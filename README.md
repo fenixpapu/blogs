@@ -1,4 +1,6 @@
 # blogs
 
-Posts in folder post.
-Images in folder images.
+My posts in folder post.
+
+
+Images in every post is in folder images.
