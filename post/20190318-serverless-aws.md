@@ -112,9 +112,7 @@ OK LET GO!!!
 
 ### Cập nhật cấu hình serverless
 
-- Thêm table trong phần `resources` sử dụng cú pháp CloudFormation.
-- Thêm quyền IAM cho function trong phần `iamRoleStatements` của mục `provider`.
-- Truyền table name như biến môi trường(enviroment variable) để các function có thể sử dụng.
+- Cùng thay đổi cấu hình một chút như dưới:
 
   ```yml
   # serverless.yml
@@ -328,7 +326,7 @@ OK LET GO!!!
 
 ### Options
 
-- Để hiểu kĩ hơn về serverless bạn nên tìm hiểu qua một lượt[User Guide](https://serverless.com/framework/docs/providers/aws/guide/intro/)
+- Để hiểu kĩ hơn về serverless bạn nên tìm hiểu qua một lượt [User Guide](https://serverless.com/framework/docs/providers/aws/guide/intro/)
 - Để cấu hình serverless linh hoạt hơn, bạn nên xem kĩ các cách sử dụng [`variable`](https://serverless.com/framework/docs/providers/aws/guide/variables/) của serverless. Một số cách sử dụng nên ưu tiên xem trước:
   - Environment variables.
   - CLI options
