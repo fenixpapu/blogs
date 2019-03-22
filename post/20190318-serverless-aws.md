@@ -290,7 +290,9 @@ OK LET GO!!!
   {"userId":"FRAMGIA","name":"SUN*"}
   ```
 
-- Thử GET lại thông tin user đã add. May quá GET được:
+- Thử GET lại thông tin user đã add.
+
+  May quá GET được:
 
   ```sh
   $curl -H "Content-Type: application/json" -X GET https://8gagnsxxnl.execute-api.us-east-1.amazonaws.com/dev/users/FRAMGIA
