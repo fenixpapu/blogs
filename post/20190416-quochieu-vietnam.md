@@ -10,7 +10,8 @@ STT| Tên Gọi | Người đặt tên | Ghi chú
 6  | Đại Việt | Lý Thái Tông | Điềm lành lớn: 1 ngôi sao sáng chói nhiều ngày mới tắt. Đổi quốc hiệu Đại Cồ Việt sang Đại Việt.
 7  | Đại Ngu  | Hồ Quý Ly | Quốc hiệu đổi từ Đại Việt sang Đại Ngu, Ngu có nghĩa `sự yên vui, hòa bình`.
 8  | Đại Việt | Lê Lợi | Nhà Hồ thất bại trước nhà Minh và Lê Lợi sau khi chống nhà Minh toàn thắng, lên ngôi lấy lại tên nước Đại Việt.
-9  | Việt Nam | Nguyễn Ánh | `Việt Nam` chỉ quốc gia người Việt ở phương Nam nhằm phân biệt quốc gia của `người lạ` ở phương Bắc
-10 | Đại Nam  | Minh Mạng  | `Đại Nam` ý chỉ `nước Nam lớn`. Quốc hiệu này tồn tại tới năm 1945.
+9  | Việt Nam | Nguyễn Ánh | Triều Nguyễn vua Nguyễn Ánh đặt quóc hiệu `Việt Nam` chỉ quốc gia người Việt ở phương Nam nhằm phân biệt quốc gia của `người lạ` ở phương Bắc
+10 | Đại Nam  | Minh Mạng  | Minh Mạng cho đổi quốc hiệu từ `Việt Nam` thành `Đại Nam` ý chỉ `nước Nam lớn`. Quốc hiệu này tồn tại tới năm 1945.
 11 | Việt Nam Dân Chủ Cộng Hòa | Hồ Chí Minh | Tuyên ngôn độc lập 02/09/1945, HCM đặt ra quốc hiệu VNDCCH (`quốc hiệu gắn với thể chế chính trị`): mục đích của nhà nước là quyền dân chủ, tự do, công bằng cho tất cả mọi người
 12 | Cộng Hòa Xã Hội Chủ Nghĩa Việt Nam | Quốc hội Việt Nam | 30/04/1975 Sau khi thống nhất đất nước, quốc hội nhất trí lấy quốc hiệu CHXHCN Việt Nam. Tương tự như tên gọi trước đó, quốc hiệu này cũng gắn thể chế chính trị và thể hiện mục tiêu vươn tới xã hội ***KHÔNG TƯỞNG*** à nhầm một xã hội tốt đẹp hơn.
+* Danh sách này bỏ qua các tên thời kỳ Bắc thuộc và Pháp thuộc như: Giao Chi, Giao Châu, Liên Bang Đông Dương
