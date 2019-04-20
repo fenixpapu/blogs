@@ -214,13 +214,15 @@ touch Dockerfile
   1. `Port` trong web-app, và `EXPOSE` trong `Dockerfile`, trong `-p 3000:8080` khi run image có mối liên hệ như thế nào?
 
     `Port` trong web-app là port cấu hình dịch vụ. Web-app sẽ lắng nghe request thông qua port này.
+
     `EXPOSE` trong `Dockerfile` chỉ ra rằng container lắng nghe trên cổng này trong mạng (`network`) cụ thể.
-    `-p 3000:8080` publish một container port ra ngoài. Trong ví dụ có thể request từ `localhost` của máy chủ port 3000 vào port 8080 của container.
+
+    `-p 3000:8080` Giúp map giữa `localhost:3000` vào port `8080` của container. Lưu ý container và localhost thuộc 2 dải mạng khác nhau.
+
     Hai port của `-p` và `EXPOSE` mang hai ý nghĩa khác nhau, không liên quan. Bạn có thể command `EXPOSE` và chạy lại. Container khác ( nếu có) được cấu hình cùng dải mạng với conatiner web-app sẽ ko truy cập được. Nhưng từ máy chủ sẽ vẫn truy cập được qua: `localhost:3000`. Không tin à? Làm thử đi thì biết :D.
 
   2. Chẳng phải `COPY . .` đã copy toàn bộ source code vào trong image rồi. Tại sao lại phải copy `package.json` và `npm install` trước.
 
-    Chúng ta hoàn toàn có thể bỏ qua bước copy `package.json` và để  lệnh `COPY . .` lên trước `npm install` rồi chạy lại. Dịch vụ sẽ vẫn hoạt động bình thường( thử thì biết?).
-    Vậy nguyên nhân ở đây là gì? `npm install` thường là bước tốn thời gian, nhưng chúng ta chỉ cần chạy lại nó khi `package.json` có sự thay đổi. Bởi vậy thường bước một sẽ cài các gói phụ thuộc và bước hai mới thực sự thêm source code. Ví dụ khi bạn thay đổi source code `src/*.js` nhưng không thay đổi các gói phụ thuộc `package.json`. Khi bạn build lại image, Docker sẽ không thực sự cài đặt lại chúng(`npm install`). Nguyên nhân từ cách Docker image được build ( dựa trên layer và cache).
+    `npm install` thường là bước tốn thời gian, nhưng chúng ta chỉ cần chạy lại nó khi `package.json` có sự thay đổi. Bởi vậy thường bước một sẽ cài các gói phụ thuộc và bước hai mới thực sự thêm source code. Ví dụ khi bạn thay đổi source code `src/*.js` nhưng không thay đổi các gói phụ thuộc `package.json`. Nhờ thực hiện theo cách này, khi bạn build lại image, Docker sẽ không cần chạy lại chúng(`npm install`). Nguyên nhân từ cách Docker image được build ( dựa trên layer và cache).
 
 - Cảm ơn mọi người đã theo dõi tới bước này :D.
