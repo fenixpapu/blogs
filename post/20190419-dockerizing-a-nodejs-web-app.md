@@ -217,6 +217,7 @@ touch Dockerfile
     `EXPOSE` trong `Dockerfile` chỉ ra rằng container lắng nghe trên cổng này trong mạng (`network`) cụ thể.
     `-p 3000:8080` publish một container port ra ngoài. Trong ví dụ có thể request từ `localhost` của máy chủ port 3000 vào port 8080 của container.
     Hai port của `-p` và `EXPOSE` mang hai ý nghĩa khác nhau, không liên quan. Bạn có thể command `EXPOSE` và chạy lại. Container khác ( nếu có) được cấu hình cùng dải mạng với conatiner web-app sẽ ko truy cập được. Nhưng từ máy chủ sẽ vẫn truy cập được qua: `localhost:3000`. Không tin à? Làm thử đi thì biết :D.
+
   2. Chẳng phải `COPY . .` đã copy toàn bộ source code vào trong image rồi. Tại sao lại phải copy `package.json` và `npm install` trước.
 
     Chúng ta hoàn toàn có thể bỏ qua bước copy `package.json` và để  lệnh `COPY . .` lên trước `npm install` rồi chạy lại. Dịch vụ sẽ vẫn hoạt động bình thường( thử thì biết?).
