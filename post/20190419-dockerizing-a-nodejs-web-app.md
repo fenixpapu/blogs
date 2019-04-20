@@ -221,7 +221,7 @@ touch Dockerfile
 
     Hai port của `-p` và `EXPOSE` mang hai ý nghĩa khác nhau, không liên quan. Bạn có thể command `EXPOSE` và chạy lại. Container khác ( nếu có) được cấu hình cùng dải mạng với conatiner web-app sẽ ko truy cập được. Nhưng từ máy chủ sẽ vẫn truy cập được qua: `localhost:3000`. Không tin à? Làm thử đi thì biết :D.
 
-  2. Chẳng phải `COPY . .` đã copy toàn bộ source code vào trong image rồi. Tại sao lại phải copy `package.json` và `npm install` trước.
+  2. Chẳng phải `COPY . .` sẽ copy toàn bộ source code vào trong image rồi. Tại sao lại phải copy `package.json` và `npm install` trước.
 
     `npm install` thường là bước tốn thời gian, nhưng chúng ta chỉ cần chạy lại nó khi `package.json` có sự thay đổi. Bởi vậy thường bước một sẽ cài các gói phụ thuộc và bước hai mới thực sự thêm source code. Ví dụ khi bạn thay đổi source code `src/*.js` nhưng không thay đổi các gói phụ thuộc `package.json`. Nhờ thực hiện theo cách này, khi bạn build lại image, Docker sẽ không cần chạy lại chúng(`npm install`). Nguyên nhân từ cách Docker image được build ( dựa trên layer và cache).
 
