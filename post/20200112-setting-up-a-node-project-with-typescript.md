@@ -2,7 +2,7 @@
 
 ## Introduction
 
-- Như chúng ta đã biết JS là ngôn ngữ kiểu `[dynamic type](https://en.wikipedia.org/wiki/Programming_language#Static_versus_dynamic_typing)`.
+- Như chúng ta đã biết JS là ngôn ngữ kiểu [dynamic type](https://en.wikipedia.org/wiki/Programming_language#Static_versus_dynamic_typing).
 - Typescript giúp có thể đọc và code JS như `static type` thay vì `dynamic type`.
 - [Bài viết này](https://scotch.io/tutorials/setting-up-a-node-project-with-typescript) chú trọng tới cài đặt một dự án với typescript.
 
