@@ -279,6 +279,7 @@
 ## Bonus Redis command exec on:
 
 - String:
+
   - `GET`: lấy ra giá trị của key (get value of key) trả về nil nếu key không tồn tại và error nếu gía trị lưu trong key không phải string. GET chỉ handle giá trị là string.
   - `SET`: gán giá trị (kiểu string ) cho một key. Nếu key đã có giá trị nó sẽ bị ghi đè ( không quan tâm kiểu trước đó là gì). Các options:
     - EX giây: thời gian bị hết hạn theo giây.
@@ -288,8 +289,30 @@
   - Do SET có các options như trên nên các câu lệnh như sau có thể bị bỏ trong tương lại: SETEX, SETNX, PSETEX.
   - `INCR`: Tăng số đang được lưu trong key lên một. Nếu key không có giá trị nó được gán về 0 và tăng lên 1 ( tức = 1).Trả về lỗi nếu giá trị lưu trong key không phải là string hoặc string không chuyển thành số được. Phép cộng 1 giới hạn bởi 64 bit signed integers.
   - `DECR`: Tương tự `INCR` nhưng thằng này trừ 1.
+
 - List:
 
-  -
+  - `LRANGE` KEY START STOP: Độ phức tạp câu lệnh này: `O(S+N)`: S độ lệch giữa `START` và 0. N số phần tử trong list. Lệnh này trả về một danh sách (array) các phần tử được lưu trong key. Độ lệch của `START` và `STOP` được tính từ `0`. Tức ko là phần tử đầu tiên. Cũng có thể lấy từ cuối danh sách trở đi với `-1` là phần tử cuối cùng. Out of range sẽ không trả về một `error`. Start lớn hơn phần tử cuối cùng mảng rỗng sẽ được trả về. Stop lớn hơn phần tử cuối cùng, Redis sẽ trả về tới phần tử cuối cùng.
+  - `RPUSH` KEY ELEMENT [ELEMENT...]: Độ phức tạp `O(1)` cho mỗi phần tử được thêm mới, nên O(N) với N phần tử được thêm vào. Thêm tất cả các giá trị vào đuôi của list được lưu bởi key. Key không tồn tại nó sẽ được tạo mới và chèn dữ liệu vào. Nếu Key lưu giá trị không phải list, error sẽ được trả về.
+  - `LPUSH` KEY ELEMENT [ELEMENT...]: Độ phúc tạp tương tự `RPUSH`. Tương tự `RPUSH` khác insert từ đầu (HEAD) thay vì đuôi (tail).
 
-  - To be con tì niu: sẽ update thêm mấy lệnh nữa trong redis.
+- HASHES:
+
+  - `hgetall`: Độ phức tạp `O(N)` N là kích thước hash. Trả về tất cả các field và value của chúng được lưu trong hash. Giá trị trả về field được theo value của chúng -> gấp đôi kích thước hash.
+  - `hmget`: Độ phức tạp `O(N)` N là kích thước fields được truy vấn. Trả về các giá trị (value) tương ứng với fields của hash được lưu trong key. Request field không tồn tại sẽ nhận về nil.
+  - `hmset`: Độ phức tạp `O(N)` N là số field được set. Set các giá trị cho các hash fields. Ver `4.0.0` `hmset` deprecated được thay mởi `hset`.
+  - `hdel`: Độ phức tạp `O(N)` N kích thước số fields xóa bỏ. Xóa một hoặc nhiều fields trong hash. Fields không tồn tại đơn giản bị bỏ qua. Nhưng nếu Key không tồn tại được xem như một hash rỗng và trả về 0.
+
+- SET:
+
+  - `SMEMBERS` KEY: Độ phức tạp `O(N)`. Lấy tất cả members trong set.
+  - `SADD` KEY member [members...]: Độ phức tạp `O(1)` với mỗi member được thêm mới nên `O(N)` với N phần tử thêm mới. `Sound like: set add`. Thêm một hoặc nhiều member vào set.
+  - `SREM` key member [members...]: Độ phức tạp `O(N)` với N là số phần tử bị xóa. Xóa các members khỏi set. Các member không thuộc set đơn giản bị bỏ qua. Nếu key không tồn tại trả về 0 (coi như empty set). Trả về lỗi nếu giá trị lưu trong key không phải set.
+
+- ZSET:
+
+  - `ZRANGE` KEY START STOP [WITHSCORE...]: Độ phức tạp `O(log(N) + M)`: với N số phần tử trong set, M số các phần tử trả về. Trả về mảng các phần tử trong set. Các phần tử được sắp xếp từ điểm (score) thấp nhất tới cao nhất.
+
+- Chi tiết tất cả các command trong redis có thể tra cứu [tại đây](https://redis.io/commands#) :D
+
+- Happy using Redis!!!
