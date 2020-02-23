@@ -104,7 +104,7 @@ $ aws s3 ls
 
 - Chỉ chạy 1 file `makeBucket.js` thôi sao phải cấu hình project, config các thứ làm gì? Hãy làm quen với cách quản lý các file cấu hình liên quan tới Key của các dịch vụ như AWS hay Google... một cách là bạn lưu vào file config và add file đó vào trong .gitignore. ( Nếu triển khai trên cloud thì các file cấu hình này nên được lưu vào vùng có mã hóa và hạn chế quyền truy xuất như vậy sẽ an toàn hơn). Sau đó bạn có thể yên tâm đẩy project của mình lên github hoặc share link repo cho người khác.
 
-- File .gitignore của mình đang ntn:
+- File .gitignore ntn:
 
 ```sh
 config.json
