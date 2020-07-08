@@ -34,12 +34,17 @@
     </div>
 
     <script>
-      const randomColor = () =>
-        Math.floor(Math.random() * 16777216).toString(16);
+      const randomColor = () => {
+        const colorOne = Math.floor(Math.random() * 16777216);
+        const colorTwo = 16777216 - colorOne;
+        return {
+          colorOne: colorOne.toString(16),
+          colorTwo: colorTwo.toString(16),
+        };
+      };
       const randomDeg = () => Math.floor(Math.random() * 360);
       setInterval(() => {
-        const colorOne = randomColor();
-        const colorTwo = randomColor();
+        const { colorOne, colorTwo } = randomColor();
         const deg = randomDeg();
         const circle = document.getElementById("circle");
         const colorStopOne = document.getElementById("color-stop-1");
