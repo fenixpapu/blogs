@@ -1,0 +1,42 @@
+<html>
+  <head> </head>
+  <body>
+    <div style="text-align: center;">
+      <h1>
+        Vòng tròn sắc màu
+      </h1>
+
+      - Tên mỹ miều vãi cả nồi :v.
+      <br />
+      - Bạn bảo làm thử cái vòng tròn auto tự thay màu.
+      <br />
+      - Ừ thì rảnh làm thử cái nghịch :D
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <div
+        id="circle"
+        style="
+          background: rgb(141, 151, 155);
+          border-radius: 50%;
+          width: 400px;
+          height: 400px;
+          margin: auto;
+        "
+      ></div>
+    </div>
+
+    <script>
+      setInterval(() => {
+        const red = Math.floor(Math.random() * 256);
+        const green = Math.floor(Math.random() * 256);
+        const blue = Math.floor(Math.random() * 256);
+        const circle = document.getElementById("circle");
+        console.log(`RGB color: ${red}, ${green}, ${blue}`);
+        circle.style.background = `rgb(${red}, ${green}, ${blue})`;
+      }, 3000);
+    </script>
+  </body>
+</html>
