@@ -16,14 +16,15 @@ OK LET GO!!!
 ### [Cài đặt serverless Framework](https://serverless.com/framework/docs/providers/aws/guide/quick-start/)
 
 - Trước khi bắt đầu chúng ta cần cài đặt môi trường đã:
+
   - [NodeJS](https://nodejs.org/en/download/)
   - [Serverless CLI v1.9.0 hoặc mới hơn](https://www.npmjs.com/package/serverless)
   - [Một tài khoản AWS](https://portal.aws.amazon.com/billing/signup#/start)
   - [Thiết lập Provider Credential với tài khoản AWS của bạn](https://www.youtube.com/watch?v=KngM5bfpttA)
 
-- Nếu bạn gặp khó khăn trong việc cài `serverless CLI` khi có `nvm` hãy thử  gỡ bỏ `nvm` xem sao.
+- Nếu bạn gặp khó khăn trong việc cài `serverless CLI` khi có `nvm` hãy thử gỡ bỏ `nvm` xem sao.
 
- ### Create API
+### Create API
 
 - Tạo thư mục với file `package.json`.
 
@@ -44,13 +45,13 @@ OK LET GO!!!
 
   ```javascript
   // index.js
-  const serverless = require('serverless-http');
-  const express = require('express')
-  const app = express()
+  const serverless = require("serverless-http");
+  const express = require("express");
+  const app = express();
 
-  app.get('/', function (req, res) {
-    res.send('Hello World!')
-  })
+  app.get("/", function (req, res) {
+    res.send("Hello World!");
+  });
   module.exports.handler = serverless(app);
   ```
 
@@ -72,7 +73,7 @@ OK LET GO!!!
       handler: index.handler
       events:
         - http: ANY /
-        - http: 'ANY {proxy+}'
+        - http: "ANY {proxy+}"
   ```
 
 - Nói qua một chút:
@@ -100,9 +101,10 @@ OK LET GO!!!
 
 - Thử truy cập chúng ta thấy server đã hoạt động:
 
-  ![Hello World](../images/20190318_2_server_work.png)
+  ![Hello World](../../images/20190318_2_server_work.png)
 
-- Dùng serverless deploy một API chỉ *đơn giản* vậy thôi! Ngoài ra:
+- Dùng serverless deploy một API chỉ _đơn giản_ vậy thôi! Ngoài ra:
+
   - Trong file `serverless.yml` có thể khai báo nhiều function thay vì chỉ có một function `app` như trong demo phía trên.
   - Function `app` đang xử lý các request đến server. Tuy nhiên có thể làm hoàn toàn ngược lại đó là dùng function để call tới một API khác. Lúc này function có thể đóng vai trò như một trigger.
 
@@ -120,7 +122,7 @@ OK LET GO!!!
   service: my-first-serverless
 
   custom:
-    tableName: 'users-table-${self:provider.stage}'
+    tableName: "users-table-${self:provider.stage}"
 
   provider:
     name: aws
@@ -137,7 +139,7 @@ OK LET GO!!!
           - dynamodb:UpdateItem
           - dynamodb:DeleteItem
         Resource:
-          - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
+          - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn"] }
     environment:
       USERS_TABLE: ${self:custom.tableName}
 
@@ -146,20 +148,18 @@ OK LET GO!!!
       handler: index.handler
       events:
         - http: ANY /
-        - http: 'ANY {proxy+}'
+        - http: "ANY {proxy+}"
 
   resources:
     Resources:
       UsersDynamoDBTable:
-        Type: 'AWS::DynamoDB::Table'
+        Type: "AWS::DynamoDB::Table"
         Properties:
           AttributeDefinitions:
-            -
-              AttributeName: userId
+            - AttributeName: userId
               AttributeType: S
           KeySchema:
-            -
-              AttributeName: userId
+            - AttributeName: userId
               KeyType: HASH
           ProvisionedThroughput:
             ReadCapacityUnits: 1
@@ -186,30 +186,30 @@ OK LET GO!!!
   ```javascript
   // index.js
 
-  const serverless = require('serverless-http');
-  const bodyParser = require('body-parser');
-  const express = require('express')
-  const app = express()
-  const AWS = require('aws-sdk');
+  const serverless = require("serverless-http");
+  const bodyParser = require("body-parser");
+  const express = require("express");
+  const app = express();
+  const AWS = require("aws-sdk");
+  ```
 
+const USERS_TABLE = process.env.USERS_TABLE;
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-  const USERS_TABLE = process.env.USERS_TABLE;
-  const dynamoDb = new AWS.DynamoDB.DocumentClient();
+app.use(bodyParser.json({ strict: false }));
 
-  app.use(bodyParser.json({ strict: false }));
+app.get('/', function (req, res) {
+res.send('Hello World!')
+})
 
-  app.get('/', function (req, res) {
-    res.send('Hello World!')
-  })
-
-  // Get User endpoint
-  app.get('/users/:userId', function (req, res) {
-    const params = {
-      TableName: USERS_TABLE,
-      Key: {
-        userId: req.params.userId,
-      },
-    }
+// Get User endpoint
+app.get('/users/:userId', function (req, res) {
+const params = {
+TableName: USERS_TABLE,
+Key: {
+userId: req.params.userId,
+},
+}
 
     dynamoDb.get(params, (error, result) => {
       if (error) {
@@ -223,16 +223,17 @@ OK LET GO!!!
         res.status(404).json({ error: "User not found" });
       }
     });
-  })
 
-  // Create User endpoint
-  app.post('/users', function (req, res) {
-    const { userId, name } = req.body;
-    if (typeof userId !== 'string') {
-      res.status(400).json({ error: '"userId" must be a string' });
-    } else if (typeof name !== 'string') {
-      res.status(400).json({ error: '"name" must be a string' });
-    }
+})
+
+// Create User endpoint
+app.post('/users', function (req, res) {
+const { userId, name } = req.body;
+if (typeof userId !== 'string') {
+res.status(400).json({ error: '"userId" must be a string' });
+} else if (typeof name !== 'string') {
+res.status(400).json({ error: '"name" must be a string' });
+}
 
     const params = {
       TableName: USERS_TABLE,
@@ -249,27 +250,29 @@ OK LET GO!!!
       }
       res.json({ userId, name });
     });
-  })
 
-  module.exports.handler = serverless(app);
-  ```
+})
+
+module.exports.handler = serverless(app);
+
+````
 
 ### Deploy
 
 - Deploy để cập nhật lại cấu hình và code:
 
-  ```sh
-  sls deploy
-  ```
+```sh
+sls deploy
+````
 
 - Sau khi có public link chúng ta thử tạo user:
-  
+
   ```sh
   $ curl -H "Content-Type: application/json" -X POST https://8gagnsxxnl.execute-api.us-east-1.amazonaws.com/dev/users -d '{"userId": "FRAMGIA", "name": "SUN*"}'
   ```
 
 - Trước khi deploy hãy chắc chắn bạn đã save code nếu không sẽ nhận được kết quả:
-  
+
   ```sh
   <!DOCTYPE html>
   <html lang="en">
@@ -315,15 +318,15 @@ OK LET GO!!!
       handler: index.handler
       events:
         - http: ANY /
-        - http: 'ANY {proxy+}'
+        - http: "ANY {proxy+}"
     getUser:
       handler: index.handler
       events:
-        - http: 'GET /users/{proxy+}'
+        - http: "GET /users/{proxy+}"
     createUser:
       handler: index.handler
       events:
-        - http: 'POST /users'
+        - http: "POST /users"
   ```
 
 ### Options
@@ -351,6 +354,7 @@ OK LET GO!!!
   ```console
   sls remove
   ```
+
 - Nếu bạn muốn để ứng dụng public để test. AWS có mục liên quan [billing](https://console.aws.amazon.com/billing/home?#/freetier) mục này sẽ cho bạn biết đang sử dụng tài nguyên hết bao nhiêu % của mức free ;).
 
 - Hết! Cảm ơn bạn đã theo dõi tới phần này! :D

@@ -10,16 +10,16 @@
 
 - Cùng hình dung chúng ta có 1 đồ thị lịch sử các commit như dưới:
 
-  ![git's branchs](../images/20190622-git-branch-normal.png)
+  ![git's branchs](../../images/20190622-git-branch-normal.png)
 
 - Khá dễ dàng để nhận ra chúng ta có 3 branch: RED(A,B,C,D,E), BLUE( A,B, F ,G), GREEN(A,B,H,I,J)
 
-  ![git's branchs with colr](../images/20190622-git-branch-color.png)
+  ![git's branchs with colr](../../images/20190622-git-branch-color.png)
 
-- Nhìn có vẻ như chúng ta có thể  định nghĩa branch: Tập các commit mà branch đó chứa (RED: A,B,C,D,E). Tuy nhiên đó ko phải cách git đang làm. Git sử dụng một giải pháp đơn giản, hiệu quả hơn. Thay vì phải có danh sách tất cả các commit thuộc về một branch, và giữ cho danh sách này được cập nhật, git đơn giản chỉ cần để mắt tới commit cuối cùng trên branch đó. Khi biết commit này việc tạo lại danh sách các commit của branch bằng cách lần theo hướng đồ thị khá đơn giản. 
+- Nhìn có vẻ như chúng ta có thể định nghĩa branch: Tập các commit mà branch đó chứa (RED: A,B,C,D,E). Tuy nhiên đó ko phải cách git đang làm. Git sử dụng một giải pháp đơn giản, hiệu quả hơn. Thay vì phải có danh sách tất cả các commit thuộc về một branch, và giữ cho danh sách này được cập nhật, git đơn giản chỉ cần để mắt tới commit cuối cùng trên branch đó. Khi biết commit này việc tạo lại danh sách các commit của branch bằng cách lần theo hướng đồ thị khá đơn giản.
 - Cho ví dụ như branch BLUE, chúng ta chỉ cần biết commit G cuối cùng. Và nếu chúng ta cần danh sách commit của branch BLUE chúng ta có thể theo hướng đồ thị bắt đầu từ G để tìm ra:
 
-  ![git blue branch](../images/20190622-git-blue-branch.png)
+  ![git blue branch](../../images/20190622-git-blue-branch.png)
 
 - Đó là cách git quản lý các branch bằng cách giữ con trỏ tới các commit. Cùng làm ví dụ để hiểu rõ hơn.
 
@@ -81,7 +81,7 @@
     [master 7ad6ee6] Hello Mars Commit
     1 file changed, 1 insertion(+)
     create mode 100644 helloMars.txt
-  
+
     $ echo "Hello Saturn" > helloSaturn.txt
     $ git add .
     $ git commit -m "Hello Saturn Commit"
@@ -150,7 +150,7 @@
 - Giờ chúng ta có thêm `feature`. Và kiểm tra checksum(pointer) nào:
 
   ```sh
-    $ cat .git/refs/heads/feature 
+    $ cat .git/refs/heads/feature
     1c13b0776353a951d3b1a5c74f89c0bee810f2b9
   ```
 
