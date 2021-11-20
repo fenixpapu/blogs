@@ -97,5 +97,6 @@
     ]
   }
   ```
+- Bạn có thể tạo thử ec2 nhỏ nhỏ để test :D
 
-- Happy devops engineer! :D
+- Happy working! :D
