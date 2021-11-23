@@ -71,7 +71,7 @@
 - Tạo policy với lệnh dưới. Có thể đổi `policy-name`
 
 ```
-  aws iam create-policy --policy-name AmazonEKSClusterAutoscalerPolicy --policy-document file:cluster-autoscaler-policy.json
+  aws iam create-policy --policy-name AmazonEKSClusterAutoscalerPolicy --policy-document file://cluster-autoscaler-policy.json
 ```
 
 - Lưu lại ARN để dùng cho các bước sau.
