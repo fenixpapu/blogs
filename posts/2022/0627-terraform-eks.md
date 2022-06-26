@@ -194,4 +194,9 @@ variable "subnet_id_3" {
 
 
 
+
+
+## Next time I should translate [this](https://calvineotieno010.medium.com/devops-automation-with-terraform-aws-and-docker-build-production-grade-eks-cluster-with-ec8fbfa269c9), it's seem a good one.
+
+
 ## HAPPY DEVOPS
