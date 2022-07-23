@@ -29,12 +29,15 @@ echo "  value: '${line#*=}'"
 done < $file_name
 ```
 
-- Chú thích:
-  - `file_name='.env'` fix luôn tên file cho biến
-  - `while IFS= read -r line || [ -n "$line" ]; do` đoạn này sẽ đọc hết file. `[ -n "$line" ]` nếu ko có dòng này nó sẽ bị bỏ sót mất dòng cuối , mình cũng chưa rõ tại sao.
-  - `[ -z "$line" ] && continue` cái này để bỏ qua một line trống ( line ko có gì ).
-  - `line=$(echo $line | sed 's/['\''\"]//g')` do giá trị của biến `env` có thể chứa `'` hoặc `"` nên dòng này sẽ xoá hết các dấu `'` và `"` đi.
-  - Rồi phần còn lại là log ra biến thôi.
+##  Chú thích:
+- Phần này có liên quan [string operators](https://www.oreilly.com/library/view/learning-the-bash/1565923472/ch04s03.html) tong bash script
+- `file_name='.env'` fix luôn tên file cho biến
+- `while IFS= read -r line || [ -n "$line" ]; do` đoạn này sẽ đọc hết file. `[ -n "$line" ]` nếu ko có dòng này nó sẽ bị bỏ sót mất dòng cuối , mình cũng chưa rõ tại sao.
+- `[ -z "$line" ] && continue` cái này để bỏ qua một line trống ( line ko có gì ).
+- `line=$(echo $line | sed 's/['\''\"]//g')` do giá trị của biến `env` có thể chứa `'` hoặc `"` nên dòng này sẽ xoá hết các dấu `'` và `"` đi.
+
+- `${line%=*}`: `%` là một string operator sẽ kiểm tra từ cuối string và pattern ở đây là `=*`, pattern này sẽ match từ dấu `=` đầu tiên tới cuối string, xoá phần match này và trả về phần còn lại -> sẽ xoá phần `=value` và trả về `key`
+- `${line#*=}`: `#` là một string operator sẽ kiểm tra từ đầu một string và pattern ở đây là `*=` , parttern này sẽ match từ đầu tới dấu `=` ( vì * match tất cả các ký tự). `#` sẽ xoá phần match và trả về phần còn lại -> sẽ xoá từ `key=` và trả về phần `value` trong biến `env`
 
 - Nếu chạy xong thì nó có dạng output ntn:
 
