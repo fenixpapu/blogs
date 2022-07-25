@@ -14,6 +14,7 @@ Images in every post is in folder images.
 ## Muc Luc
 | Post | Year |
 | -----| -----|
+|[vs-code-how-to-copy-search-results.md](posts/2022/2607-vs-code-how-to-copy-search-results.md)| 2022|
 |[sed-20-examples-remove-delete-characters-from-file.md](posts/2022/2307-sed-20-examples-remove-delete-characters-from-file.md)| 2022|
 |[script-generate-env-variables.md](posts/2022/0722-script-generate-env-variables.md)| 2022|
 |[terraform-eks.md](posts/2022/0627-terraform-eks.md)| 2022|
