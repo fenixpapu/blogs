@@ -6,9 +6,9 @@ posts=`find posts | grep .md | sort -nr`
 # echo $posts
 
 
-echo '# Muc Luc' > index.md
-echo '| Post | Year |' >> index.md
-echo '| -----| -----|' >> index.md
+sed -i ""  '15,$d'  README.md
+echo '| Post | Year |' >> README.md
+echo '| -----| -----|' >> README.md
 for post in $posts
 do
   full_name=${post##*/}
@@ -16,5 +16,5 @@ do
   year_and_name=${post#*/}
   year=${year_and_name%/*}
   year=${year%/*} # remove 2020/1203-design-patterns -> 2020
-  echo "|[${name}](${post})| ${year}|" >> index.md
+  echo "|[${name}](${post})| ${year}|" >> README.md
 done
