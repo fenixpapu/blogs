@@ -14,6 +14,10 @@ Images in every post is in folder images.
 ## Muc Luc
 | Post | Year |
 | -----| -----|
+|[jenkins-for-dummies](posts/2023/2709-jenkins-for-dummies.md)| 2023|
+|[terraform-basic-aws-lambda-eventbridge-schedule](posts/2023/0726-terraform-basic-aws-lambda-eventbridge-schedule.md)| 2023|
+|[aws-lambda-timeout](posts/2023/0726-aws-lambda-timeout.md)| 2023|
+|[know-the-eight-most-common-DNS-records](posts/2023/0718-know-the-eight-most-common-DNS-records.md)| 2023|
 |[how-to-send-aws-notifications-to-microsoft-teams](posts/2023/0627-how-to-send-aws-notifications-to-microsoft-teams.md)| 2023|
 |[WIP-google-best-practices-for-using-terraform](posts/2023/0622-WIP-google-best-practices-for-using-terraform.md)| 2023|
 |[vagrant-custom-ubuntu](posts/2023/0418-vagrant-custom-ubuntu.md)| 2023|
