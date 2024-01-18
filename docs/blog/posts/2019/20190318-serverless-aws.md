@@ -43,8 +43,7 @@ npm install --save express serverless-http
 
 - Implement code file `index.js` như dưới:
 
-```javascript
-// index.js
+```javascript title="index.js" linenums="1"
 const serverless = require("serverless-http");
 const express = require("express");
 const app = express();
@@ -59,8 +58,7 @@ module.exports.handler = serverless(app);
 
 - Trong cùng thư mục với hai file `index.js` và `package.json` ở trên chúng ta tạo file `serverless.yml` với nội dung:
 
-```yml
-# serverless.yml
+```yml title="serverless.yml" linenums="1"
 service: my-first-serverless
 provider:
   name: aws
@@ -116,9 +114,7 @@ functions:
 
 - Cùng thay đổi cấu hình một chút như dưới:
 
-```yml
-# serverless.yml
-
+```yml title="serverless.yml" linenums="1" hl_lines="2 5"
 service: my-first-serverless
 
 custom:
@@ -183,9 +179,7 @@ resources:
 
 - Cập nhật lại code:
 
-```javascript
-// index.js
-
+```javascript title="index.js" linenums="1"
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
 const express = require("express");
@@ -306,9 +300,7 @@ sls deploy
   - Mỗi route mất bao lâu để có response(và bạn sẽ tiết kiệm được bao nhiêu tiền nếu tối ưu route đó có thời gian phản hồi nhanh hơn).
 - Cấu hình có dạng như dưới:
 
-```yml
-# serverless.yml
-
+```yml title="serverless.yml" linenums="1"
 functions:
   app:
     handler: index.handler
