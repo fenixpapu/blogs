@@ -28,53 +28,53 @@ OK LET GO!!!
 
 - Tạo thư mục với file `package.json`.
 
-  ```bash
-  mkdir my-first-serverless && cd my-first-serverless
-  npm init -f
-  ```
+```bash
+mkdir my-first-serverless && cd my-first-serverless
+npm init -f
+```
 
 - Cài đặt các gói phụ thuộc cần thiết:
 
-  ```bash
-  npm install --save express serverless-http
-  ```
+```bash
+npm install --save express serverless-http
+```
 
 - Để khởi tạo một REST API ngoài sử dụng `Express` chúng ta sẽ sử dụng thêm `serverless-http` như một middleware giao tiếp giữa NodeJS và API Gateway của AWS.
 
 - Implement code file `index.js` như dưới:
 
-  ```javascript
-  // index.js
-  const serverless = require("serverless-http");
-  const express = require("express");
-  const app = express();
+```javascript
+// index.js
+const serverless = require("serverless-http");
+const express = require("express");
+const app = express();
 
-  app.get("/", function (req, res) {
-    res.send("Hello World!");
-  });
-  module.exports.handler = serverless(app);
-  ```
+app.get("/", function (req, res) {
+  res.send("Hello World!");
+});
+module.exports.handler = serverless(app);
+```
 
 ### Config Serverless
 
 - Trong cùng thư mục với hai file `index.js` và `package.json` ở trên chúng ta tạo file `serverless.yml` với nội dung:
 
-  ```yml
-  # serverless.yml
-  service: my-first-serverless
-  provider:
-    name: aws
-    runtime: nodejs6.10
-    stage: dev
-    region: us-east-1
+```yml
+# serverless.yml
+service: my-first-serverless
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
 
-  functions:
-    app:
-      handler: index.handler
-      events:
-        - http: ANY /
-        - http: "ANY {proxy+}"
-  ```
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: "ANY {proxy+}"
+```
 
 - Nói qua một chút:
   - my-first-serverless: là tên service.
@@ -85,7 +85,7 @@ OK LET GO!!!
 
 - Dùng lệnh: `serverless deploy` hoặc ngắn gọn hơn `sls deploy`. Thêm `-v`(verbose) nếu bạn muốn xem chi tiết tất cả các tiến trình.
 
-  ```console
+```console
   my-first-serverless$ sls deploy
   ...
   endpoints:
@@ -95,7 +95,7 @@ OK LET GO!!!
     app: my-first-serverless-dev-app
   layers:
     None
-  ```
+```
 
 - Nếu code của bạn sai, deploy có thể vẫn trả về một public link, nhưng truy cập có thể trả về message internal server error. Hãy dùng `sls logs` để [xem log](https://serverless.com/framework/docs/providers/aws/cli-reference/logs/) của các function.
 
@@ -116,56 +116,56 @@ OK LET GO!!!
 
 - Cùng thay đổi cấu hình một chút như dưới:
 
-  ```yml
-  # serverless.yml
+```yml
+# serverless.yml
 
-  service: my-first-serverless
+service: my-first-serverless
 
-  custom:
-    tableName: "users-table-${self:provider.stage}"
+custom:
+  tableName: "users-table-${self:provider.stage}"
 
-  provider:
-    name: aws
-    runtime: nodejs6.10
-    stage: dev
-    region: us-east-1
-    iamRoleStatements:
-      - Effect: Allow
-        Action:
-          - dynamodb:Query
-          - dynamodb:Scan
-          - dynamodb:GetItem
-          - dynamodb:PutItem
-          - dynamodb:UpdateItem
-          - dynamodb:DeleteItem
-        Resource:
-          - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn"] }
-    environment:
-      USERS_TABLE: ${self:custom.tableName}
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn"] }
+  environment:
+    USERS_TABLE: ${self:custom.tableName}
 
-  functions:
-    app:
-      handler: index.handler
-      events:
-        - http: ANY /
-        - http: "ANY {proxy+}"
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: "ANY {proxy+}"
 
-  resources:
-    Resources:
-      UsersDynamoDBTable:
-        Type: "AWS::DynamoDB::Table"
-        Properties:
-          AttributeDefinitions:
-            - AttributeName: userId
-              AttributeType: S
-          KeySchema:
-            - AttributeName: userId
-              KeyType: HASH
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
-          TableName: ${self:custom.tableName}
-  ```
+resources:
+  Resources:
+    UsersDynamoDBTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.tableName}
+```
 
 - Cấu hình trên chúng ta sẽ có:
   - Do `provider.stage: dev` nên `customer.tableName` sẽ là: `users-table-dev`.
@@ -177,85 +177,81 @@ OK LET GO!!!
 - Để app sử dụng table đã thêm ở trên. Chúng ta sẽ thêm 2 phương thức: POST và GET cho phép người dùng tạo: user và lấy thông tin user.
 - Đầu tiên cài đặt `aws-sdk` và `body-parser`:
 
-  ```sh
+```sh
   npm install --save aws-sdk body-parser
-  ```
+```
 
 - Cập nhật lại code:
 
-  ```javascript
-  // index.js
+```javascript
+// index.js
 
-  const serverless = require("serverless-http");
-  const bodyParser = require("body-parser");
-  const express = require("express");
-  const app = express();
-  const AWS = require("aws-sdk");
-  ```
+const serverless = require("serverless-http");
+const bodyParser = require("body-parser");
+const express = require("express");
+const app = express();
+const AWS = require("aws-sdk");
 
 const USERS_TABLE = process.env.USERS_TABLE;
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 app.use(bodyParser.json({ strict: false }));
 
-app.get('/', function (req, res) {
-res.send('Hello World!')
-})
+app.get("/", function (req, res) {
+  res.send("Hello World!");
+});
 
 // Get User endpoint
-app.get('/users/:userId', function (req, res) {
-const params = {
-TableName: USERS_TABLE,
-Key: {
-userId: req.params.userId,
-},
-}
+app.get("/users/:userId", function (req, res) {
+  const params = {
+    TableName: USERS_TABLE,
+    Key: {
+      userId: req.params.userId,
+    },
+  };
 
-    dynamoDb.get(params, (error, result) => {
-      if (error) {
-        console.log(error);
-        res.status(400).json({ error: 'Could not get user' });
-      }
-      if (result.Item) {
-        const {userId, name} = result.Item;
-        res.json({ userId, name });
-      } else {
-        res.status(404).json({ error: "User not found" });
-      }
-    });
-
-})
+  dynamoDb.get(params, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(400).json({ error: "Could not get user" });
+    }
+    if (result.Item) {
+      const { userId, name } = result.Item;
+      res.json({ userId, name });
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  });
+});
 
 // Create User endpoint
-app.post('/users', function (req, res) {
-const { userId, name } = req.body;
-if (typeof userId !== 'string') {
-res.status(400).json({ error: '"userId" must be a string' });
-} else if (typeof name !== 'string') {
-res.status(400).json({ error: '"name" must be a string' });
-}
+app.post("/users", function (req, res) {
+  const { userId, name } = req.body;
+  if (typeof userId !== "string") {
+    res.status(400).json({ error: '"userId" must be a string' });
+  } else if (typeof name !== "string") {
+    res.status(400).json({ error: '"name" must be a string' });
+  }
 
-    const params = {
-      TableName: USERS_TABLE,
-      Item: {
-        userId: userId,
-        name: name,
-      },
-    };
+  const params = {
+    TableName: USERS_TABLE,
+    Item: {
+      userId: userId,
+      name: name,
+    },
+  };
 
-    dynamoDb.put(params, (error) => {
-      if (error) {
-        console.log(error);
-        res.status(400).json({ error: 'Could not create user' });
-      }
-      res.json({ userId, name });
-    });
-
-})
+  dynamoDb.put(params, (error) => {
+    if (error) {
+      console.log(error);
+      res.status(400).json({ error: "Could not create user" });
+    }
+    res.json({ userId, name });
+  });
+});
 
 module.exports.handler = serverless(app);
-
-````
+```
 
 ### Deploy
 
@@ -263,17 +259,17 @@ module.exports.handler = serverless(app);
 
 ```sh
 sls deploy
-````
+```
 
 - Sau khi có public link chúng ta thử tạo user:
 
-  ```sh
+```sh
   $ curl -H "Content-Type: application/json" -X POST https://8gagnsxxnl.execute-api.us-east-1.amazonaws.com/dev/users -d '{"userId": "FRAMGIA", "name": "SUN*"}'
-  ```
+```
 
 - Trước khi deploy hãy chắc chắn bạn đã save code nếu không sẽ nhận được kết quả:
 
-  ```sh
+```sh
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -284,23 +280,23 @@ sls deploy
   <pre>Cannot POST /dev/users</pre>
   </body>
   </html>
-  ```
+```
 
 - Sau khi save code deploy chúng ta đã có thể thêm mới user:
 
-  ```yml
+```yml
   $ curl -H "Content-Type: application/json" -X POST https://8gagnsxxnl.execute-api.us-east-1.amazonaws.com/dev/users -d '{"userId": "FRAMGIA", "name": "SUN*"}'
   {"userId":"FRAMGIA","name":"SUN*"}
-  ```
+```
 
 - Thử GET lại thông tin user đã add.
 
   May quá GET được:
 
-  ```sh
+```sh
   $curl -H "Content-Type: application/json" -X GET https://8gagnsxxnl.execute-api.us-east-1.amazonaws.com/dev/users/FRAMGIA
   {"userId":"FRAMGIA","name":"SUN*"}
-  ```
+```
 
 ### Path specific routing
 
@@ -310,24 +306,24 @@ sls deploy
   - Mỗi route mất bao lâu để có response(và bạn sẽ tiết kiệm được bao nhiêu tiền nếu tối ưu route đó có thời gian phản hồi nhanh hơn).
 - Cấu hình có dạng như dưới:
 
-  ```yml
-  # serverless.yml
+```yml
+# serverless.yml
 
-  functions:
-    app:
-      handler: index.handler
-      events:
-        - http: ANY /
-        - http: "ANY {proxy+}"
-    getUser:
-      handler: index.handler
-      events:
-        - http: "GET /users/{proxy+}"
-    createUser:
-      handler: index.handler
-      events:
-        - http: "POST /users"
-  ```
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: "ANY {proxy+}"
+  getUser:
+    handler: index.handler
+    events:
+      - http: "GET /users/{proxy+}"
+  createUser:
+    handler: index.handler
+    events:
+      - http: "POST /users"
+```
 
 ### Options
 
@@ -343,17 +339,17 @@ sls deploy
 
 - Lưu ý [đoạn sau](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
 
-  ```
+```
   While in the AWS Free Tier, you can build an entire application on AWS Lambda, AWS API Gateway, and more, without getting charged for 1 year... As long as you don't exceed the resources in the free tier, of course.
-  ```
+```
 
 - Bạn sẽ được dùng miễn phí một năm miễn sao không sử dụng tài nguyên vượt ngưỡng. Còn nếu vượt ngưỡng sẽ ra sao thì không nói ^^. Và cái account của bạn chắc chắn có link tới một thẻ có thể bị trừ tiền. Vậy nên hãy lưu tâm đến vấn đề này.
 
 - Việc đầu tiên sau khi test thử dịch vụ đã ok mà không cần duy trì hãy `remove` ứng dụng bạn đã vừa deploy với lệnh:
 
-  ```console
+```console
   sls remove
-  ```
+```
 
 - Nếu bạn muốn để ứng dụng public để test. AWS có mục liên quan [billing](https://console.aws.amazon.com/billing/home?#/freetier) mục này sẽ cho bạn biết đang sử dụng tài nguyên hết bao nhiêu % của mức free ;).
 
