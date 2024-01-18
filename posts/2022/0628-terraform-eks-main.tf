@@ -43,7 +43,7 @@ resource "aws_eks_cluster" "blogs-eks" {
  role_arn = aws_iam_role.eks-iam-role.arn
 
  vpc_config {
-  subnet_ids = [var.subnet_id_1, var.subnet_id_2, var.subnet_id_3]
+  subnet_ids = ["subnet_id_1", "subnet_id_2", "subnet_id_3"]
  }
 
   depends_on = [
@@ -105,7 +105,7 @@ resource "aws_eks_node_group" "worker-node-group" {
   cluster_name  = aws_eks_cluster.blogs-eks.name
   node_group_name = "blogs-workernodes"
   node_role_arn  = aws_iam_role.workernodes.arn
-  subnet_ids   = [var.subnet_id_1, var.subnet_id_2, var.subnet_id_3]
+  subnet_ids   = ["subnet_id_1", "subnet_id_2", "subnet_id_3"]
   instance_types = ["t3.xlarge"]
  
   scaling_config {
