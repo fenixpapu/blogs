@@ -1,3 +1,3 @@
 # About
 
-- Passion without and
+- Passion without N

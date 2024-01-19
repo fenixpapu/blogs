@@ -34,7 +34,7 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/phoenixpapu
     - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/phoenixpapu/
+      link: https://www.linkedin.com/in/fenixpapu/
 
 markdown_extensions:
   - pymdownx.highlight:
