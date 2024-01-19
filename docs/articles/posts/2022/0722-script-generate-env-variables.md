@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-07-22
+draft: false
+---
+
 # Script generate env variables
 
 - Nay có một đoạn setup deployment file trước khi deploy, mà cu em đồng nghiệp feedback chuyển từ file `.env` sang `env` trên deployment dễ bị thiếu quá, đã thế check bằng mắt thường tốn performance, và request nên có tool.

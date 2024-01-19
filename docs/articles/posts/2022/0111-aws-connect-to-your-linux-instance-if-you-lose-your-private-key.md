@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-01-11
+draft: false
+---
+
 # Connect to your Linux instance if you lose your private key
 
 - Official ở [đây](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replacing-lost-key-pair.html)

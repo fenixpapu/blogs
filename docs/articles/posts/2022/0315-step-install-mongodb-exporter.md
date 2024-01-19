@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-03-15
+draft: false
+---
+
 # Step install mongodb exporter
 
 ## Pre-requisite task

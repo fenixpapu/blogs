@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-06-27
+draft: false
+---
+
 # Deploy an eks cluster using terraform
 
 - Bài gốc [ở đây](https://www.techtarget.com/searchcloudcomputing/tutorial/How-to-deploy-an-EKS-cluster-using-Terraform)

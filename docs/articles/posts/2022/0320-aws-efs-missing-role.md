@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-03-20
+draft: false
+---
+
 # Missing permission in the example IAM policy file
 
 - Source form [github](https://github.com/kubernetes-sigs/aws-efs-csi-driver/issues/489)

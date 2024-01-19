@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-05-16
+draft: false
+---
+
 # Debug Rust trên [`vscode`](https://code.visualstudio.com/docs/languages/rust#_debugging)
 
 ## Installing

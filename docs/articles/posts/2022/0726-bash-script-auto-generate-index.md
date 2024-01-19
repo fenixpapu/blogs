@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-07-26
+draft: false
+---
+
 # auto generate index with bash script
 
 - Mình có các bài viết theo các năm mỗi tội muốn đọc lại phải vào từng folder của năm để check ( hơi tù).

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-03-21
+draft: false
+---
+
 # Dig and whois command
 
 - Bài này để remind mình tìm hiểu thêm về lệnh `dig` và `whois`. Hôm bữa gặp sự cố 1 bạn AWS supporter dùng 2 lệnh này để trace ra issue nên thấy 2 lệnh này hữu ích nên tìm hiểu thêm

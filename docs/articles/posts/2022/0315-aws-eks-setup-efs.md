@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-03-15
+draft: false
+---
+
 # SET UP EFS FOR EKS
 
 - EFS có thể sử dụng cross zone ( giữa các zone) nên ko bị hạn chế như EBS.

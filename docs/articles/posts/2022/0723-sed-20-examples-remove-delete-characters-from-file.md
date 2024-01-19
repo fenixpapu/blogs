@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-07-23
+draft: false
+---
+
 # [sed remove / delete characters from file](https://www.theunixschool.com/2014/08/sed-examples-remove-delete-chars-from-line-file.html)
 
 - Vì dòng mô tả sau đây mà mình quyết định dịch bài này. Cú pháp của `sed` sẽ như thế này:

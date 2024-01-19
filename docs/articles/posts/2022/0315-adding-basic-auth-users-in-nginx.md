@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2022-03-15
+draft: false
+---
+
 # Adding basic auth users in nginx
 
 ## Enable basic authentication
