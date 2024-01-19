@@ -5,6 +5,7 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
+    - navigation.indexes
     - toc.integrate
     - navigation.top
     - search.suggest
@@ -57,6 +58,10 @@ plugins:
       blog_dir: articles
       post_dir: articles/posts
       post_date_format: medium
+      archive: false
+      pagination: true
+      pagination_per_page: 5
+      pagination_format: "$link_first $link_previous ~2~ $link_next $link_last"
 
 copyright: |
   &copy; 2023 <a href="https://github.com/fenixpapu"  target="_blank" rel="noopener">PaPu</a>
