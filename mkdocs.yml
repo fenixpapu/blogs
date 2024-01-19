@@ -28,6 +28,8 @@ theme:
         name: Switch to dark mode
       primary: teal
       accent: purple
+  icon:
+    repo: fontawesome/brands/github
 
 extra:
   social:
@@ -37,6 +39,7 @@ extra:
       link: https://twitter.com/phoenixpapu
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/fenixpapu/
+  # generator: false
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -65,5 +68,6 @@ plugins:
       pagination_format: "$link_first $link_previous ~2~ $link_next $link_last"
   - search:
 
-copyright: |
-  &copy; 2023 <a href="https://github.com/fenixpapu"  target="_blank" rel="noopener">PaPu</a>
+repo_url: https://github.com/fenixpapu/blogs
+repo_name: fenixpapu/blogs
+copyright: Copyright &copy; 2023 <a href="https://github.com/fenixpapu"  target="_blank" rel="noopener">PaPu</a>
