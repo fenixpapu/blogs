@@ -53,7 +53,10 @@ markdown_extensions:
 plugins:
   - blog:
       authors: true
+      blog_toc: true
       blog_dir: articles
+      post_dir: articles/posts
+      post_date_format: medium
 
 copyright: |
   &copy; 2023 <a href="https://github.com/fenixpapu"  target="_blank" rel="noopener">PaPu</a>
