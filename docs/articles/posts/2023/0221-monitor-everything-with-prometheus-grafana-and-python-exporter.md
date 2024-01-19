@@ -152,13 +152,13 @@ scrape_configs:
 
 - Cần setup Grafana để lấy dữ liệu từ prometheus và hiển thị. Đoạn này hơi cấn một chút. Do mình chạy docker-compose nên đoạn này cấu hình `Data source` cho grafana ko nhập localhost được mà cần nhập IP máy chạy docker-compose. Như đang demo sẽ là: `http://172.17.0.1:9090`
 
-- Sau khi `Data source` work. Chúng ta khởi tạo Panel với metric như trong hình: ![grafana setup metric](../../images/20230221-grafana-setup-metric.png)
+- Sau khi `Data source` work. Chúng ta khởi tạo Panel với metric như trong hình: ![grafana setup metric](../../images/2023/20230221-grafana-setup-metric.png)
 
 - Ở đây mình tạo metric counter `interest_per_currency` nó bị thêm cái `_total` :D. Nếu metric là `Gauge` thì nó sẽ dữ nguyên tên.
 
 - Ok done như vậy là với 1 metric chúng ta có thể cùng lúc monitor được nhiều giá trị với các ý nghĩa khác nhau như `VND` và `USD` như hình dưới, prometheus thật tuyệt :D
 
-![one metric multiple label](../../images/20230221-one-metric-multiple-label.png)
+![one metric multiple label](../../images/2023/20230221-one-metric-multiple-label.png)
 
 - HAPPY _dev_ and _devops_ :D !!!
 

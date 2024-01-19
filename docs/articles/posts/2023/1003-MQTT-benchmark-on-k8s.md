@@ -118,7 +118,7 @@ kubectl port-forward svc/my-emqx 18083:18083
 
 - Note: máy mình chỉ có 1 config k8s (minikube) nếu máy có nhiều config của k8s cluster thì cần chọn lại đúng cluster mong muốn trước khi chạy kubectl (chạy như nào gg :D)
 - Sau đó chúng ta có thể truy cập địa chỉ: `localhost:18083` để vào EMQX dashboard trông nó sẽ ntn:
-  ![EQMX cluster dashboard](../../images/20231004-EMQX-cluster-dashboard.png)
+  ![EQMX cluster dashboard](../../images/2023/20231004-EMQX-cluster-dashboard.png)
 
 ### EMQX-bench
 
@@ -264,7 +264,7 @@ spec:
 
 - Khi có 3 nodes trong EMQX cluster, và 1 pod của EMQX-bench thì có share tải. Nhưng khi mình scale tay lên node thứ 4 thì node 4 này ko chịu tải ( ko có request nào tới). Khi chạy thêm pod thứ hai của EMQX-bench thì node thứ 4 mới chịu tải ==> :
 
-- ![node-4th](../../images/20231004-EMQX-cluster-node-4th.png)
+- ![node-4th](../../images/2023/20231004-EMQX-cluster-node-4th.png)
 
 - Việc scale phải setup trước khi quá tải, khi quá tải rồi add thêm node mới không có ý nghĩa với lượng tải hiện tại. Chỉ có ý nghĩa với những mess từ publisher mới.
 
