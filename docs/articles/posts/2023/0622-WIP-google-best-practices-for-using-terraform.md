@@ -13,6 +13,8 @@ draft: true
 
 - Bài này dành cho những ai đã dùng qua terraform(không phải những ai bắt đầu tìm hiểu)
 
+<!-- more -->
+
 ## General style and structure guidelines
 
 - Những khuyến nghị sau đây bao gồm các style và structure cơ bản cho cấu hình Terraform của bạn. Các khuyến nghị hướng tới việc tái sử dụng module Terraform và cấu hình root.

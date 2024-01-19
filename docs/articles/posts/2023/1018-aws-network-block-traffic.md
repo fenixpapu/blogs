@@ -11,6 +11,8 @@ draft: false
 
 - Bài này note lại TIL thôi. Mình có 1 yêu cầu từ dev team block traffic từ 1 service tới 1 service khác. Chính xác là block traffic từ spark job tới kafka.
 
+<!-- more -->
+
 - Về mặt lý thuyết chúng ta sẽ có 1 số cách block tuỳ vào hạ tầng cụ thể, từ ngoài vào trong lần lượt sẽ:
 
   - chặn routing ( nếu khác VPC và đang đang routing).

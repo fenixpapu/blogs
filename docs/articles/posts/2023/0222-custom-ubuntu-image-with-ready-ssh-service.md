@@ -12,7 +12,10 @@ draft: false
 - Bài này take note lại từ repo [này](https://github.com/fenixpapu/custom-ubuntu-image-with-ssh-ready)
 
 - Tại sao cần custom ubuntu image dùng bản gốc không phải ngon hơn sao ?
-  - Mình đang thực hành ansible và bản chất cần một số server với quyền ssh vào. Nếu khởi chạy từng server rồi đi add user và ssh sẽ rất cực nên tạo luôn 1 image mang tính cá nhân với quyền ssh từ public key của máy mình. Sau đó chỉ việc run và thực hành ansible thôi
+
+<!-- more -->
+
+- Mình đang thực hành ansible và bản chất cần một số server với quyền ssh vào. Nếu khởi chạy từng server rồi đi add user và ssh sẽ rất cực nên tạo luôn 1 image mang tính cá nhân với quyền ssh từ public key của máy mình. Sau đó chỉ việc run và thực hành ansible thôi
 
 ## Dockerfile and id_rsa
 

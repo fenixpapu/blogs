@@ -11,6 +11,8 @@ draft: false
 
 - Trong bài [này](../2023/0222-custom-ubuntu-image-with-ready-ssh-service.md) mình có custom một docker image để khi docker run là ta có một container sẵn sàng ssh được từ máy chủ (máy chạy docker). Tuy nhiên trong quá trình giả lập để test một số dịch vụ khi chạy ansible, có vẻ container ko đáp ứng được nên mình đã phải dùng `vagrant`.
 
+<!-- more -->
+
 - TLDR: bài này setup để khi vagrant chạy `ubuntu` sẽ add sẵn luôn ssh key cho account `vagrant` và account `root`.
 
 - Cài đặt vagrant link official [tại đây](https://developer.hashicorp.com/vagrant/downloads). Note vagrant dùng quản lý chạy các VM nên sẽ khác và tốn tài nguyên hơn docker.

@@ -14,6 +14,8 @@ draft: true
 
 - Để đọc bài này nên biết một chút về sqlalchemy , alembic và fastapi.
 
+<!-- more -->
+
 ## Mở đầu
 
 - Mình dùng [fastapi](https://fastapi.tiangolo.com/) làm backend cho một project. Sqlalchemy làm ORM cho postgres và `alembic` để quản lý các version (upgrade, downgrade mỗi khi cần thay đổi cấu trúc dữ liệu).

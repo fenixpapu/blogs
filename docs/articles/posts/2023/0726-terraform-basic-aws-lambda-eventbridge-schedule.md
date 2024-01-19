@@ -11,7 +11,10 @@ draft: false
 
 - Có nhiều cách để tạo lambda thậm chí mình nghĩ nên dùng serverless của aws ngon hơn :v
 - Tuy nhiên đang cần thực hành terraform (terraform cũng có cái lợi riêng) nên mình tạo lambda theo terraform.
-- Tương tự như cách tạo lambda thì cách trigger lambda có có `n` cách. Trong bài này mình sẽ tạo một module khởi tạo lambda được trigger bởi eventbridge schedule. Tức lambda này sẽ chạy theo lập lịch ( như dưới đây sẽ là 1h chạy 1 lần).
+
+<!-- more -->
+
+- Tương tự như cách tạo lambda thì cách trigger lambda có `n` cách. Trong bài này mình sẽ tạo một module khởi tạo lambda được trigger bởi eventbridge schedule. Tức lambda này sẽ chạy theo lập lịch ( như dưới đây sẽ là 1h chạy 1 lần).
 - Đặc biệt nếu trigger bởi eventbridge schedule thì khi vào lambda trên aws phần trigger nó sẽ trống trơn (tưởng lambda này đang ko được chạy) nhưng check log cloudwatch ( nếu có quyền ghi log) thì vẫn có nhé.
 
 ## Module lambda_eventbridge_schedule

@@ -13,6 +13,8 @@ draft: false
 
 - Tuy nhiên đôi khi chúng ta cần monitor những thứ không có sẵn đơn giản ví dụ chúng ta có thể monitor redis server, nhưng nếu muốn monitor giá trị của key `current_users` trong redis ( thay vì trạng thái server thì làm sao)?. Trong bài này mình sẽ note lại các bước dùng python custom metric của prometheus để monitor bất kỳ thứ gì chúng ta muốn.
 
+<!-- more -->
+
 ## Python custom metric
 
 - Chi tiết python exporter có thể xem tại [đây](https://github.com/prometheus/client_python). Một số kiểu metric của prometheus:

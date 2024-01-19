@@ -15,6 +15,8 @@ draft: false
 
 - Mọi chuyện vẫn bình thường cho đến khi:
 
+<!-- more -->
+
 ```linenums="1"
 {
   "action" : "KillSubmissionResponse",

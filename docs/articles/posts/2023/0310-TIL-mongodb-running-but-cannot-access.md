@@ -11,6 +11,8 @@ draft: false
 
 - Bài này không đủ dài để làm một bài đăng blog. Nhưng như tiêu đề: `today I learned`, nó làm mình mất thời gian nên cần note lại để lâu lâu đọc lại nhớ lần sau ko bị :))
 
+<!-- more -->
+
 - Nay có issue mongodb chết ( trước đó có cảnh báo full ổ, nhưng khi mình check thì ai đó đã nâng lên 1T và đang dùng có 74%).
 
 - Mình check thấy service failed. Đã restart lại service mongo với cả 2 lệnh:

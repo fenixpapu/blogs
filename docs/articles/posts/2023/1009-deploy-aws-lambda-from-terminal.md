@@ -11,6 +11,8 @@ draft: false
 
 - Cần nói trước có nhiều cách deploy lambda function hay hơn ( bằng sls (serverless) khi bạn tạo project từ serverless) hoặc từ terraform. Tuy nhiên đôi khi lambda function đã có sẵn và được deploy từ terminal nên mình cũng deploy luôn chứ ko tạo lại từ đầu theo 2 cách trên.
 
+<!-- more -->
+
 - Deploy từ terminal này cũng là cho source code và deploy từ `.zip` file ko phải cho images (lambda có hỗ trợ cả images ko riêng source code).
 
 ## Zip file

@@ -13,6 +13,8 @@ draft: false
 
 - DNS có hàng tá loại bản ghi với các mục đích khác nhau. Hiểu một trong số các bản ghi cơ bản giúp chúng ta phát hiện các mối đe dọa và cập nhật những gì đang xảy ra trên mạng của mình.
 
+<!-- more -->
+
 ## Bản ghi `A` và `AAAA`
 
 - Kiểu bản ghi `A` kiểu phổ biến nhất, nó ánh xạ tên miền sang địa chỉ IPv4.

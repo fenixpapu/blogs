@@ -17,6 +17,8 @@ draft: false
 
 - Bài viết này đề cập hai giải pháp push noti từ aws vào MS team. Có hai cách: 1 là lambda + webhook và 2 là push thẳng sns vào email.
 
+<!-- more -->
+
 - Mục đích mình note lại việc MS team có support tạo email cho 1 channel (cái này lạ à nha).
 
 ## Using lambda và webhook.

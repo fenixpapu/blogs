@@ -12,6 +12,9 @@ draft: false
 # AWS auto start stop RDS
 
 - Bài toán: Công ty có các môi trường dev, stg, pre, prd. Trừ prd cần always up, ngoài ra các môi trường khác mình thấy ban đêm để thì phí tài nguyên, và xếp có yêu cầu giảm cost nên mình viết lambda để tự động tắt RDS trên các môi trường non-prod khi ngoài giờ hành chính.
+
+<!-- more -->
+
 - Lúc đầu viết bằng python mà sau sếp bảo đổi sang nodejs cho cùng stack với dev team. Bài này sẽ note lại cả 2 ngôn ngữ.
 
 - Tại thời điểm viết thằng chủ thớt viết bài này cả python và nodejs nó ko tìm được cách để list các rds instance, nên script sẽ cho điền tên instance vào ( ko biết có dummy quá ko :v)

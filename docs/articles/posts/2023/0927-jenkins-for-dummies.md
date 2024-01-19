@@ -11,6 +11,8 @@ draft: false
 
 - Nhân tiện có ticket liên quan jenkins nên mình lưu lại một số ghi chú trong quá trình tìm hiểu để sau cần thì lục lại cũng nhanh hơn.
 
+<!-- more -->
+
 ## Jenkins on docker
 
 - Devops cũng như dev ngoài môi trường `dev`, `qa`, `pre`, `prod`, có một môi trường local vẫn luôn là tiện nhất. Hoặc trong trường hợp Jenkins dùng chung giữa `qa` và `prod` thì nếu được, test local là tốt nhất.

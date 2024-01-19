@@ -13,6 +13,8 @@ draft: false
 
 - Năm năm trước (2017 - lúc đó network engineer) đọc python mình thấy có một số thứ vẫn còn hay bị quên. Những thứ này chỉ có ở python mà quên thì đôi khi đọc code thường hay lấn cấn. Nên giờ muốn học lại python viết luôn bài này note lại luôn cho nhớ :D
 
+<!-- more -->
+
 ## List comprehension
 
 - List comprehension thường là cú pháp ngắn hơn khi muốn tạo một list từ một list đã tồn tại.

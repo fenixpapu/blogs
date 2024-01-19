@@ -11,9 +11,11 @@ draft: false
 
 ## Before start
 
-- Với nodejs chúng ta có `sse` để gửi noti. Nhưng muốn improve python nên mình tìm cách gửi noti bằng python.
+- Với nodejs chúng ta có `sse` để gửi noti. Nhưng muốn cải thiện python nên mình tìm cách gửi noti bằng python.
 
 - Google sẽ ra một số cách với flask api hoặc dùng phần mềm bên thứ 3. Nhưng mình muốn dùng với `fast-api` và là lib như sse của nodejs.
+
+<!-- more -->
 
 - Search 1 hồi thì thấy có: `sse-starlette` thấy có mỗi mấy start trên github hơi nghi nghi :D nhưng thôi cứ thử.
 
