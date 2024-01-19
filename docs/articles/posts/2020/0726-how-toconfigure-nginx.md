@@ -20,8 +20,7 @@
 
 - Cùng xem thử cấu hình mặc định của `/etc/nginx/nginx.conf`.
 
-```sh linenums="1"
-# cat /etc/nginx/nginx.conf
+```sh linenums="1" title="/etc/nginx/nginx.conf"
 
 user  nginx;
 worker_processes  1;
@@ -80,8 +79,7 @@ http {
 
 - Bất kể source cài đặt như thế nào, file cấu hình server sẽ chứa một block (hoặc các block) `server` cho một web site. Ví dụ:
 
-```sh linenums="1"
-#/etc/nginx/conf.d/example.com.conf
+```sh linenums="1" title="/etc/nginx/conf.d/example.com.conf"
 server {
 listen 80 default_server;
 listen [::]:80 default_server;
@@ -104,23 +102,20 @@ try_files \$uri /index.html;
 
   1. Xử lý request cho cả `example.com` và `www.example.com`
 
-```sh linenums="1"
-  #/etc/nginx/conf.d/example.com.conf
+```sh linenums="1" title="/etc/nginx/conf.d/example.com.conf"
   server_name example.com www.example.com;
 ```
 
 2. Chỉ thị `server_name` có thể sử dụng wildcards `*.example.com` và `.example.com` cả hai đều chỉ server cách xử lý requests với tất cả các sub domain của `example.com`
 
-```sh linenums="1"
-#/etc/nginx/conf.d/example.com.conf
+```sh linenums="1" title="/etc/nginx/conf.d/example.com.conf"
 server_name *.example.com;
 server_name .example.com;
 ```
 
 3. Xử lý với tất của request với domain bắt đầu bằng `example.`:
 
-```sh linenums="1"
-# /etc/nginx/conf.d/example.com.conf
+```sh linenums="1" title="/etc/nginx/conf.d/example.com.conf"
 server_name example;
 ```
 
@@ -132,8 +127,7 @@ server_name example;
 
 - Thiết lập `location` cho phép bạn cấu hình cách NGINX sẽ phản hồi request với tài nguyên trong server. Giống như directive `server_name`nói cho NGINX biết cách xử lý request tới domain, directive `location` đảm bảo cho request tới các file hoặc thư mục cụ thể như `http://example.com/blog/`. Đây là một ví dụ:
 
-```sh linenums="1"
-  #/etc/nginx/sites-available/example.com
+```sh linenums="1" title="/etc/nginx/sites-available/example.com"
   location / {}
   location /images/ {}
   location /blog/ {}
@@ -153,32 +147,28 @@ server_name example;
 
 - **Returns**: sẽ được đáp ứng bởi chỉ thị `location /planet/blog/` vì nó có thể hơn, dù `location /planet/` cũng phù hợp với request này.
 
-```sh linenums="1"
-#/etc/nginx/sites-available/example.com
+```sh linenums="1" title="/etc/nginx/sites-available/example.com"
 location ~ IndexPage\.php$ {}
 locaiton ~ ^/BlogPlanet(/|/index\.php)$ {}
 ```
 
 - Khi một directive `location` được theo sau bởi một dấu ngã (~), NGINX thực thi một regex (regular expression) match. Những regex này luôn luôn case-sensitive ( phân biệt hoa thường). Vì vậy, `IndexPage.php` sẽ match với ví dụ đầu tiên ở trên, nhưng `indexpage.php` sẽ không. Trong ví dụ thứ 2, regex `^/BlogPlanet(/|/index\.php)$` sẽ match với request cho `/BlogPlanet/` và `/BlogPlanet/index.php`, nhưng **KHÔNG** match `/BlogPlanet`, `blogplanet`, hoặc `/blogplanet/index.php`. NGINX sử dụng [Perl Compatible Regular Expressions - PCRE](https://perldoc.perl.org/perlre.html)
 
-```sh linenums="1"
-#/etc/nginx/sites-available/example.com
+```sh linenums="1" title="/etc/nginx/sites-available/example.com"
 location ~* \.(pl|cgi|perl|prl)$ { }
 location ~* \.(md|mdwn|txt|mkdn)$ { }
 ```
 
 - Nếu bạn muốn match với `case-insensitive` (match KHÔNG phân biệt hoa thường), sử dụng một dấu ngã với một dấu sao (~\*). Các ví dụ trên chỉ định cách NGINX nên sử lý tất cả các request mà kết thúc trong một phần mở rộng file. Ví dụ đầu tiên, bất kỳ file nào kết thúc với: `.pl`, `.PL`, `.cgi`, `.CGI`, `.perl`, `.Perl`, `.prl`, và `.PrL` sẽ match.
 
-```sh linenums="1"
-#/etc/nginx/sites-available/example.com
+```sh linenums="1" title="/etc/nginx/sites-available/example.com"
 location ^~/images/IndexPage/ {}
 location ^~/blog/BlogPlanet/ {}
 ```
 
 - Thêm một dấu mũ và dấu ngã (^~) vào directive `location` nới với NGINX, nếu nó match một string cụ thể , dừng tìm kiếm một match cụ thể hơn (match dài hơn) và sử dụng luôn các chỉ thị (directive) ở đây.
 
-```sh linenums="1"
-#/etc/nginx/sites-available/example.com
+```sh linenums="1" title="/etc/nginx/sites-available/example.com"
 location = / {}
 ```
 
@@ -207,8 +197,7 @@ Location lồng nhau thì không được khuyến khích hoặc supported.
 
 - Một khi NGINX xác định một directive `location` phù hợp nhất với request, response cho request này được xác định bởi nội dung liên quan trong block của directive `location`. Đây là một ví dụ:
 
-```sh linenums="1"
-#/etc/nginx/sites-available/example.com
+```sh linenums="1" title="/etc/nginx/sites-available/example.com"
 location / {
   root html;
   index index.html index.htm;
@@ -237,8 +226,7 @@ Bạn có thể sử dụng đường dẫn tuyệt đối nếu muốn
 
 - Đây là một ví dụ phức tạp hơn một chút, hiển thị một tập các directive `location` cho một server response với domain `example.com`:
 
-```sh linenums="1"
-# /etc/nginx/sites-available/example.com location directive
+```sh linenums="1" title="/etc/nginx/sites-available/example.com"
 location / {
   root /srv/www/example.com/public_html;
   index index.html index.htm;

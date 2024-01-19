@@ -12,9 +12,7 @@
 
   - Không sử dụng Redis:
 
-```javascript linenums="1"
-// withoutRedisAsCache.js
-
+```javascript linenums="1" title="withoutRedisAsCache.js"
 //Define all dependencies needed
 const express = require("express");
 const responseTime = require("response-time");
@@ -49,9 +47,7 @@ app.listen(3000, function () {
 
 - Có sử dụng redis làm cache:
 
-```javascript linenums="1"
-// withRedisAsCache.js
-
+```javascript linenums="1" title="withRedisAsCache.js"
 const express = require("express");
 const responseTime = require("response-time");
 const axios = require("axios");
@@ -146,9 +142,7 @@ Connection: keep-alive
 
 - Sử dụng mongodb:
 
-```javascript linenums="1"
-// mongoDB.js
-
+```javascript linenums="1" title="mongoDB.js"
 const mongoose = require("mongoose");
 const express = require("express");
 const responseTime = require("response-time");
@@ -220,9 +214,7 @@ Connection: keep-alive
 - Nếu cùng mục đích sử dụng lưu lastLogin nhưng lần này mình sẽ lưu trong redis thì sao:
 - Sử dụng redis:
 
-```javascript linenums="1"
-// redisDB.js
-
+```javascript linenums="1" title="redisDB.js"
 const express = require("express");
 const responseTime = require("response-time");
 const axios = require("axios");

@@ -49,8 +49,7 @@
 
 - Webpack bắt đầu công việc của mình từ một file Javascript được gọi là `entry point`. Từ đây nó sẽ tìm ra tất các cả gói phụ thuộc mà chương trình cần. Chúng ta tạo một file `index.js` trong thư mục Javascript làm entry point. Viết một đoạn code nào đó trong file này:
 
-```javascript linenums="1"
-// index.js
+```javascript linenums="1" title="index.js"
 console.log(`webpack is awesome!`);
 ```
 

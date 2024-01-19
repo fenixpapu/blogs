@@ -3,9 +3,11 @@
 ## Enable basic authentication
 
 - install the httpasswd package
-  ```linenums="1"
-  yum install httpd24-tools
-  ```
+
+```linenums="1"
+yum install httpd24-tools
+```
+
 - If you create an user for the **_first time_**, you have to create the password file using “-c <file>” option. Remember using “-c” option for the first time only.
 
 ```linenums="1"

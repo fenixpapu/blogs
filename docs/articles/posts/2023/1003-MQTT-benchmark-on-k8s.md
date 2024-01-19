@@ -10,8 +10,7 @@
 
 - Trang chủ EMQX có sẵn [docker-compose](https://www.emqx.io/docs/en/v5.0/deploy/install-docker.html#use-docker-compose-to-build-an-emqx-cluster) cho EMQX cluster. Paste lại đây trong trường hợp link chết :D
 
-```yml linenums="1"
-#docker-compose.yml
+```yml linenums="1" title="docker-compose.yml"
 version: "3"
 
 services:
@@ -178,8 +177,7 @@ IMAGE          CREATED        CREATED BY                                      SI
 
   - pub-deployment-EMQX-bench.yml:
 
-```yaml linenums="1"
-# pub-deployment-EMQX-bench.yml
+```yaml linenums="1" title="pub-deployment-EMQX-bench.yml"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -218,8 +216,7 @@ spec:
 
 - sub-deployment-EMQX-bench.yaml
 
-```yaml linenums="1"
-# sub-deployment-EMQX-bench.yaml
+```yaml linenums="1" title="sub-deployment-EMQX-bench.yaml"
 apiVersion: apps/v1
 kind: Deployment
 metadata:

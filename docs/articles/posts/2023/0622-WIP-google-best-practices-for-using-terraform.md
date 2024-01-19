@@ -32,19 +32,19 @@
 
   - Recommended:
 
-  ```linenums="1"
-  resource "google_compute_instance" "web_server" {
-    name = "web-server"
-  }
-  ```
+```linenums="1"
+resource "google_compute_instance" "web_server" {
+  name = "web-server"
+}
+```
 
-  - Not recommended:
+- Not recommended:
 
-  ```linenums="1"
-  resource "google_compute_instance" "web-server" {
-    name = "web-server"
-  }
-  ```
+```linenums="1"
+resource "google_compute_instance" "web-server" {
+  name = "web-server"
+}
+```
 
 - Để đơn giản hóa việc tham chiếu resource, chỉ có một loại duy nhất ( ví dụ, một load balancer cho toàn bộ module), đặt tên resource `main`
 
@@ -58,15 +58,15 @@
 
   - Recommended:
 
-  ```linenums="1"
-  resource "google_compute_global_address" "main" { ... }
-  ```
+```linenums="1"
+resource "google_compute_global_address" "main" { ... }
+```
 
-  - Not recommended:
+- Not recommended:
 
-  ```linenums="1"
-  resource "google_compute_global_address" "main_global_address" { … }
-  ```
+```linenums="1"
+resource "google_compute_global_address" "main_global_address" { … }
+```
 
 ### Use variables carefully
 

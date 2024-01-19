@@ -281,8 +281,7 @@ docker network create my-mongo-cluster
 
 - File `docker-compose.yml` như dưới:
 
-```yml linenums="1"
-# docker-compose.yml file
+```yml linenums="1" title="docker-compose.yml"
 version: "3.5"
 
 services:

@@ -108,9 +108,9 @@ Hãy thử tự tạo ra magic box và black box
 
 ```text linenums="1"
 "I hear and I forget.
-  I see and I remember.
-    I DO AND I UNDERSTAND"
-                  - Nho giáo -
+I see and I remember.
+I DO AND I UNDERSTAND"
+        - Nho giáo -
 ```
 
 ### One more thing

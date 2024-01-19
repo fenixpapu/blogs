@@ -51,9 +51,7 @@ class Test:
 
 - `Tuy nhiên dấu "_" lại có tác động tới tên import từ modules.` Tưởng tượng bạn có một module `my_module.py` như dưới đây:
 
-```python linenums="1"
-# This is my_module.py
-
+```python linenums="1" title="my_module.py"
 def external_func():
     return 23
 

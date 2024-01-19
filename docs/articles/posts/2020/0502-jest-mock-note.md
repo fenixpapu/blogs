@@ -4,20 +4,17 @@
 
 - Below an example:
 
-```js linenums="1"
-//foo.js
+```js linenums="1" title="foo.js"
 export const foo = true; // could be expression as well
 ```
 
-```js linenums="1"
-//subject.js
+```js linenums="1" title="subject.js"
 import { foo } from "./foo";
 
 export default () => foo;
 ```
 
-```js linenums="1"
-//subject.spec.js also know as(aka) subject.test.js
+```js linenums="1" title="subject.spec.js also know as(aka) subject.test.js"
 import subject from "./subject";
 
 jest.mock("./foo", () => ({
