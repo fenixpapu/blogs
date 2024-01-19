@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2020-09-20
+draft: false
+---
+
 # socket.io emit cheat sheet
 
 - Đang làm dự án liên quan socket.io thấy file này hay quá nên chôm chỉa về đây sau tham chiếu cho tiện.

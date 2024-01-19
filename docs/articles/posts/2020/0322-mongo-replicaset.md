@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-03-22
+draft: false
+---
+
 # Mongo Replica Set on Docker
 
 ## Mongo Replica Set

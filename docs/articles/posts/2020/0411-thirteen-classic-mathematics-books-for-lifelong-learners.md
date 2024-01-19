@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - math
+date: 2020-04-11
+draft: false
+---
+
 # 13 Classic Mathematics Books for Lifelong Learners
 
 - 13 quyển sách toán học cổ điển dành cho người học suốt đời

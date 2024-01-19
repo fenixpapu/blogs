@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2020-01-26
+draft: false
+---
+
 # [The differences between a junior, mid level, and senior developer](https://medium.com/better-programming/the-differences-between-a-junior-mid-level-and-senior-developer-bb2cb2eb000d)
 
 - Trở thành một junior, mid-level, hay senior developer không đơn thuần chỉ là làm lập trình trong nhiều năm. Một junior có thể già hơn một senior. Tất cả dựa trên kĩ năng. Việc này không có nghĩa senior phải là chuyên gia trong mọi thứ, nhưng chính xác khi nói lập trình viên senior được trang bị nhiều kĩ năng hơn nhiều so với junior và mid-level.

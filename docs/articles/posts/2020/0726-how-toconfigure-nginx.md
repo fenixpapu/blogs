@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-07-26
+draft: false
+---
+
 # How to config NGINX
 
 - Bài gốc tại [đây](https://www.linode.com/docs/web-servers/nginx/how-to-configure-nginx/)

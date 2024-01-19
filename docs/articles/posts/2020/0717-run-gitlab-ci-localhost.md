@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-07-17
+draft: false
+---
+
 # Run gitlab CI with Runner
 
 ## Trước khi bắt đầu

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2020-02-22
+draft: false
+---
+
 # Nodejs upload files to aws
 
 ## Introdution

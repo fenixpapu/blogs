@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2020-05-08
+draft: false
+---
+
 # [Typescript Generics Explained](https://medium.com/@rossbulat/typescript-generics-explained-15c6493b510f)
 
 - Đây là bài dịch với mục đích tìm hiểu và thực hành về typescript. Link bài gốc trên tiêu đề :)

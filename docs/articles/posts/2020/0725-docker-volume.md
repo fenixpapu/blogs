@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-07-25
+draft: false
+---
+
 # Manage data in Docker
 
 - Bài này dịch từ tài liệu doc của Docker [ở đây](https://docs.docker.com/storage/)

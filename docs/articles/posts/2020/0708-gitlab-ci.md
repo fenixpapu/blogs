@@ -1,4 +1,13 @@
-# DRAFT Install gitlab and running gitlab ci
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-07-08
+draft: true
+---
+
+# Install gitlab and run gitlab ci
 
 - Dự án mình làm cần dùng gitlab-ci vào vài việc nhỏ nên cài thử gitlab vọc luôn xem sao.
 

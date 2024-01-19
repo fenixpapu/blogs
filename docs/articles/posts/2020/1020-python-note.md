@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2020-10-20
+draft: false
+---
+
 # Một số note khi tìm hiểu về python
 
 ## casefold() vs lower()

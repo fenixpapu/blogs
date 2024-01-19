@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-10-15
+draft: false
+---
+
 # Install hadoop cluster
 
 ## Run docker

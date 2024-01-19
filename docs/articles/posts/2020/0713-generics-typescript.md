@@ -1,4 +1,13 @@
-# [Generics](https://www.typescriptlang.org/docs/handbook/generics.html)
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2020-07-13
+draft: false
+---
+
+# [Generics Typescript](https://www.typescriptlang.org/docs/handbook/generics.html)
 
 - Bài này nên được dịch cẩn thận hơn. Dòng này sẽ được xóa khi đã chỉnh sửa lại.
 

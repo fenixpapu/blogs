@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2020-05-02
+draft: false
+---
+
 # Jest Mock Note.
 
 - Bài này note lại một câu trả lời trên [stackoverflow](https://stackoverflow.com/a/54807475/1406656) cách mock function, module, giải quyết vấn đề mình gặp phải dự án. (note lại sau tìm cho dễ)

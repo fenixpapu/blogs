@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-10-10
+draft: false
+---
+
 # Run Docker commands without sudo
 
 1. Add `docker` group if it doesn't already exist ( It should be already existed).

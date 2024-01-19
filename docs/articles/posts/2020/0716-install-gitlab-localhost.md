@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-07-16
+draft: false
+---
+
 # Cài đặt gitlab trên local
 
 ## Trước khi bắt đầu

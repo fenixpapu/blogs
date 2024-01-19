@@ -1,3 +1,13 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+  - dev
+date: 2020-03-27
+draft: false
+---
+
 # Active Learner — How developers keep learning
 
 - Đây là một bài dịch. Bản thân thấy có ích nên mình lượm lặt lại. Link bài gốc [tại đây](https://hackernoon.com/active-learner-how-developers-keep-learning-1309b91f1ae6)

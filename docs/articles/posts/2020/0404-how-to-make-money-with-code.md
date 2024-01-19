@@ -1,3 +1,13 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+  - dev
+date: 2020-04-04
+draft: false
+---
+
 # How to make money with code
 
 - Bài gốc ở [đây](https://levelup.gitconnected.com/how-to-make-money-with-code-e6bd6c698fe4) bài này có câu mở đầu tạo động lực nên quyết định dịch luôn cả bài ^^!

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2020-10-20
+draft: false
+---
+
 # VIM keyboards shortcut
 
 - Xóa từ đầu tới ký tự `X` (trái qua phải) : `dtX`
