@@ -187,7 +187,7 @@ variable "subnet_id_3" {
 
 ## Final result:
 
-![20220628-012200-blogs-cluster-created-by-terraform](../../images/20220628-012200-blogs-cluster-created-by-terraform.png)
+![20220628-012200-blogs-cluster-created-by-terraform](../../images/2022/20220628-012200-blogs-cluster-created-by-terraform.png)
 
 ## Next time I should translate [this](https://calvineotieno010.medium.com/devops-automation-with-terraform-aws-and-docker-build-production-grade-eks-cluster-with-ec8fbfa269c9), it's seem a good one.
 
