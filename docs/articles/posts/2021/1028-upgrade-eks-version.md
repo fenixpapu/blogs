@@ -19,7 +19,7 @@
 
 ## K8s components
 
-![k8s-architectural](../../images/20211028_145822_k8s_architectural.png "k8s architectural overview")
+![k8s-architectural](../../images/2021/20211028_145822_k8s_architectural.png "k8s architectural overview")
 
 - We have some components need to be consider when we upgrade k8s version: `control plane`, `node group (aka: data plane)`, `VPC CNI`, `Core DNS` and `kube-proxy`
 
@@ -135,7 +135,7 @@
 
 - Check compatible between k8s version and kube-proxy version in [here](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html#kube-proxy-default-versions-table)
 
-- ![k8s version compatible with kube-proxy](../../images/20211102_111143_k8s_compatible_kube-proxy.png)
+- ![k8s version compatible with kube-proxy](../../images/2021/20211102_111143_k8s_compatible_kube-proxy.png)
 
 - If you are using kube-proxy Amazon EKS add-on follow [this](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html#updating-kube-proxy-eks-add-on)
 
@@ -158,7 +158,7 @@
 
 - Check compatible between k8s version and CoreDNS in [here](https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html#coredns-versions)
 
-- ![k8s version compatible with CoreDNS](../../images/20211102_134530_k8s_compatible_CoreDNS.png)
+- ![k8s version compatible with CoreDNS](../../images/2021/20211102_134530_k8s_compatible_CoreDNS.png)
 
 - If you are using CoreDNS Amazon EKS add-on follow [this](https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html#updating-coredns-eks-add-on)
 

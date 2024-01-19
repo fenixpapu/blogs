@@ -370,6 +370,6 @@
   - Tạo file `docker-compose.yml` , `nginx.conf`, `eserver.crt`, `server.key` with their content. `eserver.crt` và `server.key` là nội dung bạn tự gen ra cho mình để support SSL (cloud flare support self ssl - cần check lại việc này (cwl)).
   - thực thi câu lệnh cài docker, docker-compose và `docker-compose up -d`
   - Sau khi ec2 và các container up thì sẽ tạo ra mô hình như ảnh dưới, phần còn lại là trỏ domain về public IP được tạo trước đó là xong.
-    ![ec2-with-nginx-as-proxy](../../images/20211121_014000_ec2_with_nginx_proxy.png)
+    ![ec2-with-nginx-as-proxy](../../images/2021/20211121_014000_ec2_with_nginx_proxy.png)
 
 - Happy working!!!
