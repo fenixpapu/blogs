@@ -16,14 +16,14 @@
 
 - Cùng bắt đầu: Khởi tạo folder `webpack-demo` bên trong khai báo 2 folder `dist` và `src` và các thư mục con như bên dưới.
 
-  ```bash
-  ├── dist
-  └── src
-      ├── fonts
-      ├── images
-      ├── javascript
-      └── sass
-  ```
+```bash linenums="1"
+├── dist
+└── src
+    ├── fonts
+    ├── images
+    ├── javascript
+    └── sass
+```
 
 - Webpack sẽ tạo ra 1 file Javascript và 1 file CSS đã được `bundle`. Chúng ta có thể đơn giản thêm file đó vào trong HTML file.
 
@@ -33,38 +33,38 @@
 
 - Sử dụng npm: `npm init -y` để khởi tạo project và `package.json` file, các gói phụ thuộc của JS sẽ được khai báo trong file này. Sau đó chúng ta cài đặt webpack với lệnh: `npm i --save-dev webpack webpack-cli`. Sau 2 lệnh này chúng ta có thư mục như dưới(các lần sau mình sẽ remove bỏ `node_modules` trong cây thư mục):
 
-  ```bash
-  ├── dist
-  ├── node_modules
-  ├── package.json
-  ├── package-lock.json
-  └── src
-      ├── fonts
-      ├── images
-      ├── javascript
-      └── sass
-  ```
+```bash linenums="1"
+├── dist
+├── node_modules
+├── package.json
+├── package-lock.json
+└── src
+    ├── fonts
+    ├── images
+    ├── javascript
+    └── sass
+```
 
 ### Create entry point file
 
 - Webpack bắt đầu công việc của mình từ một file Javascript được gọi là `entry point`. Từ đây nó sẽ tìm ra tất các cả gói phụ thuộc mà chương trình cần. Chúng ta tạo một file `index.js` trong thư mục Javascript làm entry point. Viết một đoạn code nào đó trong file này:
 
-  ```javascript
-  // index.js
-  console.log(`webpack is awesome!`);
-  ```
+```javascript linenums="1"
+// index.js
+console.log(`webpack is awesome!`);
+```
 
-  ```bash
-  ├── dist
-  ├── package.json
-  ├── package-lock.json
-  └── src
-      ├── fonts
-      ├── images
-      ├── javascript
-      │   └── index.js
-      └── sass
-  ```
+```bash linenums="1"
+├── dist
+├── package.json
+├── package-lock.json
+└── src
+    ├── fonts
+    ├── images
+    ├── javascript
+    │   └── index.js
+    └── sass
+```
 
 ### Create webpack.config.js
 
@@ -72,57 +72,54 @@
 
 - Đây là một ví dụ về bước đầu cấu hình webpack:
 
-  ```js
-  // FILE webpack.config.js
+```javascript linenums="1" title="webpack.config.js"
+// Webpack sử dụng path để làm việc với thư mục
+const path = require("path");
 
-  // Webpack sử dụng path để làm việc với thư mục
-  const path = require("path");
+// Dưới đây sẽ chứa phần cấu hình chính của webpack
+// Bạn sẽ viết các cấu hình khác nhau dựa theo mỗi dự án và chỉ rõ cho webpack biết // nó phải làm gì
+module.exports = {
+  // Đường dẫn tới thư mục `entry point`. `Webpack` sẽ bắt đầu công việc của mình //// từ đây
+  entry: "./src/javascript/index.js",
 
-  // Dưới đây sẽ chứa phần cấu hình chính của webpack
-  // Bạn sẽ viết các cấu hình khác nhau dựa theo mỗi dự án và chỉ rõ cho webpack biết // nó phải làm gì
-  module.exports = {
-    // Đường dẫn tới thư mục `entry point`. `Webpack` sẽ bắt đầu công việc của mình //// từ đây
-    entry: "./src/javascript/index.js",
+  // Đường dẫn và tên file sau khi đã được `bundle`
+  // Webpack sẽ bundle tất cả JS vào trong file này.
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
 
-    // Đường dẫn và tên file sau khi đã được `bundle`
-    // Webpack sẽ bundle tất cả JS vào trong file này.
-    output: {
-      path: path.resolve(__dirname, "dist"),
-      filename: "bundle.js"
-    },
+  // Mặc định webpack là mode production.
+  // Tùy thuộc vào mode mà webpack sẽ bundle ra các file khác nhau:
+  // Thường thì với mode production chúng ta sẽ cấu hình để bundle ra file có dung /// lượng nhỏ nhất. Trong khi đó mode development chúng ta muốn xem log để debug.
+  mode: "development",
+};
+```
 
-    // Mặc định webpack là mode production.
-    // Tùy thuộc vào mode mà webpack sẽ bundle ra các file khác nhau:
-    // Thường thì với mode production chúng ta sẽ cấu hình để bundle ra file có dung /// lượng nhỏ nhất. Trong khi đó mode development chúng ta muốn xem log để debug.
-    mode: "development"
-  };
-  ```
-
-  ```bash
-  ├── dist
-  ├── package.json
-  ├── package-lock.json
-  ├── src
-  └── webpack.config.js
-  ```
+```bash linenums="1"
+├── dist
+├── package.json
+├── package-lock.json
+├── src
+└── webpack.config.js
+```
 
 ### Add npm script in `package.json` to run Webpack
 
 - Để chạy được webpack chúng ta cần có script cho npm với câu lệnh đơn giản `webpack` và được cấu hình:
 
-  ```json
-  // package.json file
-  "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "build": "webpack --config webpack.config.js"
-    },
-  ```
+```json linenums="1" title="package.json"
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js"
+  },
+```
 
 ### Run Webpack
 
 - Với cấu hình cơ bản như trên chúng ta có thể chạy webpack: `npm run build`. Webpack sẽ tìm kiếm trong entry file, và tìm ra tất cả các gói phụ thuộc được import bên trong đó và `bundle` chúng vào 1 file `.js` trong thư mục `dist`. Màn hình sau khi chạy lệnh build như thế này:
 
-```bash
+```bash linenums="1"
 > webpack --config webpack.config.js
 
 Hash: ce0af5daa3e00f4bfac5
@@ -145,26 +142,26 @@ Entrypoint main = bundle.js
 
 - [Babel](https://babeljs.io/) là trình chuyển đổi JS tốt nhất hiện có. Ta sẽ nói với webpack sử dụng babel để chuyển đổi code JS tương thích các trình duyệt. Đầu tiên cài đặt babel:
 
-```sh
+```sh linenums="1"
 npm i --save-dev babel-loader @babel/core @babel/preset-env
 ```
 
 - Giờ hãy cùng thêm rule cho những file JS.
 
-  ```js
-  rules: [
-      {
-        test: / \.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            preset: ["@babel/preset-env"]
-          }
+```js linenums="1"
+rules: [
+    {
+      test: / \.js$/,
+      exclude: /(node_modules)/,
+      use: {
+        loader: "babel-loader",
+        options: {
+          preset: ["@babel/preset-env"]
         }
       }
-    ],
-  ```
+    }
+  ],
+```
 
 - Cùng nhìn lại 1 chút:
 
@@ -188,74 +185,74 @@ npm i --save-dev babel-loader @babel/core @babel/preset-env
 
 - Install với
 
-  ```sh
-  npm i --save-dev file-loader
-  ```
+```sh linenums="1"
+npm i --save-dev file-loader
+```
 
 - Sau đó thêm mới rule cho file `webpack.config.js` như dưới:
 
-  ```sh
-  {
-        test: /\.(png|jpe?g|gif|svg)$/,
-        use: [
-        "file-loader",
-        ]
-      }
-  ```
+```sh linenums="1"
+{
+      test: /\.(png|jpe?g|gif|svg)$/,
+      use: [
+      "file-loader",
+      ]
+    }
+```
 
 - Cùng thêm file `icon.png` trong project như dưới:
 
-  ```sh
-  .
-  ├── dist
-  │   └── bundle.js
-  ├── package.json
-  ├── package-lock.json
-  ├── src
-  │   ├── fonts
-  │   ├── icon.png
-  │   ├── images
-  │   ├── javascript
-  │   └── sass
-  └── webpack.config.js
-  ```
+```sh linenums="1"
+.
+├── dist
+│   └── bundle.js
+├── package.json
+├── package-lock.json
+├── src
+│   ├── fonts
+│   ├── icon.png
+│   ├── images
+│   ├── javascript
+│   └── sass
+└── webpack.config.js
+```
 
 - Và thay đổi code trong file `index.js` như dưới:
 
-  ```js
-  import Icon from "../icon.png";
+```js linenums="1"
+import Icon from "../icon.png";
 
-  const component = () => {
-    const myIcon = new Image();
-    myIcon.src = Icon;
-    Element.appendChild(myIcon);
-    return Element;
-  };
-  document.body.appendChild(component());
-  ```
+const component = () => {
+  const myIcon = new Image();
+  myIcon.src = Icon;
+  Element.appendChild(myIcon);
+  return Element;
+};
+document.body.appendChild(component());
+```
 
 - Chạy lại `webpack` : `npm run build`. Terminal tương tự như dưới:
 
-  ```sh
-  > webpack --config webpack.config.js
+```sh linenums="1"
+> webpack --config webpack.config.js
 
-  Hash: 99e14bd8069d9d883131
-  Version: webpack 4.41.2
-  Time: 214ms
-  Built at: 10/20/2019 5:03:27 PM
-                                Asset      Size  Chunks             Chunk Names
-  76f686ca7590b10beaa3064309902337.png  2.93 KiB          [emitted]
-                            bundle.js  4.75 KiB    main  [emitted]  main
-  Entrypoint main = bundle.js
-  [./src/icon.png] 82 bytes {main} [built]
-  [./src/javascript/index.js] 202 bytes {main} [built]
-  ```
+Hash: 99e14bd8069d9d883131
+Version: webpack 4.41.2
+Time: 214ms
+Built at: 10/20/2019 5:03:27 PM
+                              Asset      Size  Chunks             Chunk Names
+76f686ca7590b10beaa3064309902337.png  2.93 KiB          [emitted]
+                          bundle.js  4.75 KiB    main  [emitted]  main
+Entrypoint main = bundle.js
+[./src/icon.png] 82 bytes {main} [built]
+[./src/javascript/index.js] 202 bytes {main} [built]
+```
 
 - Và nếu bạn nhìn vào trong thư mục `dist` sẽ thấy xuất hiện thêm 1 file `76f686ca7590b10beaa3064309902337.png` ( tên file có thể khác một chút). Bên trong file `bundle.js` 1 dòng:
 
-  ```sh
-  eval("module.exports = __webpack_require__.p + \"76f686ca7590b10beaa3064309902337.png\";\n\n//# sourceURL=webpack:///./src/icon.png?");
-  ```
+```sh linenums="1"
+eval("module.exports = __webpack_require__.p + \"76f686ca7590b10beaa3064309902337.png\";\n\n//# sourceURL=webpack:///./src/icon.png?");
+```
 
 - Như vậy webpack đã chuyển đổi thành công route `../icon.png` trong `index.js` thành `dist/76f686ca7590b10beaa3064309902337.png` khi bundle.
 

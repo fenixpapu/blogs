@@ -10,7 +10,7 @@
 
 - Trang chủ EMQX có sẵn [docker-compose](https://www.emqx.io/docs/en/v5.0/deploy/install-docker.html#use-docker-compose-to-build-an-emqx-cluster) cho EMQX cluster. Paste lại đây trong trường hợp link chết :D
 
-```yml
+```yml linenums="1"
 #docker-compose.yml
 version: "3"
 
@@ -75,7 +75,7 @@ networks:
 
 - Ok sau khi đã sửa tham số và đã có thể test tải ok. Lệnh pub&sub trông sẽ ntn (nhớ thử với thông số nhỏ trước nhé vì có thể lỗi, thay bằng số lớn sau):
 
-```
+```linenums="1"
 # pub 1
 docker run -it emqx/emqtt-bench pub -c 1 -I 1 -t bench/%i -q 2 -h 10.20.0.232 -q 2
 
@@ -100,7 +100,7 @@ docker run -it emqx/emqtt-bench sub -c 1000 -i 1000 -t bench/%i -q 2 -h 10.20.0.
 
 - Kéo code về rồi sửa version trong Chart.yaml thành `5.0.8` như của khách rồi chạy thôi để có EMQX cluster trong k8s:
 
-```
+```linenums="1"
 $ git clone https://github.com/emqx/emqx.git
 $ cd emqx/deploy/charts/emqx
 $ helm install my-emqx .
@@ -113,7 +113,7 @@ $ helm del my-emqx
 
 - Để truy cập dashboard của EMQX chúng ta cần expose port của EMQX ra local với lệnh:
 
-```
+```linenums="1"
 kubectl port-forward svc/my-emqx 18083:18083
 ```
 
@@ -132,7 +132,7 @@ kubectl port-forward svc/my-emqx 18083:18083
 
 - Check ra thấy entry point đã bị thay đổi như này:
 
-```
+```linenums="1"
 papu@cyber:~$ docker history emqx/emqtt-bench
 IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
 9c87dc50902a   8 weeks ago    CMD [""]                                        0B        buildkit.dockerfile.v0
@@ -178,83 +178,83 @@ IMAGE          CREATED        CREATED BY                                      SI
 
   - pub-deployment-EMQX-bench.yml:
 
-  ```yaml
-  # pub-deployment-EMQX-bench.yml
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    name: emqx-bench-deployment
-    labels:
+```yaml linenums="1"
+# pub-deployment-EMQX-bench.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emqx-bench-deployment
+  labels:
+    app: emqx-bench
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
       app: emqx-bench
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
+  template:
+    metadata:
+      labels:
         app: emqx-bench
-    template:
-      metadata:
-        labels:
-          app: emqx-bench
-      spec:
-        containers:
-          - name: emqx-bench
-            image: emqx/emqtt-bench:latest
-            command:
-              [
-                "emqtt_bench",
-                "pub",
-                "-c",
-                "500",
-                "-I",
-                "500",
-                "-t",
-                "bench/%i",
-                "-q",
-                "2",
-                "-h",
-                "my-emqx.default.svc.cluster.local",
-              ]
-  ```
+    spec:
+      containers:
+        - name: emqx-bench
+          image: emqx/emqtt-bench:latest
+          command:
+            [
+              "emqtt_bench",
+              "pub",
+              "-c",
+              "500",
+              "-I",
+              "500",
+              "-t",
+              "bench/%i",
+              "-q",
+              "2",
+              "-h",
+              "my-emqx.default.svc.cluster.local",
+            ]
+```
 
-  - sub-deployment-EMQX-bench.yaml
+- sub-deployment-EMQX-bench.yaml
 
-  ```yaml
-  # sub-deployment-EMQX-bench.yaml
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    name: emqx-bench-sub-deployment
-    labels:
+```yaml linenums="1"
+# sub-deployment-EMQX-bench.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emqx-bench-sub-deployment
+  labels:
+    app: emqx-bench
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
       app: emqx-bench
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
+  template:
+    metadata:
+      labels:
         app: emqx-bench
-    template:
-      metadata:
-        labels:
-          app: emqx-bench
-      spec:
-        containers:
-          - name: emqx-bench
-            image: emqx/emqtt-bench:latest
-            command:
-              [
-                "emqtt_bench",
-                "sub",
-                "-c",
-                "500",
-                "-i",
-                "500",
-                "-t",
-                "bench/%i",
-                "-q",
-                "2",
-                "-h",
-                "my-emqx.default.svc.cluster.local",
-              ]
-  ```
+    spec:
+      containers:
+        - name: emqx-bench
+          image: emqx/emqtt-bench:latest
+          command:
+            [
+              "emqtt_bench",
+              "sub",
+              "-c",
+              "500",
+              "-i",
+              "500",
+              "-t",
+              "bench/%i",
+              "-q",
+              "2",
+              "-h",
+              "my-emqx.default.svc.cluster.local",
+            ]
+```
 
 - Note:
 

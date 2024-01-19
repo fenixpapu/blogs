@@ -41,7 +41,7 @@
 
 - Nhớ rằng function này được gọi với tất cả props do đó developer cần check xem có thực sự thay đổi hay không ví dụ:
 
-```javascript
+```javascript linenums="1"
   componentWillReceiveProps(nextProps) {
     if(nextProps.myProp !== this.props.myProps) {
       // nextProps.myProp has a different value than our current prop
@@ -99,7 +99,7 @@
 
 - Hàm này nhận vào ba tham số (prevProps, prevState, prevContext) cho phép chúng ta tự kiểm tra các giá trị bị thay đổi và chỉ thực hiện một số cập nhật nhất định tùy ý:
 
-```javascript
+```javascript linenums="1"
 componentDidUpdate(prevProps) {
   if(prevProps.myProps !== this.props.myProp) {
     // this.props.myProp has a different value

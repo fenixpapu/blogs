@@ -6,7 +6,7 @@
 
 - Mọi chuyện vẫn bình thường cho đến khi:
 
-```
+```linenums="1"
 {
   "action" : "KillSubmissionResponse",
   "message" : "Cannot find driver",
@@ -21,25 +21,25 @@
 
 - Lúc đầu mình ssh vào con master01 và call trực tiếp trên con master01:
 
-```
+```linenums="1"
 curl -X POST http://localhost:7077/v1/submissions/kill/driver-20231013041033-0802
 ```
 
 - Response:
 
-```
+```linenums="1"
 curl: (7) Failed to connect to localhost port 7077: Connection refused
 ```
 
 - Mình nghi nghờ do security group chưa allow (có thể là từ chính IP của ec2 này). Nên vpn vào cùng vpc rồi call:
 
-```
+```linenums="1"
 curl -X POST http://10.20.30.40:7077/v1/submissions/kill/driver-20231013041033-0802
 ```
 
 - Với `10.20.30.40` là IP của master01 thì lúc này thành công:
 
-```
+```linenums="1"
 {
   "action" : "KillSubmissionResponse",
   "message" : "Killing running driver",

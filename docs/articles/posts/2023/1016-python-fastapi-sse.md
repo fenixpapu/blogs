@@ -16,7 +16,7 @@
 
 - Thêm các gói phụ thuộc trong: `requirements.txt` với nội dung:
 
-```
+```python linenums="1"
 sse-starlette==1.6.5
 fastapi==0.103.2
 uvicorn==0.23.2
@@ -24,7 +24,7 @@ uvicorn==0.23.2
 
 - Tạo virtual env:
 
-```
+```python linenums="1"
 python3 -m venv venv
 
 # activate venv
@@ -33,13 +33,13 @@ source venv/bin/activate
 
 - Cài đặt các gói phụ thuộc:
 
-```
+```python linenums="1"
 pip3 install -r requirements.txt
 ```
 
 - Add source code trong file: `main.py`
 
-```python
+```python linenums="1"
 import asyncio
 from fastapi import FastAPI, Request
 from sse_starlette.sse import EventSourceResponse
@@ -78,13 +78,13 @@ async def message_stream(request: Request):
 
 - Done giờ thì start server rồi test thôi:
 
-```
+```linenums="1"
 uvicorn main:app --reload
 ```
 
 - Sau đó thử truy cập local port 8000 với curl nó sẽ ntn:
 
-```
+```linenums="1"
 $ curl localhost:8000
 id: message_id
 event: new_message

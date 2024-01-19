@@ -8,8 +8,8 @@
 
 - Toán học thật đẹp và đáng kinh ngạc. Thật vui sướng biết bao khi hiểu được toán học, chẳng hạn như: làm sao để chứng minh định lý cuối cùng của Fermat hay những bí ẩn của số Pi, e, epsilon vân vân và vân vân.
 
-- Dẫu sao thì, nếu bạn vượt qua rất nhiều ký thi toán nhưng lại không cảm thụ được vẻ đẹp của toán học trong suốt quãng thời gian đi học của mình, **những quyển sách này được viết ra dành cho bạn**. 
-Ý kiến thằng dịch: toán học không nhàm chán, nếu bạn thấy chán, bạn đã học sai thầy (cwl). Thấy toán thú vị khi học môn Đại Số của một thầy hồi học đại học :D
+- Dẫu sao thì, nếu bạn vượt qua rất nhiều ký thi toán nhưng lại không cảm thụ được vẻ đẹp của toán học trong suốt quãng thời gian đi học của mình, **những quyển sách này được viết ra dành cho bạn**.
+  Ý kiến thằng dịch: toán học không nhàm chán, nếu bạn thấy chán, bạn đã học sai thầy (cwl). Thấy toán thú vị khi học môn Đại Số của một thầy hồi học đại học :D
 
 ## Zero: The Biography of a Dangerous Idea | Charles Seife
 
@@ -29,9 +29,9 @@
 
 - Với Paul Lockhart, toán học là một môn nghệ thuật, nó vượt ra ngoài việc ghi nhớ các ký hiệu và công thức toán học. Với Paul:
 
-  ```text
-  Toán học là tình yêu suốt đời.
-  ```
+```text linenums="1"
+Toán học là tình yêu suốt đời.
+```
 
 - Paul tin rằng, chúng ta cần dừng cách dạy toán theo cách truyền thống và cần sử dụng sự tò mò bẩm sinh của mình để dạy và học toán.
 
@@ -51,7 +51,7 @@
 
 ## Proofs from The Book | Aigner and Ziegler
 
-- Quyển sách chứa đựng những bằng chứng tốt nhất (?) từ các lĩnh vực toán học khác nhau. Và đây không phải sách giáo khoa. Ziegler và Aigner đưa chúng ta tới một thế giới khác. Nếu bạn có ý định đọc quyển sách này bạn nên có kiến thức về  giải tích và đại số tuyến tính. Nếu không bạn sẽ gặp khó khăn trong các chứng minh.
+- Quyển sách chứa đựng những bằng chứng tốt nhất (?) từ các lĩnh vực toán học khác nhau. Và đây không phải sách giáo khoa. Ziegler và Aigner đưa chúng ta tới một thế giới khác. Nếu bạn có ý định đọc quyển sách này bạn nên có kiến thức về giải tích và đại số tuyến tính. Nếu không bạn sẽ gặp khó khăn trong các chứng minh.
 
 - Điều thú vị là tác giả đưa bạn qua các chứng minh nổi tiếng nhất của tất cả các toán học đơn giản hóa chúng thành các phương trình mà bạn có thể giải quyết trong đầu.
 
@@ -87,11 +87,11 @@
 
 ## An Imaginary Tale | Paul Nahin
 
-  ```text
-  x² + 1 = 0.
-  ```
+```text linenums="1"
+x² + 1 = 0.
+```
 
-- Phương trình này thật đẹp phải không (- không  :D -). Thực sự đẹp đẽ, một phương trình yêu thích nhất của tôi. Dù sao, tôi nghĩ bất kỳ sinh viên học giải tích nào cũng nên đọc quyển sách này nhiều hơn một lần. Quyển sách này được viết một cách hoàn hảo và sinh viên giải tích nên cảm thấy yêu nó.
+- Phương trình này thật đẹp phải không (- không :D -). Thực sự đẹp đẽ, một phương trình yêu thích nhất của tôi. Dù sao, tôi nghĩ bất kỳ sinh viên học giải tích nào cũng nên đọc quyển sách này nhiều hơn một lần. Quyển sách này được viết một cách hoàn hảo và sinh viên giải tích nên cảm thấy yêu nó.
 
 - Trong quyển này, bạn có thể học cách làm thế nào các nhà toán học khác nhau đối phó với số phức `i`. Và bạn có thể biết thêm cơ số thứ về Euler, nhà toán học vĩ đại của chúng ta.
 
@@ -99,9 +99,9 @@
 
 ## e: The Story of a Number | Eli Maor
 
-- Đây là một trong những quyển tôi sẽ đọc lại sau khi tôi hoàn thành nó. Nó cũng là một quyển sách thiết yếu. 
+- Đây là một trong những quyển tôi sẽ đọc lại sau khi tôi hoàn thành nó. Nó cũng là một quyển sách thiết yếu.
 
-- Ban đầu quyển sách giường như chỉ về số đặc biệt `e`, nhưng thực tế khác. Đó chỉ là một nửa của quyển sách. Khi bạn đọc, bạn sẽ thấy khám phá ra những con số đầu tiên, số hữu tỷ và số vô tỷ. Một số ch ương giống như bài học lịch sử tập trung vào con người và sự kiện tại một thời gian và địa điểm ( cái what the hell is that (?) : ). 
+- Ban đầu quyển sách giường như chỉ về số đặc biệt `e`, nhưng thực tế khác. Đó chỉ là một nửa của quyển sách. Khi bạn đọc, bạn sẽ thấy khám phá ra những con số đầu tiên, số hữu tỷ và số vô tỷ. Một số ch ương giống như bài học lịch sử tập trung vào con người và sự kiện tại một thời gian và địa điểm ( cái what the hell is that (?) : ).
 
 ## Imagining Numbers | Barry Mazur
 

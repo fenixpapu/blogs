@@ -27,81 +27,81 @@
 
 - Đầu tiên chúng ta khởi tạo một repository
 
-  ```sh
-    git init
-  ```
+```sh linenums="1"
+  git init
+```
 
 - Cùng xem folder `.git`
 
-  ```sh
-    $ tree .git
-    .git
-    ├── branches
-    ├── config
-    ├── description
-    ├── HEAD
-    ├── hooks
-    │   ├── applypatch-msg.sample
-    │   ├── commit-msg.sample
-    │   ├── fsmonitor-watchman.sample
-    │   ├── post-update.sample
-    │   ├── pre-applypatch.sample
-    │   ├── pre-commit.sample
-    │   ├── prepare-commit-msg.sample
-    │   ├── pre-push.sample
-    │   ├── pre-rebase.sample
-    │   ├── pre-receive.sample
-    │   └── update.sample
-    ├── info
-    │   └── exclude
-    ├── objects
-    │   ├── info
-    │   └── pack
-    └── refs
-        ├── heads
-        └── tags
+```sh linenums="1"
+  $ tree .git
+  .git
+  ├── branches
+  ├── config
+  ├── description
+  ├── HEAD
+  ├── hooks
+  │   ├── applypatch-msg.sample
+  │   ├── commit-msg.sample
+  │   ├── fsmonitor-watchman.sample
+  │   ├── post-update.sample
+  │   ├── pre-applypatch.sample
+  │   ├── pre-commit.sample
+  │   ├── prepare-commit-msg.sample
+  │   ├── pre-push.sample
+  │   ├── pre-rebase.sample
+  │   ├── pre-receive.sample
+  │   └── update.sample
+  ├── info
+  │   └── exclude
+  ├── objects
+  │   ├── info
+  │   └── pack
+  └── refs
+      ├── heads
+      └── tags
 
-    9 directories, 15 files
-  ```
+  9 directories, 15 files
+```
 
 - Cùng để ý tới folder `refs`. Nó viết tắt của `refernces` và đó cũng là nơi git lưu trữ các con trỏ của branch.
 - Chúng ta chưa commit gì cả, bởi vậy `refs` chống rỗng, cùng thay đổi nó nào, bằng cách tạo và commit một vài file.
 
-  ```sh
-    $ echo "Hello World" > helloEarth.txt
-    $ git add .
-    $ git commit -m "Hello World Commit"
-    [master (root-commit) 38de966] Hello World Commit
-    1 file changed, 1 insertion(+)
-    create mode 100644 helloEarth.txt
+```sh linenums="1"
+  $ echo "Hello World" > helloEarth.txt
+  $ git add .
+  $ git commit -m "Hello World Commit"
+  [master (root-commit) 38de966] Hello World Commit
+  1 file changed, 1 insertion(+)
+  create mode 100644 helloEarth.txt
 
-    $ echo "Hello Mars" > helloMars.txt
-    $ git add .
-    $ git commit -m "Hello Mars Commit"
-    [master 7ad6ee6] Hello Mars Commit
-    1 file changed, 1 insertion(+)
-    create mode 100644 helloMars.txt
+  $ echo "Hello Mars" > helloMars.txt
+  $ git add .
+  $ git commit -m "Hello Mars Commit"
+  [master 7ad6ee6] Hello Mars Commit
+  1 file changed, 1 insertion(+)
+  create mode 100644 helloMars.txt
 
-    $ echo "Hello Saturn" > helloSaturn.txt
-    $ git add .
-    $ git commit -m "Hello Saturn Commit"
-    [master 1c13b07] Hello Saturn Commit
-    1 file changed, 1 insertion(+)
-    create mode 100644 helloSaturn.txt
+  $ echo "Hello Saturn" > helloSaturn.txt
+  $ git add .
+  $ git commit -m "Hello Saturn Commit"
+  [master 1c13b07] Hello Saturn Commit
+  1 file changed, 1 insertion(+)
+  create mode 100644 helloSaturn.txt
 
-  ```
+```
 
 - Cùng kiểm tra xem chúng ta đang ở đâu với `git branch`:
 
-  ```sh
-    $ git branch
-    * master
-  ```
+```sh linenums="1"
+  $ git branch
+  * master
+```
 
 - Điều này có nghĩa chúng ta đang ở nhánh master(nguyên nhân do git tạo tự động dựa trên lần commit đầu tiên của chúng ta).
 - Giờ hãy cùng kiểm tra lại `.git/refs`:
 
-```sh
+```sh linenums="1"
   └── refs
     ├── heads
     │   └── master
@@ -110,49 +110,49 @@
 
 - Để ý `master` trong folder `refs/heads` rất giống branch chúng ta :D. Cùng kiểm tra nội dung của nó nào:
 
-  ```sh
-    $ cat .git/refs/heads/master
-    1c13b0776353a951d3b1a5c74f89c0bee810f2b9
-  ```
+```sh linenums="1"
+  $ cat .git/refs/heads/master
+  1c13b0776353a951d3b1a5c74f89c0bee810f2b9
+```
 
 - Và nếu chúng ta check log:
 
-  ```sh
-    git log
-  ```
+```sh linenums="1"
+  git log
+```
 
 - Đây là phần đầu của output:
 
-  ```sh
-    commit 1c13b0776353a951d3b1a5c74f89c0bee810f2b9 (HEAD -> master)
-    Author: fenixpapu <phucluongngoc@gmail.com>
-    Date:   Sat Jun 22 23:27:15 2019 +0700
+```sh linenums="1"
+  commit 1c13b0776353a951d3b1a5c74f89c0bee810f2b9 (HEAD -> master)
+  Author: fenixpapu <phucluongngoc@gmail.com>
+  Date:   Sat Jun 22 23:27:15 2019 +0700
 
-        Hello Saturn Commit
-  ```
+      Hello Saturn Commit
+```
 
 - YEAH! Bạn thấy đó. Một branch trong git đơn giản chỉ là một file chứa checksum của commit cuối cùng trên branch đó. Hay đơn giản: một con trỏ tới một commit :D.
 - Nếu chúng ta tạo và checkout ra một branch mới và kiểm tra thư mục `.git/refs`
 
-  ```sh
-    git checkout -b feature
-    Switched to a new branch 'feature'
-    $ tree .git/refs/
-    .git/refs/
-    ├── heads
-    │   ├── feature
-    │   └── master
-    └── tags
+```sh linenums="1"
+  git checkout -b feature
+  Switched to a new branch 'feature'
+  $ tree .git/refs/
+  .git/refs/
+  ├── heads
+  │   ├── feature
+  │   └── master
+  └── tags
 
-    2 directories, 2 files
-  ```
+  2 directories, 2 files
+```
 
 - Giờ chúng ta có thêm `feature`. Và kiểm tra checksum(pointer) nào:
 
-  ```sh
-    $ cat .git/refs/heads/feature
-    1c13b0776353a951d3b1a5c74f89c0bee810f2b9
-  ```
+```sh linenums="1"
+  $ cat .git/refs/heads/feature
+  1c13b0776353a951d3b1a5c74f89c0bee810f2b9
+```
 
 - Do chúng ta không có thêm commit nào trên nhánh này nên cả `feature` và `master` đang trỏ tới cùng một commit.
 - Đó là cách nhanh gọn và hiệu quả mà git tạo ra một branch: tạo một text file và cập nhật vào nó với checksum của commit hiện tại.
@@ -161,19 +161,19 @@
 
 - Nó ở đây nè:
 
-  ```sh
-    $ cat .git/HEAD
-    ref: refs/heads/feature
-  ```
+```sh linenums="1"
+  $ cat .git/HEAD
+  ref: refs/heads/feature
+```
 
 - Thử chuyển branch để kiểm tra lại nhé:
 
-  ```sh
-    $ git checkout master
-    Switched to branch 'master'
-    $ cat .git/HEAD
-    ref: refs/heads/master
-  ```
+```sh linenums="1"
+  $ git checkout master
+  Switched to branch 'master'
+  $ cat .git/HEAD
+  ref: refs/heads/master
+```
 
 - Như bạn thấy đó giờ HEAD chuyển qua master.
 - Chỉ đơn giản vậy thôi, nhưng lại khá quan trọng cho chúng ta để hiểu các hoạt động của git khi thao tác trên đồ thị các branch này (như merge, rebase, checkout, revert...).

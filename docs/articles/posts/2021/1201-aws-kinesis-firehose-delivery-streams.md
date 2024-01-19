@@ -4,7 +4,7 @@
 
 - File `main.tf` trông sẽ như thế này:
 
-```
+```linenums="1"
   resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {
     name        = "terraform-kinesis-firehose-extended-s3-test-stream"
     destination = "extended_s3"
@@ -44,6 +44,7 @@
   EOF
   }
 ```
+
 - Do ko có nhu cầu xử lý dữ liệu trước khi đẩy vào destination (S3). Nên mình lọc bỏ đoạn lambda (trên docs của terraform). Destination S3 thì cần dùng `extended_s3` nhé `S3` bị `deprecated` không nên dùng.
 
 - Ok! chạy thì nó tạo thành công `kinesis firehose delivery streams`, và S3 (lưu ý cái trên là S3 public access nhé, tý sẽ sửa lại sau).
@@ -52,70 +53,71 @@
 
 - Và chờ 5 phút (do buffer interval là 300 seconds) vẫn ko thấy dữ liệu trong S3 như hướng dẫn.
 
-- F*ckkk sau khi check lại thì vấn đề ở chỗ tạo IAM role cho Kinesis nhưng chưa assign permission gì cả cho nên cần phải sửa lại cái IAM role như này:
+- F\*ckkk sau khi check lại thì vấn đề ở chỗ tạo IAM role cho Kinesis nhưng chưa assign permission gì cả cho nên cần phải sửa lại cái IAM role như này:
 
-  ```
-  resource "aws_iam_role" "firehose_role" {
-    name = var.firehose_role_name
+```linenums="1"
+resource "aws_iam_role" "firehose_role" {
+  name = var.firehose_role_name
 
-    inline_policy {
-      name = "allow_s3_kinesis"
-      policy = jsonencode({
-        "Version" : "2012-10-17"
-        "Statement" : [
-          {
-            "Effect" : "Allow",
-            "Action" : [
-              "s3:AbortMultipartUpload",
-              "s3:GetBucketLocation",
-              "s3:GetObject",
-              "s3:ListBucket",
-              "s3:ListBucketMultipartUploads",
-              "s3:PutObject"
-            ],
-            "Resource" : [
-              "arn:aws:s3:::${var.s3_bucket_name}",
-              "arn:aws:s3:::${var.s3_bucket_name}/*"
-            ]
-          },
-          {
-            "Effect" : "Allow",
-            "Action" : [
-              "kinesis:DescribeStream",
-              "kinesis:GetShardIterator",
-              "kinesis:GetRecords",
-              "kinesis:ListShards"
-            ],
-            "Resource" : "arn:aws:kinesis:ap-southeast-1:${var.account_id}:stream/${var.kinesis_firehose_delivery_stream_name}"
-          },
-        ]
-      })
-    }
-
-    assume_role_policy = <<EOF
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "",
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "firehose.amazonaws.com"
+  inline_policy {
+    name = "allow_s3_kinesis"
+    policy = jsonencode({
+      "Version" : "2012-10-17"
+      "Statement" : [
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "s3:AbortMultipartUpload",
+            "s3:GetBucketLocation",
+            "s3:GetObject",
+            "s3:ListBucket",
+            "s3:ListBucketMultipartUploads",
+            "s3:PutObject"
+          ],
+          "Resource" : [
+            "arn:aws:s3:::${var.s3_bucket_name}",
+            "arn:aws:s3:::${var.s3_bucket_name}/*"
+          ]
         },
-        "Action": "sts:AssumeRole"
-      }
-    ]
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "kinesis:DescribeStream",
+            "kinesis:GetShardIterator",
+            "kinesis:GetRecords",
+            "kinesis:ListShards"
+          ],
+          "Resource" : "arn:aws:kinesis:ap-southeast-1:${var.account_id}:stream/${var.kinesis_firehose_delivery_stream_name}"
+        },
+      ]
+    })
   }
-  EOF
-  }
-  ```
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "firehose.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+}
+```
+
 - Ok! Sau khi tạo lại thì `kinesis` đã có thể đẩy dữ liệu vào S3 rồi phewwww.
 
 - Thực ra vấn đề chính mình gặp phải là đã ko hiểu rõ IAM role được tạo bằng terraform thì nó ntn. Biết thiếu permission nhưng loay hoay mãi ko thêm được :|. Cảm ơn em đồng nghiệp tên Minh(Peter Bùi :D) ^^!
 
-- Và phần S3 cũng cần sửa chút để bucket khi được tạo ra trở thành private chứ ko bị public. Cuối cùng file `.tf` trông sẽ ntn: 
+- Và phần S3 cũng cần sửa chút để bucket khi được tạo ra trở thành private chứ ko bị public. Cuối cùng file `.tf` trông sẽ ntn:
 
-```
+```linenums="1"
   resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {
     name        = var.kinesis_firehose_delivery_stream_name
     destination = "extended_s3"
@@ -200,6 +202,6 @@
   }
 ```
 
-- Các cái `var` kia là tham số truyền vào khi chạy terragrunt nhé :D 
+- Các cái `var` kia là tham số truyền vào khi chạy terragrunt nhé :D
 
 - Happy working!!!

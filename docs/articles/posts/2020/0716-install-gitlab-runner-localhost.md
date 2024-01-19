@@ -22,12 +22,12 @@
 
 - Sửa `latest` của hướng dẫn này thành `v13.1.1` (version mới nhất hiện tại của gitlab-runner). Chạy lệnh:
 
-  ```sh
-  sudo docker run -d --name gitlab-runner --restart always \
-  -v /srv/gitlab-runner/config:/etc/gitlab-runner \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  gitlab/gitlab-runner:v13.1.1
-  ```
+```sh linenums="1"
+sudo docker run -d --name gitlab-runner --restart always \
+-v /srv/gitlab-runner/config:/etc/gitlab-runner \
+-v /var/run/docker.sock:/var/run/docker.sock \
+gitlab/gitlab-runner:v13.1.1
+```
 
 ## Setup
 
@@ -39,57 +39,57 @@
 
   - Chạy câu lệnh đăng ký:
 
-    ```sh
-    docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner:v13.1.1 register
-    ```
+```sh linenums="1"
+docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner:v13.1.1 register
+```
 
-  - Nhập địa chỉ URL của gitlab
+- Nhập địa chỉ URL của gitlab
 
-    - Như phần lưu ý đã nói trên URL là: `http://172.16.3.213/`
+  - Như phần lưu ý đã nói trên URL là: `http://172.16.3.213/`
 
-  - Nhập token
+- Nhập token
 
-    - Như phần lưu ý đã nói trên token là: `p_XhU9o_r_6Bki6E_HSK`
+  - Như phần lưu ý đã nói trên token là: `p_XhU9o_r_6Bki6E_HSK`
 
-  - Nhập mô tả cho runner
+- Nhập mô tả cho runner
 
-    - Ví dụ: `one of my runners`
+  - Ví dụ: `one of my runners`
 
-  - Nhập tag cho runner vừa cài đặt.
+- Nhập tag cho runner vừa cài đặt.
 
-    - Ví dụ: `first-runner`.
+  - Ví dụ: `first-runner`.
 
-  - Điền [Runner Executor](https://docs.gitlab.com/runner/executors/README.html)
+- Điền [Runner Executor](https://docs.gitlab.com/runner/executors/README.html)
 
-    - Ví dụ: `docker`
+  - Ví dụ: `docker`
 
-  - Điền image name
+- Điền image name
 
-    - Nếu executor là `docker` thì mới cần điền thêm `image`.
-    - Ví dụ nhập: `ubuntu`.
+  - Nếu executor là `docker` thì mới cần điền thêm `image`.
+  - Ví dụ nhập: `ubuntu`.
 
 - Khi hoàn tất:
 
-  ```sh
-    $ sudo docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner:v13.1.1 register
-    Runtime platform                                    arch=amd64 os=linux pid=6 revision=6fbc7474 version=13.1.1
-    Running in system-mode.
+```sh linenums="1"
+  $ sudo docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner:v13.1.1 register
+  Runtime platform                                    arch=amd64 os=linux pid=6 revision=6fbc7474 version=13.1.1
+  Running in system-mode.
 
-    Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
-    http://172.16.3.213/
-    Please enter the gitlab-ci token for this runner:
-    p_XhU9o_r_6Bki6E_HSK
-    Please enter the gitlab-ci description for this runner:
-    [0647bb754faa]: one of my runners
-    Please enter the gitlab-ci tags for this runner (comma separated):
-    first-runner
-    Registering runner... succeeded                     runner=rWZxJE5j
-    Please enter the executor: ssh, docker+machine, docker, docker-ssh, shell, virtualbox, docker-ssh+machine, kubernetes, custom, parallels:
-    docker
-    Please enter the default Docker image (e.g. ruby:2.6):
-    ubuntu
-    Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
-  ```
+  Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+  http://172.16.3.213/
+  Please enter the gitlab-ci token for this runner:
+  p_XhU9o_r_6Bki6E_HSK
+  Please enter the gitlab-ci description for this runner:
+  [0647bb754faa]: one of my runners
+  Please enter the gitlab-ci tags for this runner (comma separated):
+  first-runner
+  Registering runner... succeeded                     runner=rWZxJE5j
+  Please enter the executor: ssh, docker+machine, docker, docker-ssh, shell, virtualbox, docker-ssh+machine, kubernetes, custom, parallels:
+  docker
+  Please enter the default Docker image (e.g. ruby:2.6):
+  ubuntu
+  Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+```
 
 - Nếu quay lại **Settings ~> CI/CD ~> Runners** Click `expand` sẽ thấy Runner được gán vào ntn:
 

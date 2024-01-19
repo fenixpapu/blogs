@@ -2,18 +2,18 @@
 
 1. Add `docker` group if it doesn't already exist ( It should be already existed).
 
-```sh
+```sh linenums="1"
   sudo groupadd docker
 ```
 
 2. Add current user `$USER` to the docker group
 
-```sh
+```sh linenums="1"
   sudo gpasswd -a $USER docker
 ```
 
 3. Restart the docker daemon
 
-```sh
+```sh linenums="1"
   sudo service docker restart
 ```

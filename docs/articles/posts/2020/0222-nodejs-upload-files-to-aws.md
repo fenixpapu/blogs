@@ -28,117 +28,117 @@
 
 - Tạo folder, khởi tạp project, khởi tạo git với các lệnh
 
-  ```sh
-  mkdir nodejs-aws-s3
-  cd nodejs-aws-s3
-  npm init -y
-  git init
-  ```
+```sh linenums="1"
+mkdir nodejs-aws-s3
+cd nodejs-aws-s3
+npm init -y
+git init
+```
 
 - Tạo file `config.json` với nội dung:
 
-  ```json
-  {
-    "BUCKET": "created-by-api",
-    "REGION": "ap-southeast-1",
-    "AWS_ACCESS_KEY": "NHAP_ACCESS_KEY_CUA_BAN_VAO_DAY",
-    "AWS_SECRET_KEY": "NHAP_SECRET_CUA_BAN_VAO_DAY"
-  }
-  ```
+```json linenums="1"
+{
+  "BUCKET": "created-by-api",
+  "REGION": "ap-southeast-1",
+  "AWS_ACCESS_KEY": "NHAP_ACCESS_KEY_CUA_BAN_VAO_DAY",
+  "AWS_SECRET_KEY": "NHAP_SECRET_CUA_BAN_VAO_DAY"
+}
+```
 
 - Tạo một file `makeBucket.js` (cho trùng với lệnh tạo bucket trong aws-cli)
 
-  ```javascript
-  const AWS = require("aws-sdk");
-  const config = require("./config.json");
+```javascript linenums="1"
+const AWS = require("aws-sdk");
+const config = require("./config.json");
 
-  const REGION = config.REGION;
-  const ACCESS_KEY = config.AWS_ACCESS_KEY;
-  const SECRET_KEY = config.AWS_SECRET_KEY;
+const REGION = config.REGION;
+const ACCESS_KEY = config.AWS_ACCESS_KEY;
+const SECRET_KEY = config.AWS_SECRET_KEY;
 
-  AWS.config.update({
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_KEY,
-    region: REGION
-  });
+AWS.config.update({
+  accessKeyId: ACCESS_KEY,
+  secretAccessKey: SECRET_KEY,
+  region: REGION,
+});
 
-  var s3 = new AWS.S3();
+var s3 = new AWS.S3();
 
-  const params = {
-    Bucket: config.BUCKET
-  };
+const params = {
+  Bucket: config.BUCKET,
+};
 
-  const editBucketCORS = () =>
-    s3.putBucketCors(
-      {
-        Bucket: config.BUCKET,
-        CORSConfiguration: {
-          CORSRules: [
-            {
-              AllowedHeaders: ["*"],
-              AllowedMethods: ["PUT", "POST", "DELETE"],
-              AllowedOrigins: ["*"]
-            },
-            {
-              AllowedMethods: ["GET"],
-              AllowedOrigins: ["*"]
-            }
-          ]
-        }
+const editBucketCORS = () =>
+  s3.putBucketCors(
+    {
+      Bucket: config.BUCKET,
+      CORSConfiguration: {
+        CORSRules: [
+          {
+            AllowedHeaders: ["*"],
+            AllowedMethods: ["PUT", "POST", "DELETE"],
+            AllowedOrigins: ["*"],
+          },
+          {
+            AllowedMethods: ["GET"],
+            AllowedOrigins: ["*"],
+          },
+        ],
       },
-      err => {
-        if (err) console.log(err, err.stack);
-        else console.log(`Edit Bucket CORS succeed!`);
-      }
-    );
-
-  s3.createBucket(params, (err, data) => {
-    if (err) console.log(err, err.stack);
-    else {
-      console.log(data);
-      editBucketCORS();
+    },
+    (err) => {
+      if (err) console.log(err, err.stack);
+      else console.log(`Edit Bucket CORS succeed!`);
     }
-  });
-  ```
+  );
+
+s3.createBucket(params, (err, data) => {
+  if (err) console.log(err, err.stack);
+  else {
+    console.log(data);
+    editBucketCORS();
+  }
+});
+```
 
 - Cấu trúc thư mục hiện tại đang ntn:
 
-  ```sh
-  .
-  ├── config.json
-  ├── makeBucket.js
-  ├── node_modules
-  ├── package.json
-  └── package-lock.json
+```sh linenums="1"
+.
+├── config.json
+├── makeBucket.js
+├── node_modules
+├── package.json
+└── package-lock.json
 
-  ```
+```
 
 - File `makeBucket.js` sẽ lấy cấu hình trong `config.json` và tạo mới một Bucket với tên `created-by-api`. Sau đó chỉnh lại cài đặt `CORS` của bucket với hàm `editBucketCORS`. Mình đã thử setup ngay lúc tạo bucket nhưng ko được. Search thử doc thì chỉ có 1 pha edit sau khi đã tạo bucket [tại đây](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putBucketCors-property) thôi :).
 - Cài đặt gói phụ thuộc `npm i aws-sdk`, cấu hình key chính xác, ta chạy file với: `node makeBucket.js` sẽ có output như sau là tạo thành công:
 
-  ```sh
-  node makeBucket.js
-  { Location: 'http://created-by-api.s3.amazonaws.com/' }
-  Edit Bucket CORS succeed!
-  ```
+```sh linenums="1"
+node makeBucket.js
+{ Location: 'http://created-by-api.s3.amazonaws.com/' }
+Edit Bucket CORS succeed!
+```
 
 - Ta cũng có thể kiểm tra bằng giao diện web hoặc cli, bằng cli sẽ có output dạng như thế này:
 
-  ```sh
-  $ aws s3 ls
-  2020-02-18 23:05:59 craft-created
-  2020-02-22 22:28:01 created-by-api
-  2020-02-22 10:49:55 created-by-cli
-  ```
+```sh linenums="1"
+$ aws s3 ls
+2020-02-18 23:05:59 craft-created
+2020-02-22 22:28:01 created-by-api
+2020-02-22 10:49:55 created-by-cli
+```
 
 - Chỉ chạy 1 file `makeBucket.js` thôi sao phải cấu hình project, config các thứ làm gì? Hãy làm quen với cách quản lý các file cấu hình liên quan tới Key của các dịch vụ như AWS hay Google... một cách là bạn lưu vào file config và add file đó vào trong .gitignore. ( Nếu triển khai trên cloud thì các file cấu hình này nên được lưu vào vùng có mã hóa và hạn chế quyền truy xuất như vậy sẽ an toàn hơn). Sau đó bạn có thể yên tâm đẩy project của mình lên github hoặc share link repo cho người khác.
 
 - File .gitignore ntn:
 
-  ```sh
-  config.json
-  node_modules/
-  ```
+```sh linenums="1"
+config.json
+node_modules/
+```
 
 ## Upload file
 
@@ -152,62 +152,62 @@
 
 - Để server trực tiếp đẩy file lên S3. Chúng ta tạo file `directUpload.js` với nội dung như sau:
 
-  ```javascript
-  const AWS = require("aws-sdk");
-  const fs = require("fs");
-  const config = require("./config.json");
+```javascript linenums="1"
+const AWS = require("aws-sdk");
+const fs = require("fs");
+const config = require("./config.json");
 
-  const BUCKET = config.BUCKET;
-  const REGION = config.REGION;
-  const ACCESS_KEY = config.AWS_ACCESS_KEY;
-  const SECRET_KEY = config.AWS_SECRET_KEY;
+const BUCKET = config.BUCKET;
+const REGION = config.REGION;
+const ACCESS_KEY = config.AWS_ACCESS_KEY;
+const SECRET_KEY = config.AWS_SECRET_KEY;
 
-  const localImage = "./cat.jpeg";
-  const imageRemoteName = `directUpload_catImage_${new Date().getTime()}.jpeg`;
+const localImage = "./cat.jpeg";
+const imageRemoteName = `directUpload_catImage_${new Date().getTime()}.jpeg`;
 
-  AWS.config.update({
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_KEY,
-    region: REGION
-  });
+AWS.config.update({
+  accessKeyId: ACCESS_KEY,
+  secretAccessKey: SECRET_KEY,
+  region: REGION,
+});
 
-  var s3 = new AWS.S3();
+var s3 = new AWS.S3();
 
-  s3.putObject({
-    Bucket: BUCKET,
-    Body: fs.readFileSync(localImage),
-    Key: imageRemoteName
+s3.putObject({
+  Bucket: BUCKET,
+  Body: fs.readFileSync(localImage),
+  Key: imageRemoteName,
+})
+  .promise()
+  .then((res) => {
+    console.log(`Upload succeeded - `, res);
   })
-    .promise()
-    .then(res => {
-      console.log(`Upload succeeded - `, res);
-    })
-    .catch(err => {
-      console.log("Upload failed:", err);
-    });
-  ```
+  .catch((err) => {
+    console.log("Upload failed:", err);
+  });
+```
 
 - Thư mục lúc này thêm 2 file: `directUpload.js` và `cat.jpg`
 
-  ```sh
-  .
-  ├── cat.jpg
-  ├── config.json
-  ├── directUpload.js
-  ├── makeBucket.js
-  ├── node_modules
-  ├── package.json
-  └── package-lock.json
+```sh linenums="1"
+.
+├── cat.jpg
+├── config.json
+├── directUpload.js
+├── makeBucket.js
+├── node_modules
+├── package.json
+└── package-lock.json
 
-  1 directory, 6 files
-  ```
+1 directory, 6 files
+```
 
 - Chạy thử chương trình, ok upload ngon lành:
 
-  ```sh
-  node directUpload.js
-  Upload succeeded -  { ETag: '"550cf35812c2447027f8e4d547a78adb"' }
-  ```
+```sh linenums="1"
+node directUpload.js
+Upload succeeded -  { ETag: '"550cf35812c2447027f8e4d547a78adb"' }
+```
 
 ### Upload with signedURL
 
@@ -215,144 +215,144 @@
 
 - Đầu tiên ở phía server chúng ta tạo 1 file: `uploadWithSignedURL.js` với nội dung như sau:
 
-  ```javascript
-  const cors = require("cors");
-  const aws = require("aws-sdk");
-  const express = require("express");
-  const configAWS = require("./config");
+```javascript linenums="1"
+const cors = require("cors");
+const aws = require("aws-sdk");
+const express = require("express");
+const configAWS = require("./config");
 
-  const app = express();
-  app.use(cors());
-  app.get("/sign-s3", (req, res) => {
-    const s3 = new aws.S3();
-    const fileName = req.query["file-name"];
-    const fileType = req.query["file-type"];
-    const s3Params = {
-      Bucket: configAWS.BUCKET,
-      Key: fileName,
-      Expires: 60,
-      ContentType: fileType,
-      ACL: "public-read"
+const app = express();
+app.use(cors());
+app.get("/sign-s3", (req, res) => {
+  const s3 = new aws.S3();
+  const fileName = req.query["file-name"];
+  const fileType = req.query["file-type"];
+  const s3Params = {
+    Bucket: configAWS.BUCKET,
+    Key: fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: "public-read",
+  };
+
+  s3.getSignedUrl("putObject", s3Params, (err, data) => {
+    if (err) {
+      console.log(`getSignedUrl error: `, err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${configAWS.BUCKET}.s3.amazonaws.com/${fileName}`,
     };
-
-    s3.getSignedUrl("putObject", s3Params, (err, data) => {
-      if (err) {
-        console.log(`getSignedUrl error: `, err);
-        return res.end();
-      }
-      const returnData = {
-        signedRequest: data,
-        url: `https://${configAWS.BUCKET}.s3.amazonaws.com/${fileName}`
-      };
-      res.write(JSON.stringify(returnData));
-      res.end();
-    });
+    res.write(JSON.stringify(returnData));
+    res.end();
   });
+});
 
-  app.listen(3000, () => {
-    console.log("come here babe...");
-  });
-  ```
+app.listen(3000, () => {
+  console.log("come here babe...");
+});
+```
 
 - Đoạn server trên làm gì ? Khởi tạo một api nhận request với route `sign-s3` và các query: file-name, file-type. Sau đó request signedURL (với `s3.getSignedUrl`) và trả về cho client. Ok thế là đủ rồi, phần còn lại là của client.
 
 - Ở đây mình sẽ tạo một file `ugly-client` `index.html` với nội dung như dưới:
 
-  ```html
-  <html>
-    <head> </head>
-    <body>
-      <input type="file" id="file-input" />
-      <p id="status">Please select a file</p>
+```html linenums="1"
+<html>
+  <head> </head>
+  <body>
+    <input type="file" id="file-input" />
+    <p id="status">Please select a file</p>
 
-      <script>
-        (() => {
-          document.getElementById("file-input").onchange = () => {
-            const files = document.getElementById("file-input").files;
-            const file = files[0];
-            if (file == null) {
-              return alert("No file selected.");
-            }
-            getSignedRequest(file);
-          };
-        })();
-        const getSignedRequest = file => {
-          const xhr = new XMLHttpRequest();
-          xhr.open(
-            "GET",
-            `http://localhost:3000/sign-s3?file-name=${file.name}&file-type=${file.type}`
-          );
-          xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-              if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                uploadFile(file, response.signedRequest, response.url);
-              } else {
-                alert("Could not get signed URL.");
-              }
-            }
-          };
-          xhr.send();
+    <script>
+      (() => {
+        document.getElementById("file-input").onchange = () => {
+          const files = document.getElementById("file-input").files;
+          const file = files[0];
+          if (file == null) {
+            return alert("No file selected.");
+          }
+          getSignedRequest(file);
         };
-        const uploadFile = (file, signedRequest, url) => {
-          const xhr = new XMLHttpRequest();
-          xhr.open("PUT", signedRequest);
-          xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-              if (xhr.status === 200) {
-                console.log(`Upload succeed to: ${url}`);
-              } else {
-                alert("Could not upload file.");
-              }
+      })();
+      const getSignedRequest = (file) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(
+          "GET",
+          `http://localhost:3000/sign-s3?file-name=${file.name}&file-type=${file.type}`
+        );
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              const response = JSON.parse(xhr.responseText);
+              uploadFile(file, response.signedRequest, response.url);
+            } else {
+              alert("Could not get signed URL.");
             }
-          };
-          xhr.send(file);
+          }
         };
-      </script>
-    </body>
-  </html>
-  ```
+        xhr.send();
+      };
+      const uploadFile = (file, signedRequest, url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("PUT", signedRequest);
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              console.log(`Upload succeed to: ${url}`);
+            } else {
+              alert("Could not upload file.");
+            }
+          }
+        };
+        xhr.send(file);
+      };
+    </script>
+  </body>
+</html>
+```
 
 - Đến đây folder có thêm 2 file mới rồi nha:
 
-  ```sh
-  .
-  ├── cat.jpg
-  ├── config.json
-  ├── directUpload.js
-  ├── index.html
-  ├── makeBucket.js
-  ├── node_modules
-  ├── package.json
-  ├── package-lock.json
-  └── uploadWithSignedURL.js
+```sh linenums="1"
+.
+├── cat.jpg
+├── config.json
+├── directUpload.js
+├── index.html
+├── makeBucket.js
+├── node_modules
+├── package.json
+├── package-lock.json
+└── uploadWithSignedURL.js
 
-  1 directory, 8 files
-  ```
+1 directory, 8 files
+```
 
 - Nói qua một chút. File chỉ có 1 thẻ input để người dùng chọn file. `Script` sẽ lắng nghe `onchange` để gửi request tới server bằng `getSignedRequest`. Ở đây mình đang fix cứng URL local như bạn thấy: `http://localhost:3000/sign-s3?file-name=${file.name}&file-type=${file.type}`. Sau khi nhận được signedURL do server trả về client sẽ upload file lên S3 bằng: `uploadFile`.
 
 - Ok! Chạy thử luôn đi. Đầu tiên `npm i express cors`. Chạy server trước:
 
-  ```sh
-  node uploadWithSignedURL.js
-  come here babe...
+```sh linenums="1"
+node uploadWithSignedURL.js
+come here babe...
 
-  ```
+```
 
 - Sau đó mở file `index.html` bằng chrome và chọn file `cat.jpg` chờ một lát kiểm tra trên cửa sổ `console` của browser thấy dạng như dưới là đã upload thành công(nếu thất bại bước nào sẽ bật popup):
 
-  ```sh
-  Upload succeed to: https://created-by-api.s3.amazonaws.com/cat.jpg
-  ```
+```sh linenums="1"
+Upload succeed to: https://created-by-api.s3.amazonaws.com/cat.jpg
+```
 
 - Chắc cú bạn có thể kiểm tra lại trên trang của AWS, hoặc nhanh hơn với aws-cli:
 
-  ```sh
-  $ aws s3 ls s3://created-by-api
-  2020-02-24 23:24:19      58836 cat.jpg
-  2020-02-24 23:21:51      58836 directUpload_lovelyCat_1582561310482.jpg
-  ```
+```sh linenums="1"
+$ aws s3 ls s3://created-by-api
+2020-02-24 23:24:19      58836 cat.jpg
+2020-02-24 23:21:51      58836 directUpload_lovelyCat_1582561310482.jpg
+```
 
 - Như bạn thấy có 2 file 1 file `directUpload` từ server nodejs và 1 file upload từ phía client với signedURL.
 

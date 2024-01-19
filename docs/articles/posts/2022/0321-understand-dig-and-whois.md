@@ -2,9 +2,9 @@
 
 - Bài này để remind mình tìm hiểu thêm về lệnh `dig` và `whois`. Hôm bữa gặp sự cố 1 bạn AWS supporter dùng 2 lệnh này để trace ra issue nên thấy 2 lệnh này hữu ích nên tìm hiểu thêm
 
+- Dig example:
 
-- Dig example: 
-```
+```linenums="1"
 $ dig weomni.com +trace +nodnssec
 
 ; <<>> DiG 9.11.4-P2-RedHat-9.11.4-26.P2.amzn2.5.2 <<>> weomni.com +trace +nodnssec
@@ -50,7 +50,7 @@ weomni.com.             172800  IN      NS      ns2.redmonddc.com.
 
 - Whois example:
 
-```
+```linenums="1"
 $ whois weomni.com | grep Server
    Registrar WHOIS Server: whois.onlinenic.com
    Name Server: NS1.REDMONDDC.COM

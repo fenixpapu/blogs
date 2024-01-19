@@ -3,7 +3,7 @@
 - Đang làm dự án liên quan socket.io thấy file này hay quá nên chôm chỉa về đây sau tham chiếu cho tiện.
 - Source trên trang chủ thì [ở dây](https://socket.io/docs/emit-cheatsheet/)
 
-```javascript
+```javascript linenums="1"
 io.on("connect", onConnect);
 
 function onConnect(socket) {

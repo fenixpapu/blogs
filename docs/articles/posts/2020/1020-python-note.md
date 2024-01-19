@@ -3,11 +3,12 @@
 ## casefold() vs lower()
 
 - Cùng là method của `String` để lowercase một string. Casefold có vẻ mạnh hơn vì nó loại bỏ tất cả phân biệt hoa thường trong một chuỗi. Nếu chỉ làm việc với tiếng Anh thì 2 method này tương tự nhau. Ví dụ khác nhau trong tiếng Đức.
-  ```python
-  S = `Das straße`
-  x = S.casefold() # das strasse
-  y = S.lower() # das straße
-  ```
+
+```python linenums="1"
+S = `Das straße`
+x = S.casefold() # das strasse
+y = S.lower() # das straße
+```
 
 ## Python collections (Arrays)
 
@@ -33,4 +34,3 @@
 - Từ khóa `self` được tham chiếu tới đối tượng hiện tại của một class ( tức object), và được sử dụng để truy vấn các biến thuộc về đối tượng này.
 
 - `Self` không nhất thiết phải tên `self`, chúng ta có thể đặt tên bất kỳ, nhưng nó phải là tham số đầu tiên của bất kỳ function nào trong class.
-

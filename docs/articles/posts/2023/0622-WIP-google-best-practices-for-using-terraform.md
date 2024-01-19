@@ -4,7 +4,6 @@
 
 - Bài này dành cho những ai đã dùng qua terraform(không phải những ai bắt đầu tìm hiểu)
 
-
 ## General style and structure guidelines
 
 - Những khuyến nghị sau đây bao gồm các style và structure cơ bản cho cấu hình Terraform của bạn. Các khuyến nghị hướng tới việc tái sử dụng module Terraform và cấu hình root.
@@ -20,6 +19,7 @@
 - Các ví dụ được đặt trong thư mục `examples/`. Các ví dụ được tách riêng trong các thư mục con và `README.md` cụ thể của từng ví dụ.
 
 - Nhóm các resource theo group logic với tên dễ hình dung, như `network.tf`, `instance.tf` hay `loadbalaner.tf`
+
   - Tránh tạo nhiều resource riêng lẻ, gom các resource với cùng một mục đích. Ví dụ, kết hợp: `google_dns_managed_zone` và `google_dns_record_set` vào `dns.tf`
 
 - Trong thư mục gốc của module, chỉ bao gồm `*.tf` file và metadata của repo ( như `README.md` hay `CHANGELOG.md`)
@@ -32,7 +32,7 @@
 
   - Recommended:
 
-  ```
+  ```linenums="1"
   resource "google_compute_instance" "web_server" {
     name = "web-server"
   }
@@ -40,7 +40,7 @@
 
   - Not recommended:
 
-  ```
+  ```linenums="1"
   resource "google_compute_instance" "web-server" {
     name = "web-server"
   }
@@ -57,13 +57,14 @@
 - Trong tên của resource, đừng lặp lại resource type:
 
   - Recommended:
-  ```
+
+  ```linenums="1"
   resource "google_compute_global_address" "main" { ... }
   ```
 
   - Not recommended:
 
-  ```
+  ```linenums="1"
   resource "google_compute_global_address" "main_global_address" { … }
   ```
 
@@ -73,9 +74,9 @@
 
 - Đặt tên biến mô tả cách sử dụng hoặc mục đích của chúng:
 
-  - Input, biến cục bộ, và output đại diện cho các số - như kích cỡ ổ cứng hoặc RAM - phải đặt tên với các đơn vị ( như ram_size_gb). 
+  - Input, biến cục bộ, và output đại diện cho các số - như kích cỡ ổ cứng hoặc RAM - phải đặt tên với các đơn vị ( như ram_size_gb).
 
-  - Với các đơn vị lưu trữ, sử dụng tiền tố đơn vị nhị phân (powers by 1024) - `kibi`, `mebi`, `gibi`. Tát cả các đơn vị khác, sử dụng đơn vị tiền tố hệ thập phân ( powers by 1000) - `kilo`, `mega`, `giaga`. 
+  - Với các đơn vị lưu trữ, sử dụng tiền tố đơn vị nhị phân (powers by 1024) - `kibi`, `mebi`, `gibi`. Tát cả các đơn vị khác, sử dụng đơn vị tiền tố hệ thập phân ( powers by 1000) - `kilo`, `mega`, `giaga`.
 
   - Để đơn giản các điều kiện logic, đặt tên các biến boolean variables like: `enable_external_access`
 
@@ -84,6 +85,7 @@
 - Biến được định nghĩa kiểu.
 
 - Cung cấp giá trị mặc định khi có thể:
+
   - Các biến ko phụ thuộc theo môi trường ( dev, qa, prod), cung cấp giá trị mặc định.
   - Với các biến phụ thuộc theo môi trường ( như `project_id`), ko cung cấp giá trị mặc định.
 
@@ -110,25 +112,26 @@
 - Không truyền các outputs trực tiếp qua các biến input, làm vậy ngăn cả việc thêm chúng một cách đúng đắn vào biểu đồ phụ thuộc. Đảm bảo rằng [implicit dependencies](https://developer.hashicorp.com/terraform/tutorials/configuration-language/dependencies) được tạo và chắc chắn output tham chiếu đến các thuộc tính từ resource. Thay vì tham chiếu tới biến input.
 
   - Recommended:
-    ```
-    output "name" {
-      description = "Name of instance"
-      value       = google_compute_instance.main.name
-    }
-    ```
 
-  - Not recommended:
+```linenums="1"
+output "name" {
+  description = "Name of instance"
+  value       = google_compute_instance.main.name
+}
+```
 
-    ```
-    output "name" {
-      description = "Name of instance"
-      value       = var.name
-    }
-    ```
+- Not recommended:
+
+```linenums="1"
+output "name" {
+  description = "Name of instance"
+  value       = var.name
+}
+```
 
 ### Use data sources
 
-- Để  [datasource](https://developer.hashicorp.com/terraform/language/data-sources) cạnh các resource tham chiếu tới chúng. Ví dụ bạn tải về một `image` để sử dụng chạy một instance, để `datasource` cạnh instance thay về tập trung datasource trong file của chúng.
+- Để [datasource](https://developer.hashicorp.com/terraform/language/data-sources) cạnh các resource tham chiếu tới chúng. Ví dụ bạn tải về một `image` để sử dụng chạy một instance, để `datasource` cạnh instance thay về tập trung datasource trong file của chúng.
 
 - Nếu số lượng datasource trở nên lớn, xem xét việc move vào chung 1 file `data.tf`
 
@@ -138,14 +141,13 @@
 
 - Chỉ sử dụng script khi cần thiết. State của resource được tạo qua script không được tính hoặc quản lý bởi Terraform:
 
-  - Tránh script tùy chỉnh nếu có thể.  Chỉ sử dụng khi Terraform không hỗ trợ.
+  - Tránh script tùy chỉnh nếu có thể. Chỉ sử dụng khi Terraform không hỗ trợ.
 
   - Bất kỳ script tùy biến nào được sử dụng phải có tài liệu rõ ràng lý do tồn tại và kế hoạch cho việc loại bỏ script.
 
 - Terraform có thể gọi scripts tùy chỉnh qua provisiones, bao gồm cả local-excec provisioner.
 
 - Để scripts tùy chỉnh được gọi bởi Terraform trong thư mục `scripts/`
-
 
 ### Include helper scripts in a separate directory
 
@@ -168,7 +170,7 @@
 
 - Với những stateful resource như database, đảm bảo enable [deletion protection](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle). Ví dụ:
 
-```
+```linenums="1"
 resource "google_sql_database_instance" "main" {
   name = "primary-instance"
   settings {
@@ -185,19 +187,17 @@ resource "google_sql_database_instance" "main" {
 
 - Tất cả files Terraform phải tuân thủ chuẩn của `terraform fmt`
 
-
 ### Limit the complexity of expressions
 
 - Hạn chế sử dụng biểu thức phức tạp. Nếu nhiều functions cần trong một biểu thức, xem xét tách ra nhiều biểu thức bằng [local values](https://developer.hashicorp.com/terraform/language/values/locals)
 
 - Không bao giờ có hơn 1 toán tử ba ngôi (ternary operation) trong một dòng. Thay vì thế, sử dụng nhiều local values để tăng tính logic.
 
-
 ### Use `count` for conditional values
 
 - Để khởi tạo một resource có điều kiện, sử dụng [count](https://developer.hashicorp.com/terraform/language/meta-arguments/count) meta-argument. Ví dụ:
 
-```
+```linenums="1"
 variable "readers" {
   description = "..."
   type        = list
@@ -225,10 +225,8 @@ resource "resource_type" "reference_name" {
 
 - Private modules: Public private modules lên một [private registry](https://developer.hashicorp.com/terraform/cloud-docs/registry)
 
-
 ## Reusable modules
 
 - Với modules nó có nghĩa tái sử dụng, sử dụng các hướng dẫn dưới đây bên cạnh các hướng dẫn trước đó.
-
 
 ### Activate required APIs in modules

@@ -6,7 +6,7 @@ Bài dịch từ [medium](https://medium.com/@drcallaway/debugging-es6-in-visual
 
 - Trước hết chúng ta tạo 1 project
 
-```bash
+```bash linenums="1"
     $ mkdir debug-es6 && cd debug-es6
     $ npm init -f
     $ code .
@@ -14,13 +14,13 @@ Bài dịch từ [medium](https://medium.com/@drcallaway/debugging-es6-in-visual
 
 - Cài đặt các module của Babel như lệnh dưới:
 
-```bash
+```bash linenums="1"
     npm install --save-dev babel-cli babel-preset-es2015
 ```
 
 - `babel-cli` là trình biên dịch (compiler) và `babel-preset-es2015` là một plugin hỗ trợ ES6. Khi các module này được cài đặt. Chúng ta cần cập nhật thêm trong `package.json` hoặc tạo file `.babelrc` để cấu hình `Babel` sử dụng plugin ES6. Để demo chúng ta chỉ thêm vào trong `package.json` như dưới đây:
 
-```javascript
+```javascript linenums="1"
     {
         "name": "debug-es6",
         "version": "1.0.0",
@@ -46,7 +46,7 @@ Bài dịch từ [medium](https://medium.com/@drcallaway/debugging-es6-in-visual
 
 - Ok fine! Tiếp theo cùng tạo app đơn giản miễn sao có thể debug :3. Chúng ta sẽ tạo file `math.js` bên trong folder `src` với nội dung như dưới. `src/math.js`:
 
-```javascript
+```javascript linenums="1"
 export function add(num1, num2) {
   return num1 + num2;
 }
@@ -58,7 +58,7 @@ export function multiply(num1, num2) {
 
 - Đồng thời tạo một `src/app.js` như dưới:
 
-```javascript
+```javascript linenums="1"
 import { add, multiply } from "./math";
 
 const num1 = 5;
@@ -74,7 +74,7 @@ console.log("Multiply: ", multiply(num1, num2));
 - Tất nhiên, luôn có những cách để debug không cần cấu hình một `transpiler`. Tuy nhiên tác giả chưa có nhiều may mắn với các giải pháp như `babel-node` và `babel-register`.
 - Ngoài việc chuyển đổi code và tạo ra `source maps`, chúng ta còn muốn Babel theo dõi code của chúng ta khi có thay đổi và biên dịch lại khi cần thiết. Điều này giữ cho vòng lặp write-compile-debug của chúng ta nhẹ nhàng và chặt chẽ. Để thực hiện việc trên thêm một script `compile` vào package.json như dưới:
 
-```json
+```json linenums="1"
 	"scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel src --out-dir .compiled --source-maps --watch"
@@ -83,7 +83,7 @@ console.log("Multiply: ", multiply(num1, num2));
 
 - Script này sẽ chuyển đổi code trong folder `src` và xuất kết quả ra folder `.compiled`.Tùy chọn `--srouce-maps` và `--watch` trong câu lệnh của Babel để tạo ra source maps và tiếp tục theo dõi files nguồn khi có sự thay đỏi ( và biên dịch lại bất cứ khi nào thay đổi xảy ra). Bắt đầu Babel compiler:
 
-```bash
+```bash linenums="1"
 	$ npm run compile
 ```
 
@@ -93,7 +93,7 @@ console.log("Multiply: ", multiply(num1, num2));
 
 - Bước tiếp theo là thêm một cấu hình trong file `launch` để chạy ứng dụng với mode debug. Trên thanh `menu`, click `Debug -> Open Configurations` và chọn `Node.js` trong `prompted`. Và cập nhật cấu hình như dưới:
 
-```json
+```json linenums="1"
 {
   // Use IntelliSense to learn about possible attributes.
   // Hover to view descriptions of existing attributes.

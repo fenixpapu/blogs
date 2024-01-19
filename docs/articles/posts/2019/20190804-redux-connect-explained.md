@@ -4,7 +4,7 @@
 
 - Trong quá trình tìm hiểu: React, Redux, React-Redux, Redux-Saga có rất nhiều chỗ mình còn chưa hiểu tại sao. Và code dưới đây giải thích 1 trong các phần đó: `connect` trong Redux.
 
-```javascript
+```javascript linenums="1"
   // connect() là một function, `injects` những thứ Redux liên quan props vào trong component của bạn.
 // Bạn có thể  `injects` dữ liệu và callbacks nhưng thay đổi giữ liệu này bằng cách dispatching actions
 
@@ -46,7 +46,7 @@ function connect(mapStateToProps, mapDispatchToProps) {
 }
 
 // Đây không phải là code implement thực tế nhưng theo ý tưởng như này.
-// Bỏ qua câu hỏi: "Chúng ta lấy store từ đâu" (answer: <Provider> đưa nó vào trong React context) 
+// Bỏ qua câu hỏi: "Chúng ta lấy store từ đâu" (answer: <Provider> đưa nó vào trong React context)
 // và bỏ qua về tối ưu hiệu năng ( connect() trong thực tế đảm bảm không render lại một cách vô ích)
 
 // Mục đích của connect() là bạn không cần phải suy nghĩ về subscribing tới `store` hoặc tự tối ưu hóa,

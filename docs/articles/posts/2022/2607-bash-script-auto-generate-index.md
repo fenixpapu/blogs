@@ -8,7 +8,7 @@
 
 - File gốc: [generate-index.sh](../../generate-index.sh)
 
-```sh
+```sh linenums="1"
 #!/bin/bash
 posts=`find posts | grep .md | sort -nr`
 sed -i ""  '15,$d'  README.md
@@ -44,13 +44,12 @@ done
 
 - `year=${year_and_name%/*}` remove bỏ phần tên file để lấy year: `2020`
 
-- `year=${year%/*}` # remove 2020/1203-design-patterns -> 2020: comment đầy đủ rồi nên ko nói :D 
+- `year=${year%/*}` # remove 2020/1203-design-patterns -> 2020: comment đầy đủ rồi nên ko nói :D
 
 - `echo "|[${name}](${post})| ${year}|" >> README.md` tạo ra các records cho table trong index thôi.
 
 ## Finished
 
 - Done vậy là giờ mỗi lần có bài viết chỉ cần `$bash generate-index.sh` là có thể check bài viết từ file README rồi mà ko cần phải đi tìm trong từng thư mục @@.
-
 
 ### HAPPY WRITING SCRIPT :D

@@ -6,11 +6,12 @@
 - Đặc biệt nếu trigger bởi eventbridge schedule thì khi vào lambda trên aws phần trigger nó sẽ trống trơn (tưởng lambda này đang ko được chạy) nhưng check log cloudwatch ( nếu có quyền ghi log) thì vẫn có nhé.
 
 ## Module lambda_eventbridge_schedule
+
 - Module sẽ bao gồm 2 file: `main.tf` và `variables.tf`. Chúng ta sẽ đi từng phần như dưới
 
 - File `main.tf` nhìn sẽ ntn:
 
-```
+```linenums="1"
 data "archive_file" "lambda" {
   type        = "zip"
   source_dir  = var.source_dir
@@ -127,6 +128,7 @@ resource "aws_iam_role" "event_schedule_role" {
 - `data "archive_file" "lambda"`: Phần này khai báo cho source code lambda. Chúng ta sẽ cần nhập giá trị cho `source_dir`. Khi terraform chạy sẽ nén các file trong đường link `source_dir` thành output: `lambda_function_payload.zip` như đang khai báo. File này sau đó được upload thành source code của lambda. Ngoài `source_dir` chúng ta còn có thể dùng `source_file` chi tiết search thêm doc terraform nhé.
 
 - `resource "aws_lambda_function" "this"`. Đoạn này khai báo khởi tạo 1 lambda nhé.
+
   - `filename`: chính là tên file zip trong đoạn trên
   - `function_name`: là tên function thôi, nên có ý nghĩa 1 chút như từ dự án nào, môi trường nào(qa, prod) và service nào (backend, fe)...
   - `role`: để lambda có thể ghi log ra cloudwatch, hoặc connect tới db thuộc một VPC cụ thể chúng ta cần khai báo các quyền vào role rồi gắn vào lambda.
@@ -138,10 +140,11 @@ resource "aws_iam_role" "event_schedule_role" {
   - `source_code_hash`: cái source_code_hash này sẽ giúp terraform biết được khi có code mới nhé ví dụ thêm 1 dòng console.log thôi chẳng hạn nó sẽ vẫn deploy version code mới. ( nếu ko nó sẽ tính uptodate và ko deploy gì đâu)
 
   - `vpc_config`: trong trường hợp bạn cần connect vào db trong 1 vpc thì cần cấu hình lambda cũng thuộc vpc đó ( hoặc vpc có route tới db). Mặc định nếu rỗng thì lambda sẽ ko thuộc vpc nào. Ngay cả khi lambda cấu hình vpc thì nó cũng cần có quyền tạo network interface thì mới join được vào vpc. Phần iam role phía dưới sẽ cover việc này.
-  
+
   - `environment`: Lambda chạy sẽ cần 1 số thứ ví dụ như user/pass nhập vào như một biến môi trường -> sẽ được insert ở đây.
 
 - `resource "aws_iam_role" "this"`: Khởi tạo các quyền cho một lambda:
+
   - `managed_policy_arns`: với role `arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole` sẽ giúp lambda có quyền tạo log trên cloudwatch và khởi tạo network interface để join 1 vpc.
 
 - `resource "aws_scheduler_schedule" "this"`: Khởi tạo schedule
@@ -152,7 +155,7 @@ resource "aws_iam_role" "event_schedule_role" {
 
 - File `variables.tf` sẽ như dưới, nó khá đơn giản nên mình sẽ ko giải thích gì thêm:
 
-```
+```linenums="1"
 variable "timeout" {
   description = "(Optional) Amount of time your Lambda Function has to run in seconds."
   type        = number
@@ -203,7 +206,7 @@ variable "lambda_envs" {
 
 - Khi tạo resource từ module ở trên chúng ta sẽ cần 1 file terraform nội dung tương tự như dưới:
 
-```
+```linenums="1"
 terraform {
   required_providers {
     aws = {
@@ -245,6 +248,5 @@ module "resource_name" {
 ```
 
 - Khai báo các thông số cụ thể cho module, source code được đặt trong folder `src`. Ok rồi thế là chạy thôi.
-
 
 ### Happy working (as devops)

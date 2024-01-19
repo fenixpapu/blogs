@@ -5,13 +5,13 @@
 
 ## Before you begin
 
-- Trước khi bắt đầu bạn phải có k8s cluster và `kubectl` 
+- Trước khi bắt đầu bạn phải có k8s cluster và `kubectl`
 
 ## Get a shell to a container
 
 - Trong phần này bạn tạo một pod chạy một container. Container chạy image nginx. File `shell-demo.yaml` có nội dung như dưới:
 
-```
+```linenums="1"
   apiVersion: v1
   kind: Pod
   metadata:
@@ -36,19 +36,19 @@
 
 - Với môi trường thực, khi bạn deploy bằng file `deployment.yml` bạn có thể liệt kê các pod đang chạy với namespace tương ứng: `kubectl get pod`. Không có option `-n <namespace_name>` thì sẽ là namespace default.
 
-- Truy cập shell của container đang chạy: 
+- Truy cập shell của container đang chạy:
 
-```
+```linenums="1"
   kubectl exec --stdin --tty shell-demo -- /bin/bash
 ```
 
-- ***LƯU Ý***: Double dash `--` phân biệt các tham số bạn muốn truyền vào câu lệnh (command) với các tham số của `kubectl`
+- **_LƯU Ý_**: Double dash `--` phân biệt các tham số bạn muốn truyền vào câu lệnh (command) với các tham số của `kubectl`
 
 - Sau khi vào trong `shell` của container thì bạn có thể thực thi các câu lệnh mình muốn:
 
-```
+```linenums="1"
   user@computer-name:Desktop$ kubectl exec --stdin --tty shell-demo -- /bin/bash
-  root@shell-demo:/# cat etc/hosts 
+  root@shell-demo:/# cat etc/hosts
   # Kubernetes-managed hosts file.
   127.0.0.1       localhost
   ::1     localhost ip6-localhost ip6-loopback
@@ -60,7 +60,8 @@
 ```
 
 - Chạy một câu lệnh độc lập trong container bạn có thể thực thi trực tiếp như sau:
-```
+
+```linenums="1"
  kubectl exec shell-demo env
 ```
 
@@ -70,12 +71,12 @@
 - Giả sử chúng ta có một pod: `my-pod` và trong pod có 2 container `main-app` và `helper-app`.
 - Command dưới sẽ mở một shell trong container `main-app`:
 
-```
+```linenums="1"
   kubectl exec -i -t my-pod --container main-app -- /bin/bash
 ```
 
-- ***NOTE***: Tùy chọn dạng ngắn `-i` và `-t` tương ứng với dạng đầy đủ `--stdin` và `--tty`. 
+- **_NOTE_**: Tùy chọn dạng ngắn `-i` và `-t` tương ứng với dạng đầy đủ `--stdin` và `--tty`.
 
-- `-it` nghe quen quen như trong docker nhể :D 
+- `-it` nghe quen quen như trong docker nhể :D
 
 - Happy working!!

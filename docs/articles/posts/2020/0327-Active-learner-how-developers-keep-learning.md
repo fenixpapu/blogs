@@ -46,9 +46,9 @@
 
 - Thêm một lý do khác là các Developer bị mắc kẹt trong một hệ sinh thái duy nhất suốt một thời gian dài – một con đường mòn mà ở đó bạn luôn cảm thấy thoải mái khi làm việc trong một team suốt nhiều năm, phát triển các tính năng giống nhau, fix các lỗi tương tự, lặp đi lặp lại và về cơ bản không học được điều gì mới. Một dạng khác của con đường mòn này là khi bạn thay đổi nơi làm việc, chuyển sang các công ty khác nhau, nhưng thực tế vẫn ở trong cùng một hệ sinh thái, làm việc cùng một vị trí, cùng trách nhiệm và sử dụng cùng tools. Một lần nữa, bạn không học được gì mới mẻ.
 
-  ```text
-  10 năm kinh nghiệm hay 10 lần kinh nghiệm của một năm
-  ```
+```text linenums="1"
+10 năm kinh nghiệm hay 10 lần kinh nghiệm của một năm
+```
 
 - Có những người nhìn qua tưởng chừng có nhiều năm kinh nghiệm nhưng thực ra chỉ là lặp đi lặp lại một set kinh nghiệm cũ qua nhiều năm. Tôi đã từng đọc CV của rất nhiều Developer có 6 hay thậm chí 9 năm làm việc trong ngành, nhưng khi nói chuyện, nhưng khi nói chuyện những kinh nghiệm đó lại rất mờ nhạt giống như đang nói chuyện với một Junior Developer hơn là một Senior Developer
 
@@ -58,13 +58,13 @@
 
 - Khi nói chuyện với Expert Beginner, đặt cho họ những câu hỏi có chiều sâu, bạn sẽ thường nhận được những câu trả lời như:
 
-  ```text
-  "This is a `black box`"
-  "It `magiccally` works"
-  "That was here `before me`"
-  "The `other team` is responsible for this"
-  "X sucks, Y is the best, `It just is`"
-  ```
+```text linenums="1"
+"This is a `black box`"
+"It `magiccally` works"
+"That was here `before me`"
+"The `other team` is responsible for this"
+"X sucks, Y is the best, `It just is`"
+```
 
 - Những câu trả lời bạn nhận được không có chiều sâu được thể hiện bằng qua sự am hiểu về nguyên lý hoạt động và đáp án cho câu hỏi “Tại sao”
 
@@ -90,9 +90,9 @@
 
 - Phát triển phần mềm không phải là framework hay ngôn ngữ mà bạn biết, phát triển phần mềm là các nguyên tắc, SOLID, DRY, KISS, tự động hóa… Các nguyên tắc này là đa nền tảng. Hãy thử những thứ bạn không quen thuộc, những tools và framework khác nhau. Đừng chỉ vì chúng đang **hot**, nhưng hiểu cách chúng giải quyết những vấn đề bạn đang phải đối mặt. Hãy bước ra khỏi nơi mà mọi thứ đã được chuẩn bị sẵn sàng và mọi thứ chỉ đơn giản là "hoạt động" ( tức bạn không hiểu nó hoạt động như thế nào ?).
 
-  ```text
-  Hãy thử tự tạo ra magic box và black box
-  ```
+```text linenums="1"
+Hãy thử tự tạo ra magic box và black box
+```
 
 - Bạn sẽ nhận ra rằng các ngôn ngữ, framework, tools đều có chung những principles nhất định. Tìm tòi, khám phá nhiều lần một vấn đề sẽ củng cố khả năng hiểu biết và bạn có thể ứng dụng chúng ở bất kỳ đâu.
 
@@ -106,12 +106,12 @@
 
 - Và thực sự, chỉ cần mở máy tính và code, code bất cứ điều gì bạn muốn và bất cứ điều gì bạn đam mê. Mỗi khi bạn develop một thứ gì đó mà bạn đã từng xem là điều kỳ diệu hay black box, bạn đã củng cố kỹ năng và hiểu biết của mình. Đừng quên tìm hiểu khi nào nên sử dụng những tools đó, khi nào thì không nhé!
 
-  ```text
-  "I hear and I forget.
-    I see and I remember.
-      I DO AND I UNDERSTAND"
-                    - Nho giáo -
-  ```
+```text linenums="1"
+"I hear and I forget.
+  I see and I remember.
+    I DO AND I UNDERSTAND"
+                  - Nho giáo -
+```
 
 ### One more thing
 

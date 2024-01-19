@@ -6,7 +6,7 @@
 - Idea của mình là ghi đè vào docker `container` lúc chạy hoặc `image` lúc buid.
 - Search thử qua thì hình như có chút vấn đề với việc ghi đè lên `image` lúc build. (nếu cần thì chắc có thể test thử lại). Thấy không ổn nên mình chuyển luôn ^^!. Solution thứ hai: ghi đè file hosts của container lúc chạy. Phía dưới file deployment cho nginx image sẽ ghi đè `/etc/hosts` khi container được chạy:
 
-```
+```linenums="1"
   apiVersion: apps/v1
   kind: Deployment
   metadata:
@@ -36,12 +36,13 @@
           ports:
           - containerPort: 80
 ```
+
 - Deployment file trên sẽ ghi đè file `etc/hosts` với 2 bản ghi mới cho domain: `foo.local`, `bar.local` và `foo.remote`, `bar.remote`.
 - Deploy thử file trên và check lại trên trong pod, với lệnh curl foo.local:
 
-```
+```linenums="1"
   papu@computer:Desktop$ kubectl exec --stdin --tty nginx-deployment-88b8b5cf8-m8km8 -- /bin/bash
-  root@nginx-deployment-88b8b5cf8-m8km8:/# cat etc/hosts 
+  root@nginx-deployment-88b8b5cf8-m8km8:/# cat etc/hosts
   # Kubernetes-managed hosts file.
   127.0.0.1       localhost
   ::1     localhost ip6-localhost ip6-loopback
@@ -83,6 +84,7 @@
 ```
 
 - Cách này có gì khác so với route53:
+
   - Route53 sẽ mất tiền cho mỗi bản ghi
   - Cách này thì không tuy nhiên khi IP thay đổi thì route53 chỉ cần sửa và sẽ được apply ngay. Còn với cách này chúng ta phải vào sửa tay từng pod hoặc sửa file deployment rồi deploy lại.
 

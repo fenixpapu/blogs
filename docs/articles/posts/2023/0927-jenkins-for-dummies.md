@@ -8,13 +8,13 @@
 
 - Chạy jenkins local với lệnh (đổi image tag bạn cần):
 
-```
+```linenums="1"
 docker run -d -p 8080:8080 -p 50000:50000 --name jenkins jenkins/jenkins:2.414.1-lts-jdk11
 ```
 
 - Sau khi container run bạn sẽ có một jenkins local. Để check password của container có thể dùng lệnh dưới ( mặc định sẽ là `admin/admin`):
 
-```
+```linenums="1"
 docker exec -it <container_id> cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
@@ -41,15 +41,17 @@ docker exec -it <container_id> cat /var/jenkins_home/secrets/initialAdminPasswor
 - _CHẮC CHẮN NÊN THAM KHẢO LINK [PIPELINE STEPS REFERENCE](https://www.jenkins.io/doc/pipeline/steps/)_ : vì chúng ta thường ko viết pipeline thuần mà thường cần tích hợp với các plugin.
   - Ví dụ muốn dùng jenkins pipeline với jira plugin để trigger workflow action của Jira check trong doc: [Jira: Progress issues by workflow action](https://www.jenkins.io/doc/pipeline/steps/jira/#stepclass-jiraissueupdatebuilder-jira-progress-issues-by-workflow-action)
   - Code ví dụ cho đoạn trên sẽ ntn (đoạn này cần biết chút về jira workflow ^^):
-  ```
-  step([
-      $class: "JiraIssueUpdateBuilder",
-      jqlSearch: "project=PROJECT_NAME AND status='Ready for QA Release' AND component=iOS",
-      workflowActionName: "Deployed to QA",
-      comment: "Move any iOS issues that are marked as 'Ready for QA Release' to 'Ready For QA'."
-  ])
-  ```
-  - Link [github](https://jenkinsci.github.io/jira-steps-plugin/steps/version/jira_new_version/) này có các code ví dụ dễ hiểu hơn, nhưng có vẻ chưa đầy đủ lắm( tham khảo được).
+
+```linenums="1"
+step([
+    $class: "JiraIssueUpdateBuilder",
+    jqlSearch: "project=PROJECT_NAME AND status='Ready for QA Release' AND component=iOS",
+    workflowActionName: "Deployed to QA",
+    comment: "Move any iOS issues that are marked as 'Ready for QA Release' to 'Ready For QA'."
+])
+```
+
+- Link [github](https://jenkinsci.github.io/jira-steps-plugin/steps/version/jira_new_version/) này có các code ví dụ dễ hiểu hơn, nhưng có vẻ chưa đầy đủ lắm( tham khảo được).
 - Share variables trong Jenkins có thể tham khảo link [youtube](https://www.youtube.com/watch?v=41uUsWQjKRw), có 2 phần cho declarative và scripted.
 
 ## My opinion

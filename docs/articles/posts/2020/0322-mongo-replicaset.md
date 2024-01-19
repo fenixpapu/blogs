@@ -43,203 +43,203 @@
 
 - Dĩ nhiên trên PC của mình đã cài docker ;). Kiểm tra đã có image của `mongo` ( như bên dưới mongo version latest còn product chúng ta sẽ chỉ rõ version nào (bow) ).
 
-  ```terminal
-  root:~# docker images | grep mongo
-  mongo               latest              bcef5fd2979d        4 weeks ago         386MB
-  ```
+```terminal linenums="1"
+root:~# docker images | grep mongo
+mongo               latest              bcef5fd2979d        4 weeks ago         386MB
+```
 
 - Create network bằng lệnh:
 
-  ```terminal
-  root:~# docker network create my-mongo-cluster
-  ```
+```terminal linenums="1"
+root:~# docker network create my-mongo-cluster
+```
 
 - Chắc chắn chúng ta đã có:
 
-  ```terminal
-  root:~# docker network ls | grep my
-  d4b0ed47349c        my-mongo-cluster    bridge              local
-  ```
+```terminal linenums="1"
+root:~# docker network ls | grep my
+d4b0ed47349c        my-mongo-cluster    bridge              local
+```
 
 - Here we go, cùng chạy `mongo1` đầu tiên:
 
-  ```terminal
-  docker run --name mongo1 --net my-mongo-cluster mongo mongod --replSet my-mongo-set
-  ```
+```terminal linenums="1"
+docker run --name mongo1 --net my-mongo-cluster mongo mongod --replSet my-mongo-set
+```
 
-  - `docker run`: Start một container từ một image
+- `docker run`: Start một container từ một image
 
-  - `--name mongo1`: đặt tên cho container đầu tiên này là : `mongo1`.
+- `--name mongo1`: đặt tên cho container đầu tiên này là : `mongo1`.
 
-  - `--net my-mongo-cluster`: thêm container này vào network `my-mongo-cluster`.
+- `--net my-mongo-cluster`: thêm container này vào network `my-mongo-cluster`.
 
-  - `mongo`: file ảnh để chạy các container.
+- `mongo`: file ảnh để chạy các container.
 
-  - `mongod --replSet my-mongo-set`: join mongo1 vào replSet có tên `my-mongo-set`.
+- `mongod --replSet my-mongo-set`: join mongo1 vào replSet có tên `my-mongo-set`.
 
 - Ok! Giờ con thứ 2 và thứ 3 sẽ được chạy (ở đây mình chạy trên 3 cửa sổ terminal khác nhau):
 
-  ```terminal
-  docker run --name mongo1 --net my-mongo-cluster mongo mongod --replSet my-mongo-set
-  docker run --name mongo2 --net my-mongo-cluster mongo mongod --replSet my-mongo-set
-  docker run --name mongo3 --net my-mongo-cluster mongo mongod --replSet my-mongo-set
-  ```
+```terminal linenums="1"
+docker run --name mongo1 --net my-mongo-cluster mongo mongod --replSet my-mongo-set
+docker run --name mongo2 --net my-mongo-cluster mongo mongod --replSet my-mongo-set
+docker run --name mongo3 --net my-mongo-cluster mongo mongod --replSet my-mongo-set
+```
 
 - Sau khi chạy chúng ta có thể thấy log báo chưa config replSet:
 
-  ```terminal
-  Sessions collection is not set up; waiting until next sessions refresh interval: Replication has not yet been configured
-  ```
+```terminal linenums="1"
+Sessions collection is not set up; waiting until next sessions refresh interval: Replication has not yet been configured
+```
 
 - Cùng kiểm tra ip các container này đã(nếu muốn xem full thông tin network thì bỏ cái grep thôi :) ):
 
-  ```terminal
-  root:~# docker network inspect my-mongo-cluster | grep 'mongo\|IPv4Address'
-          "Name": "my-mongo-cluster",
-                  "Name": "mongo3",
-                  "IPv4Address": "172.21.0.4/16",
-                  "Name": "mongo2",
-                  "IPv4Address": "172.21.0.3/16",
-                  "Name": "mongo1",
-                  "IPv4Address": "172.21.0.2/16",
-  ```
+```terminal linenums="1"
+root:~# docker network inspect my-mongo-cluster | grep 'mongo\|IPv4Address'
+        "Name": "my-mongo-cluster",
+                "Name": "mongo3",
+                "IPv4Address": "172.21.0.4/16",
+                "Name": "mongo2",
+                "IPv4Address": "172.21.0.3/16",
+                "Name": "mongo1",
+                "IPv4Address": "172.21.0.2/16",
+```
 
 - Ok thấy ip rồi thì connect vào rồi setup replSet thoai :D. ( terminal dưới là đang connect vào mongo1 theo IP như show ở trên)
 
-  ```terminal
-  root:~# mongo --host 172.21.0.2
-  MongoDB shell version v4.0.16
-  connecting to: mongodb://172.21.0.2:27017/?gssapiServiceName=mongodb
-  Implicit session: session { "id" : UUID("0a408390-5cb6-4972-a326-3e54011cbd17") }
-  ```
+```terminal linenums="1"
+root:~# mongo --host 172.21.0.2
+MongoDB shell version v4.0.16
+connecting to: mongodb://172.21.0.2:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("0a408390-5cb6-4972-a326-3e54011cbd17") }
+```
 
 - Thêm cấu hình cho replica set
 
-  ```terminal
-  > config = {
-  ... "_id": "my-mongo-set",
-  ... "members": [
-  ... {
-  ... "_id": 0,
-  ... "host": "mongo1:27017"
-  ... },
-  ... {
-  ... "_id": 1,
-  ... "host": "mongo2:27017"
-  ... },
-  ... {
-  ... "_id":2,
-  ... "host": "mongo3:27017"
-  ... }
-  ... ]
-  ... }
-  {
-    "_id" : "my-mongo-set",
-    "members" : [
-      {
-        "_id" : 0,
-        "host" : "mongo1:27017"
-      },
-      {
-        "_id" : 1,
-        "host" : "mongo2:27017"
-      },
-      {
-        "_id" : 2,
-        "host" : "mongo3:27017"
-      }
-    ]
-  }
-  ```
+```terminal linenums="1"
+> config = {
+... "_id": "my-mongo-set",
+... "members": [
+... {
+... "_id": 0,
+... "host": "mongo1:27017"
+... },
+... {
+... "_id": 1,
+... "host": "mongo2:27017"
+... },
+... {
+... "_id":2,
+... "host": "mongo3:27017"
+... }
+... ]
+... }
+{
+  "_id" : "my-mongo-set",
+  "members" : [
+    {
+      "_id" : 0,
+      "host" : "mongo1:27017"
+    },
+    {
+      "_id" : 1,
+      "host" : "mongo2:27017"
+    },
+    {
+      "_id" : 2,
+      "host" : "mongo3:27017"
+    }
+  ]
+}
+```
 
 - Phần còn lại là start replSet thôi. Vẫn đang trên con mongo1 nhé. Sau khi start replSet nó sẽ chuyển trạng thái Secondary và chờ 1 lát nó sẽ trở thành Primary như dưới.
 
-  ```terminal
-  > rs.initiate(config)
-  {
-    "ok" : 1,
-    "$clusterTime" : {
-      "clusterTime" : Timestamp(1584870808, 1),
-      "signature" : {
-        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
-        "keyId" : NumberLong(0)
-      }
-    },
-    "operationTime" : Timestamp(1584870808, 1)
-  }
-  my-mongo-set:SECONDARY>
-  my-mongo-set:SECONDARY>
-  my-mongo-set:PRIMARY>
-  ```
+```terminal linenums="1"
+> rs.initiate(config)
+{
+  "ok" : 1,
+  "$clusterTime" : {
+    "clusterTime" : Timestamp(1584870808, 1),
+    "signature" : {
+      "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+      "keyId" : NumberLong(0)
+    }
+  },
+  "operationTime" : Timestamp(1584870808, 1)
+}
+my-mongo-set:SECONDARY>
+my-mongo-set:SECONDARY>
+my-mongo-set:PRIMARY>
+```
 
 - Phần dưới đây lần lượt với con mongo2 và mongo3
 
-  ```terminal
-  root:~# docker network inspect my-mongo-cluster | grep 'mongo\|IPv4Address'
-          "Name": "my-mongo-cluster",
-                  "Name": "mongo3",
-                  "IPv4Address": "172.21.0.4/16",
-                  "Name": "mongo2",
-                  "IPv4Address": "172.21.0.3/16",
-                  "Name": "mongo1",
-                  "IPv4Address": "172.21.0.2/16",
-  root:~# mongo --host 172.21.0.3
-  MongoDB shell version v4.0.16
-  connecting to: mongodb://172.21.0.3:27017/?gssapiServiceName=mongodb
-  Implicit session: session { "id" : UUID("01c176bf-58bf-4d0e-b018-564b76a0d2ca") }
-  MongoDB server version: 4.2.3
-  WARNING: shell and server versions do not match
-  Server has startup warnings:
-  2020-03-22T09:26:44.184+0000 I  STORAGE  [initandlisten]
-  2020-03-22T09:26:44.184+0000 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
-  2020-03-22T09:26:44.184+0000 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
-  2020-03-22T09:26:44.857+0000 I  CONTROL  [initandlisten]
-  2020-03-22T09:26:44.857+0000 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
-  2020-03-22T09:26:44.858+0000 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
-  2020-03-22T09:26:44.858+0000 I  CONTROL  [initandlisten]
-  ---
-  Enable MongoDB's free cloud-based monitoring service, which will then receive and display
-  metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+```terminal linenums="1"
+root:~# docker network inspect my-mongo-cluster | grep 'mongo\|IPv4Address'
+        "Name": "my-mongo-cluster",
+                "Name": "mongo3",
+                "IPv4Address": "172.21.0.4/16",
+                "Name": "mongo2",
+                "IPv4Address": "172.21.0.3/16",
+                "Name": "mongo1",
+                "IPv4Address": "172.21.0.2/16",
+root:~# mongo --host 172.21.0.3
+MongoDB shell version v4.0.16
+connecting to: mongodb://172.21.0.3:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("01c176bf-58bf-4d0e-b018-564b76a0d2ca") }
+MongoDB server version: 4.2.3
+WARNING: shell and server versions do not match
+Server has startup warnings:
+2020-03-22T09:26:44.184+0000 I  STORAGE  [initandlisten]
+2020-03-22T09:26:44.184+0000 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2020-03-22T09:26:44.184+0000 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2020-03-22T09:26:44.857+0000 I  CONTROL  [initandlisten]
+2020-03-22T09:26:44.857+0000 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-03-22T09:26:44.858+0000 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-03-22T09:26:44.858+0000 I  CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
 
-  The monitoring data will be available on a MongoDB website with a unique URL accessible to you
-  and anyone you share the URL with. MongoDB may use this information to make product
-  improvements and to suggest MongoDB products and deployment options to you.
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
 
-  To enable free monitoring, run the following command: db.enableFreeMonitoring()
-  To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
-  ---
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
 
-  my-mongo-set:SECONDARY>
-  bye
-  ##############################################################################################
-  root:~# mongo --host 172.21.0.4
-  MongoDB shell version v4.0.16
-  connecting to: mongodb://172.21.0.4:27017/?gssapiServiceName=mongodb
-  Implicit session: session { "id" : UUID("e4bf5607-ecef-450a-9b9c-9254533444b9") }
-  MongoDB server version: 4.2.3
-  WARNING: shell and server versions do not match
-  Server has startup warnings:
-  2020-03-22T09:26:57.550+0000 I  STORAGE  [initandlisten]
-  2020-03-22T09:26:57.550+0000 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
-  2020-03-22T09:26:57.550+0000 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
-  2020-03-22T09:26:58.232+0000 I  CONTROL  [initandlisten]
-  2020-03-22T09:26:58.232+0000 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
-  2020-03-22T09:26:58.232+0000 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
-  2020-03-22T09:26:58.232+0000 I  CONTROL  [initandlisten]
-  ---
-  Enable MongoDB's free cloud-based monitoring service, which will then receive and display
-  metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+my-mongo-set:SECONDARY>
+bye
+##############################################################################################
+root:~# mongo --host 172.21.0.4
+MongoDB shell version v4.0.16
+connecting to: mongodb://172.21.0.4:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("e4bf5607-ecef-450a-9b9c-9254533444b9") }
+MongoDB server version: 4.2.3
+WARNING: shell and server versions do not match
+Server has startup warnings:
+2020-03-22T09:26:57.550+0000 I  STORAGE  [initandlisten]
+2020-03-22T09:26:57.550+0000 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2020-03-22T09:26:57.550+0000 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2020-03-22T09:26:58.232+0000 I  CONTROL  [initandlisten]
+2020-03-22T09:26:58.232+0000 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-03-22T09:26:58.232+0000 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-03-22T09:26:58.232+0000 I  CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
 
-  The monitoring data will be available on a MongoDB website with a unique URL accessible to you
-  and anyone you share the URL with. MongoDB may use this information to make product
-  improvements and to suggest MongoDB products and deployment options to you.
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
 
-  To enable free monitoring, run the following command: db.enableFreeMonitoring()
-  To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
-  ---
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
 
-  my-mongo-set:SECONDARY>
-  ```
+my-mongo-set:SECONDARY>
+```
 
 - Có thể sẽ có câu hỏi tại sao phần này ko thấy expose port ra như 1 số tutorial (?) `-p 30001:27017`. Mình nghĩ nếu hiểu mô hình triển khai bạn sẽ thấy việc expose port ra hơi thừa.
 
@@ -249,91 +249,91 @@
 
 - Note:
 
-  ```text
-  - Do triển khai thực tế các container chạy instance `mongo` sẽ chạy trên các host khác nhau, khác Data center thậm chí khác cả khu vực địa lý. -> File docker-compose như dưới sẽ sai so với kiến trúc triển khai trên trang chủ (chạy các node trên cùng 1 host ( mất hết ý nghĩa dự phòng, sẵn sàng cao của replSet)).
-  - [For production deployments](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/#requirements), you should maintain as much separation between members as possible by hosting the mongod instances on separate machines. When using virtual machines for production deployments, you should place each mongod instance on a separate host server serviced by redundant power circuits and redundant network paths.
-  ```
+```text linenums="1"
+- Do triển khai thực tế các container chạy instance `mongo` sẽ chạy trên các host khác nhau, khác Data center thậm chí khác cả khu vực địa lý. -> File docker-compose như dưới sẽ sai so với kiến trúc triển khai trên trang chủ (chạy các node trên cùng 1 host ( mất hết ý nghĩa dự phòng, sẵn sàng cao của replSet)).
+- [For production deployments](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/#requirements), you should maintain as much separation between members as possible by hosting the mongod instances on separate machines. When using virtual machines for production deployments, you should place each mongod instance on a separate host server serviced by redundant power circuits and redundant network paths.
+```
 
 - Mình xóa hết các container trước đó đã tạo đi. Trước:
 
-  ```terminal
-  root:~# docker container ls -a | grep mongo
-  74a7b8a326da        mongo               "docker-entrypoint.s…"   37 minutes ago      Exited (0) About a minute ago                       mongo3
-  82b240631505        mongo               "docker-entrypoint.s…"   37 minutes ago      Exited (0) About a minute ago                       mongo2
-  dde102aa23bd        mongo               "docker-entrypoint.s…"   38 minutes ago      Exited (0) About a minute ago                       mongo1
-  ```
+```terminal linenums="1"
+root:~# docker container ls -a | grep mongo
+74a7b8a326da        mongo               "docker-entrypoint.s…"   37 minutes ago      Exited (0) About a minute ago                       mongo3
+82b240631505        mongo               "docker-entrypoint.s…"   37 minutes ago      Exited (0) About a minute ago                       mongo2
+dde102aa23bd        mongo               "docker-entrypoint.s…"   38 minutes ago      Exited (0) About a minute ago                       mongo1
+```
 
 - Sau:
 
-  ```terminal
-  root:~# docker container rm 74a7b8a326da 82b240631505 dde102aa23bd
-  74a7b8a326da
-  82b240631505
-  dde102aa23bd
-  root:~# docker container ls -a | grep mongo
-  ```
+```terminal linenums="1"
+root:~# docker container rm 74a7b8a326da 82b240631505 dde102aa23bd
+74a7b8a326da
+82b240631505
+dde102aa23bd
+root:~# docker container ls -a | grep mongo
+```
 
 - Network được tạo ở trên vẫn còn nhé:
 
-  ```terminal
-  docker network create my-mongo-cluster
-  ```
+```terminal linenums="1"
+docker network create my-mongo-cluster
+```
 
 - File `docker-compose.yml` như dưới:
 
-  ```yml
-  # docker-compose.yml file
-  version: "3.5"
+```yml linenums="1"
+# docker-compose.yml file
+version: "3.5"
 
-  services:
-    mongo_one:
-      container_name: mongo1
-      image: mongo #should specify version mongo here
-      command: mongod --replSet my-mongo-set
+services:
+  mongo_one:
+    container_name: mongo1
+    image: mongo #should specify version mongo here
+    command: mongod --replSet my-mongo-set
 
-    mongo_two:
-      container_name: mongo2
-      image: mongo #should specify version mongo here
-      command: mongod --replSet my-mongo-set
+  mongo_two:
+    container_name: mongo2
+    image: mongo #should specify version mongo here
+    command: mongod --replSet my-mongo-set
 
-    mongo_three:
-      container_name: mongo3
-      image: mongo #should specify version mongo here
-      command: mongod --replSet my-mongo-set
+  mongo_three:
+    container_name: mongo3
+    image: mongo #should specify version mongo here
+    command: mongod --replSet my-mongo-set
 
-  networks:
-    default:
-      external:
-        name: my-mongo-cluster
-  ```
+networks:
+  default:
+    external:
+      name: my-mongo-cluster
+```
 
 - Giờ cd vào thư mục chứa file `dockercompose.yml` chạy lệnh: `docker-compose up` lên thôi nếu bị như dưới là chưa có quyền nhé. `sudo -s` lên :D
 
-  ```terminal
-  $ docker-compose up
-  ERROR: Couldn't connect to Docker daemon at http+docker://localhost - is it running?
+```terminal linenums="1"
+$ docker-compose up
+ERROR: Couldn't connect to Docker daemon at http+docker://localhost - is it running?
 
-  If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
-  ```
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+```
 
 - Chúng ta sẽ có log ntn:
 
-  ```terminal
-  # docker-compose up
-  Creating mongo3 ... done
-  Creating mongo2 ... done
-  Creating mongo1 ... done
-  Attaching to mongo3, mongo2, mongo1
-  ```
+```terminal linenums="1"
+# docker-compose up
+Creating mongo3 ... done
+Creating mongo2 ... done
+Creating mongo1 ... done
+Attaching to mongo3, mongo2, mongo1
+```
 
 - Kiểm tra lại các container đã chạy:
 
-  ```terminal
-  root:~# docker container ls -a | grep mongo
-  c0805b44781a        mongo               "docker-entrypoint.s…"   About a minute ago   Up About a minute       27017/tcp           mongo1
-  f4a0f2608a5a        mongo               "docker-entrypoint.s…"   About a minute ago   Up About a minute       27017/tcp           mongo2
-  a569175dd493        mongo               "docker-entrypoint.s…"   About a minute ago   Up About a minute       27017/tcp           mongo3
-  ```
+```terminal linenums="1"
+root:~# docker container ls -a | grep mongo
+c0805b44781a        mongo               "docker-entrypoint.s…"   About a minute ago   Up About a minute       27017/tcp           mongo1
+f4a0f2608a5a        mongo               "docker-entrypoint.s…"   About a minute ago   Up About a minute       27017/tcp           mongo2
+a569175dd493        mongo               "docker-entrypoint.s…"   About a minute ago   Up About a minute       27017/tcp           mongo3
+```
 
 - Kiểm tra lại IP và chạy các lệnh config như phần trên là chúng ta sẽ có replSet trên local để test. Điểm lợi của docker-compose là khi chạy lệnh `docker-compose down` tự động các container được tạo bởi `docker-compose up` cũng sẽ bị remove luôn. Gom các cấu hình vào trong file .yml luôn như thế chính xác hơn là chạy lệnh terminal như phần trên.
 

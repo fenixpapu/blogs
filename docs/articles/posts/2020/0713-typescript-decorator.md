@@ -8,13 +8,13 @@
 - Để ts hỗ trợ `decorator` bạn cần cho phép `experimentalDecorators` trong terminal hoặc trong file cấu hình `tsconfig.josn`
 - Command line:
 
-```sh
+```sh linenums="1"
 tsc --target ES5 --experimentalDecorators`
 ```
 
 - `tsconfig.json`:
 
-```json
+```json linenums="1"
 {
   "compilerOptions": {
     "target": "ES5",
@@ -33,17 +33,17 @@ tsc --target ES5 --experimentalDecorators`
 
   - Single line:
 
-  ```sh
-  @f @g x
-  ```
+```sh linenums="1"
+@f @g x
+```
 
-  - On multiple lines:
+- On multiple lines:
 
-  ```sh
-  @f
-  @g
-  x
-  ```
+```sh linenums="1"
+@f
+@g
+x
+```
 
 - Các bước sau được thực thi khi đánh giá nhiều `decorators` trên một khai báo trong Typescript:
 
@@ -53,7 +53,7 @@ tsc --target ES5 --experimentalDecorators`
 
 - Xem ví dụ:
 
-```sh
+```sh linenums="1"
 function f() {
     console.log("f(): evaluated");
     return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -77,7 +77,7 @@ class C {
 
 - Output sẽ giống ntn:
 
-```sh
+```sh linenums="1"
 f(): evaluated
 g(): evaluated
 g(): called
@@ -100,53 +100,53 @@ f(): called
 
 - NẾU `class decorator` TRẢ VỀ GÍA TRỊ, NÓ SẼ THAY THẾ `class declaration` VỚI HÀM CONSTRUCTOR ĐÃ ĐƯỢC CUNG CẤP.
 
-  ```NOTE
-    Nếu bạn chọn trả về một constructor mới, bạn phải tự mình xử lý prototype gốc. Logic được áp dụng cho các decorators lúc chạy sẽ KHÔNG làm việc này cho bạn.
-  ```
+```NOTE linenums="1"
+  Nếu bạn chọn trả về một constructor mới, bạn phải tự mình xử lý prototype gốc. Logic được áp dụng cho các decorators lúc chạy sẽ KHÔNG làm việc này cho bạn.
+```
 
 - Example cho `class decorator`:
 
-  ```typescript
-  @sealed
-  class Greeter {
-    greeting: string;
-    constructor(message: string) {
-      this.greeting = message;
-    }
-    greet() {
-      return "Hello, " + this.greeting;
-    }
+```typescript linenums="1"
+@sealed
+class Greeter {
+  greeting: string;
+  constructor(message: string) {
+    this.greeting = message;
   }
+  greet() {
+    return "Hello, " + this.greeting;
+  }
+}
 
-  function sealed(constructor: Function) {
-    Object.seal(constructor);
-    Object.seal(constructor.prototype);
-  }
-  ```
+function sealed(constructor: Function) {
+  Object.seal(constructor);
+  Object.seal(constructor.prototype);
+}
+```
 
 - Here we go, đây sẽ là ví dụ mà `class decorators` trả về một giá trị, sẽ thay thế constructor cũ của class ( ghi đè)
 
-  ```typescript
-  function classDecorator<T extends { new (...args: any[]): {} }>(
-    constructor: T
-  ) {
-    return class extends constructor {
-      newProperty = "new property";
-      hello = "override";
-    };
-  }
+```typescript linenums="1"
+function classDecorator<T extends { new (...args: any[]): {} }>(
+  constructor: T
+) {
+  return class extends constructor {
+    newProperty = "new property";
+    hello = "override";
+  };
+}
 
-  @classDecorator
-  class Greeter {
-    property = "property";
-    hello: string;
-    constructor(m: string) {
-      this.hello = m;
-    }
+@classDecorator
+class Greeter {
+  property = "property";
+  hello: string;
+  constructor(m: string) {
+    this.hello = m;
   }
+}
 
-  console.log(new Greeter("world"));
-  ```
+console.log(new Greeter("world"));
+```
 
 ### Method Decorators
 
@@ -164,7 +164,7 @@ f(): called
 
 - Ví dụ `method decorators`:
 
-```typescript
+```typescript linenums="1"
 class Greeter {
   greeting: string;
   constructor(message: string) {
@@ -180,7 +180,7 @@ class Greeter {
 
 - Decorator trông sẽ ntn:
 
-```typescript
+```typescript linenums="1"
 function enumerable(value: boolean) {
   return function (
     target: any,
@@ -206,7 +206,7 @@ NOTE: Đừng quên giá trị trả về sẽ bị bỏ qua nếu script target
 
 - Ví dụ `accessor decorator`:
 
-```typescript
+```typescript linenums="1"
 class Point {
   private _x: number;
   private _y: number;
@@ -249,7 +249,7 @@ function configurable(value: boolean) {
 
 - Chúng ta có thể sử dụng thông tin để lưu lại metadata về property, như ví dụ dưới dây:
 
-```typescript
+```typescript linenums="1"
 import "reflect-metadata";
 
 const formatMetadataKey = Symbol("format");
@@ -291,7 +291,7 @@ class Greeter {
 
 - Ví dụ:
 
-```typescript
+```typescript linenums="1"
 class Greeter {
   greeting: string;
 
@@ -308,7 +308,7 @@ class Greeter {
 
 - Định nghĩa các decorators như dưới:
 
-```typescript
+```typescript linenums="1"
 import "reflect-metadata";
 
 const requiredMetadataKey = Symbol("required");

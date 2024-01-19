@@ -1,6 +1,6 @@
 # Vagrant custom ubuntu
 
-- Trong bài [này](../2023/0222-custom-ubuntu-image-with-ready-ssh-service.md) mình có custom một docker image để khi docker run là ta có một container sẵn sàng ssh được từ máy chủ (máy chạy docker). Tuy nhiên trong quá trình giả lập để test một số dịch vụ khi chạy ansible, có vẻ container ko đáp ứng được nên mình đã phải dùng `vagrant`. 
+- Trong bài [này](../2023/0222-custom-ubuntu-image-with-ready-ssh-service.md) mình có custom một docker image để khi docker run là ta có một container sẵn sàng ssh được từ máy chủ (máy chạy docker). Tuy nhiên trong quá trình giả lập để test một số dịch vụ khi chạy ansible, có vẻ container ko đáp ứng được nên mình đã phải dùng `vagrant`.
 
 - TLDR: bài này setup để khi vagrant chạy `ubuntu` sẽ add sẵn luôn ssh key cho account `vagrant` và account `root`.
 
@@ -12,21 +12,21 @@
 
 - Cài đặt plugin cho vagrant:
 
-```
+```linenums="1"
 vagrant plugin install vagrant-hosts
 ```
 
 - Tạo folder `vagrant-ubuntu-custom-ssh-key`.
-- `cd` vào thư mục vừa tạo `vagrant-ubuntu-custom-ssh-key`. 
+- `cd` vào thư mục vừa tạo `vagrant-ubuntu-custom-ssh-key`.
 - Chạy init vagrant, ở đây chúng ta sẽ chạy `ubuntu/focal64`:
 
-```
+```linenums="1"
 vagrant init ubuntu/focal64
 ```
 
 - Thêm các tham số cho machine.
 
-```terminal
+```terminal linenums="1"
 BOX_NAME =  ENV['BOX_NAME'] || "ubuntu/focal64"
 BOX_MEM = ENV['BOX_MEM'] || "1024"
 BOX_CPUS = ENV['BOX_CPUS'] || "2"
@@ -35,7 +35,7 @@ CLUSTER_HOSTS = ENV['CLUSTER_HOSTS'] || "vagrant_hosts"
 
 - Một vagrant file có thể định nghĩa cho nhiều machine và setup sẵn các cấu hình cho từng machine. Như dưới mình sẽ add thêm 1 machine. Ghi đè file host và add sẵn public key cho user `vagrant` và `root` mục đích để khi machine up là từ host mình có thể ssh vào luôn không cần phải đi add thủ công lại.
 
-```terminal
+```terminal linenums="1"
 config.vm.define "node1", primary: true do |node1_config|
     node1_config.vm.box = "ubuntu/focal64"
     node1_config.vm.hostname = "node1"
@@ -68,19 +68,15 @@ config.vm.define "node1", primary: true do |node1_config|
         SHELL
     end
 ```
+
 - Chỉ vậy thôi đến đây chỉ cần `vagrant up` và chờ là từ máy chủ có thể ssh vào được máy vừa tạo.
 
 - Note:
+
   - File đầy đủ cho bài này ở [đây](https://github.com/fenixpapu/blog-vagrant-custom-ubuntu-ssh-key)
 
-  - Nếu bạn dùng vagrant nhiều nên đọc qua doc [tại đây](https://developer.hashicorp.com/vagrant/tutorials/getting-started/getting-started-index#getting-started-index) nó khá hữu ích,  như các thuật ngữ chung khi chúng ta dùng vagrant: `machine` là gì , `box` là gì. Root password là gì? (`vagrant` nhé :v ). Hay cách để connect từ box ra ngoài máy localhost như thế nào?
-
-
+  - Nếu bạn dùng vagrant nhiều nên đọc qua doc [tại đây](https://developer.hashicorp.com/vagrant/tutorials/getting-started/getting-started-index#getting-started-index) nó khá hữu ích, như các thuật ngữ chung khi chúng ta dùng vagrant: `machine` là gì , `box` là gì. Root password là gì? (`vagrant` nhé :v ). Hay cách để connect từ box ra ngoài máy localhost như thế nào?
 
 - Vậy thôi bài này mục đích note lại phần setup ssh key cho box trên vagrant :D.
 
 - Happy devops! :D
-
-
-
-

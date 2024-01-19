@@ -6,21 +6,23 @@
 
 - Mình check thấy service failed. Đã restart lại service mongo với cả 2 lệnh:
 
-```
+```linenums="1"
 systemctl restart mongod.service
 service mongod restart
 ```
 
 - Sau đó thử stop, rồi start lại service vẫn running nhưng ko access được.
-```
+
+```linenums="1"
 telnet localhost 27017
 connection refused
 ```
+
 - Trong khi đó con số 2 (bên mình chạy mongo replicas PRA) vẫn telnet bình thường.
 
 - Sau đó a sếp check thì báo có lỗi:
 
-```
+```linenums="1"
 Error: ENOSPC: no space left on device, write
 ```
 

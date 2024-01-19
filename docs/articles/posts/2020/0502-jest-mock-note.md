@@ -4,37 +4,37 @@
 
 - Below an example:
 
-  ```js
-  //foo.js
-  export const foo = true; // could be expression as well
-  ```
+```js linenums="1"
+//foo.js
+export const foo = true; // could be expression as well
+```
 
-  ```js
-  //subject.js
-  import { foo } from "./foo";
+```js linenums="1"
+//subject.js
+import { foo } from "./foo";
 
-  export default () => foo;
-  ```
+export default () => foo;
+```
 
-  ```js
-  //subject.spec.js also know as(aka) subject.test.js
-  import subject from "./subject";
+```js linenums="1"
+//subject.spec.js also know as(aka) subject.test.js
+import subject from "./subject";
 
-  jest.mock("./foo", () => ({
-    get foo() {
-      return true; // set some default value
-    },
-  }));
+jest.mock("./foo", () => ({
+  get foo() {
+    return true; // set some default value
+  },
+}));
 
-  describe("subject", () => {
-    const mySpy = jest.spyOn(subject.default, "foo", "get");
-    it("foo return true", () => {
-      expect(subject.foo).toBe(true);
-    });
-
-    it("foo returns false", () => {
-      mySpy.mockReturnValueOne(false);
-      expect(subject.foo).toBe(true);
-    });
+describe("subject", () => {
+  const mySpy = jest.spyOn(subject.default, "foo", "get");
+  it("foo return true", () => {
+    expect(subject.foo).toBe(true);
   });
-  ```
+
+  it("foo returns false", () => {
+    mySpy.mockReturnValueOne(false);
+    expect(subject.foo).toBe(true);
+  });
+});
+```

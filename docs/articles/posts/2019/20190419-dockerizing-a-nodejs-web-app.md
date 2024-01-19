@@ -12,7 +12,7 @@ Mời các bạn theo dõi:
 
 - Để tạo một docker container của Nodejs việc đầu tiên chúng ta phải tạo nodejs app, bằng cách tạo file `package.json` với nội dung như dưới:
 
-```javascript
+```javascript linenums="1"
   {
     "name": "docker_web_app",
     "version": "1.0.0",
@@ -31,29 +31,29 @@ Mời các bạn theo dõi:
 - Từ `package.json` chúng ta sẽ cài gói phụ thuộc với `npm install`.
 - Và tạo web app hết sức đơn giản trong `index.js` file:
 
-```javascript
-  'use strict';
+```javascript linenums="1"
+"use strict";
 
-  const express = require('express');
+const express = require("express");
 
-  // Constants
-  const PORT = 8080;
-  const HOST = '0.0.0.0';
+// Constants
+const PORT = 8080;
+const HOST = "0.0.0.0";
 
-  // App
-  const app = express();
-  app.get('/', (req, res) => {
-    res.send('Hello world 2019!\n');
-  });
+// App
+const app = express();
+app.get("/", (req, res) => {
+  res.send("Hello world 2019!\n");
+});
 
-  app.listen(PORT, HOST);
-  console.log(`Devil's running on http://${HOST}:${PORT}`);
+app.listen(PORT, HOST);
+console.log(`Devil's running on http://${HOST}:${PORT}`);
 ```
 
 - Done! Thử check lại web-app của chúng ta có hoạt động.
 - Đầu tiên khởi chạy server với: `npm start` sau đó thử request tới server chúng ta được kết quả như dưới:
 
-```sh
+```sh linenums="1"
   $ curl -i localhost:8080
   HTTP/1.1 200 OK
   X-Powered-By: Express
@@ -72,26 +72,26 @@ Mời các bạn theo dõi:
 
 - Tạo một file trống với tên chính xác: `Dockerfile` bằng cách:
 
-```sh
+```sh linenums="1"
 touch Dockerfile
 ```
 
 - Image của chúng ta sẽ build dựa trên image gốc được cung cấp bởi Node bằng câu lệnh:
 
-```sh
+```sh linenums="1"
   FROM node:8
 ```
 
 - Tiếp theo ta sẽ tạo thư mục chứa toàn bộ source code bên trong image. Đây cũng sẽ là thư mục làm việc của web app.
 
-```sh
+```sh linenums="1"
   #Create app directory
   WORKDIR /usr/src/app
 ```
 
 - Bước tiếp theo chúng ta sẽ copy file `package*.json` và cài đặt các gói phụ thuộc cần thiết(thay vì copy toàn bộ) việc này cho phép tận dụng lợi thế cached của Docker layers).
 
-```sh
+```sh linenums="1"
   # Install app dependencies
   # A wildcard is used to ensure both package.json AND package-lock.json are copied
   # where available (npm@5+)
@@ -104,26 +104,26 @@ touch Dockerfile
 
 - COPY toàn bộ source code vào trong Docker image với câu lệnh:
 
-```sh
+```sh linenums="1"
   #Bundle app source
   COPY . .
 ```
 
 - Map tới port 8080 của container
 
-```sh
+```sh linenums="1"
   EXPOSE 8080
 ```
 
 - Khởi chạy ứng dụng:
 
-```sh
+```sh linenums="1"
  CMD ["npm", "start"]
 ```
 
 - `Dockerfile` hoàn chỉnh của chúng ta trông sẽ như thế này:
 
-```sh
+```sh linenums="1"
   FROM node:8
 
   #Create app directory
@@ -150,7 +150,7 @@ touch Dockerfile
 
 - Tạo file `.dockerignore` cùng cấp với file `Dockerfile`. Cấu hình dưới sẽ chỉ cho docker biết bỏ qua các file ko cần copy vào trong image:
 
-```sh
+```sh linenums="1"
   node_modules
   npm-debug.log
 ```
@@ -159,7 +159,7 @@ touch Dockerfile
 
 - Chúng ta đã setup xong web app và cấu hình cho docker. Bước tiếp theo build docker image từ các chuẩn bị đó:
 
-```sh
+```sh linenums="1"
   docker build -t node-web-app .
 ```
 
@@ -170,13 +170,13 @@ touch Dockerfile
 
 - Khởi chạy image với `-d` | detached mode, để container chạy nền ( background). `-p` để map port local với port trên container.
 
-```sh
+```sh linenums="1"
   docker run -p 3000:8080 -d node-web-app
 ```
 
-- Kiểm tra container của bạn đang chạy 
+- Kiểm tra container của bạn đang chạy
 
-```sh
+```sh linenums="1"
   # Get container ID
   docker ps
 
@@ -186,7 +186,7 @@ touch Dockerfile
 
 - Nếu cần login bên trong container đang chạy, thực hiện lệnh sau:
 
-```sh
+```sh linenums="1"
   docker exec -ti <container id> /bin/bash
 ```
 
@@ -194,7 +194,7 @@ touch Dockerfile
 
 - Thử truy cập tới dịch vụ, ta sẽ được như dưới:
 
-```sh
+```sh linenums="1"
   # curl -i localhost:3000
   HTTP/1.1 200 OK
   X-Powered-By: Express
@@ -213,16 +213,16 @@ touch Dockerfile
 
   1. `Port` trong web-app, và `EXPOSE` trong `Dockerfile`, trong `-p 3000:8080` khi run image có mối liên hệ như thế nào?
 
-    `Port` trong web-app là port cấu hình dịch vụ. Web-app sẽ lắng nghe request thông qua port này.
+  `Port` trong web-app là port cấu hình dịch vụ. Web-app sẽ lắng nghe request thông qua port này.
 
-    `EXPOSE` trong `Dockerfile` chỉ ra rằng container lắng nghe trên cổng này trong mạng (`network`) cụ thể.
+  `EXPOSE` trong `Dockerfile` chỉ ra rằng container lắng nghe trên cổng này trong mạng (`network`) cụ thể.
 
-    `-p 3000:8080` Giúp map giữa `localhost:3000` vào port `8080` của container. Lưu ý container và localhost thuộc 2 dải mạng khác nhau.
+  `-p 3000:8080` Giúp map giữa `localhost:3000` vào port `8080` của container. Lưu ý container và localhost thuộc 2 dải mạng khác nhau.
 
-    Hai port của `-p` và `EXPOSE` mang hai ý nghĩa khác nhau, không liên quan. Bạn có thể command `EXPOSE` và chạy lại. Container khác ( nếu có) được cấu hình cùng dải mạng với conatiner web-app sẽ ko truy cập được. Nhưng từ máy chủ sẽ vẫn truy cập được qua: `localhost:3000`. Không tin à? Làm thử đi thì biết :D.
+  Hai port của `-p` và `EXPOSE` mang hai ý nghĩa khác nhau, không liên quan. Bạn có thể command `EXPOSE` và chạy lại. Container khác ( nếu có) được cấu hình cùng dải mạng với conatiner web-app sẽ ko truy cập được. Nhưng từ máy chủ sẽ vẫn truy cập được qua: `localhost:3000`. Không tin à? Làm thử đi thì biết :D.
 
   2. Chẳng phải `COPY . .` sẽ copy toàn bộ source code vào trong image rồi. Tại sao lại phải copy `package.json` và `npm install` trước.
 
-    `npm install` thường là bước tốn thời gian, nhưng chúng ta chỉ cần chạy lại nó khi `package.json` có sự thay đổi. Bởi vậy thường bước một sẽ cài các gói phụ thuộc và bước hai mới thực sự thêm source code. Ví dụ khi bạn thay đổi source code `src/*.js` nhưng không thay đổi các gói phụ thuộc `package.json`. Nhờ thực hiện theo cách này, khi bạn build lại image, Docker sẽ không cần chạy lại chúng(`npm install`). Nguyên nhân từ cách Docker image được build ( dựa trên layer và cache).
+  `npm install` thường là bước tốn thời gian, nhưng chúng ta chỉ cần chạy lại nó khi `package.json` có sự thay đổi. Bởi vậy thường bước một sẽ cài các gói phụ thuộc và bước hai mới thực sự thêm source code. Ví dụ khi bạn thay đổi source code `src/*.js` nhưng không thay đổi các gói phụ thuộc `package.json`. Nhờ thực hiện theo cách này, khi bạn build lại image, Docker sẽ không cần chạy lại chúng(`npm install`). Nguyên nhân từ cách Docker image được build ( dựa trên layer và cache).
 
 - Cảm ơn mọi người đã theo dõi tới bước này :D.

@@ -12,11 +12,11 @@
 
 - Để demo ý tưởng của `generics` một cách đơn giản, cùng xem hàm ví dụ sau, `identity()`, hàm này nhận một tham số và trả về tham số đã nhận:
 
-  ```javascript
-  function identity(arg: number): number {
-    return arg;
-  }
-  ```
+```javascript linenums="1"
+function identity(arg: number): number {
+  return arg;
+}
+```
 
 - Mục đích của hàm `identity` đơn giản là trả về đối số chúng ta truyền vào. Vấn đề đây là chúng ta gán kiểu dữ liệu `number` cho cả `đối số` và giá trị `trả về`, function sau đó chỉ có thể sử dụng với kiểu dữ liệu `number` này - function có vẻ không được expand lắm - hoặc nó chính là điều chúng ta mong muốn.
 
@@ -24,7 +24,7 @@
 
 - Điều chúng ta thực sự muốn là `identity()` hoạt động với bất kỳ kiểu dữ liệu nào và sử dụng `generics` có thể giải quyết bài toán này. Bên dưới là cùng một function, lần này `kiểu dữ liệu của biến (type variable)` được thêm vào:
 
-```javascript
+```javascript linenums="1"
 function identity<T>(arg: T): T {
   return arg;
 }
@@ -36,21 +36,21 @@ function identity<T>(arg: T): T {
 
 - `T` viết tắt của Type, và cũng thường được sử dụng như kiểu dữ liệu của biến đầu tiên khi định nghĩa generics. Nhưng trong thực tế `T` có thể được thay thế với bất kỳ tên hợp lệ nào. Không chỉ vậy, chúng ta không bị giới hạn với chỉ một kiểu biến - chúng ta có thể mang bao nhiêu kiểu chúng ta muốn định nghĩa. Thử với `U` và `T` mở rộng hàm của chúng ta:
 
-  ```javascript
-  function identities<T, U>(arg1: T, arg2: U): T {
-    return arg1;
-  }
-  ```
+```javascript linenums="1"
+function identities<T, U>(arg1: T, arg2: U): T {
+  return arg1;
+}
+```
 
 - Giờ chúng ta có một `identities()` hỗ trợ hai kiểu dữ liệu, thêm một kiểu `U` type. Nhưng vẫn trả về type `T`. Hàm của chúng ta giờ đủ thông minh để truyền vào 2 kiểu dữ liệu trả về một kiểu dữ liệu của `arg1`.
 
 - Nhưng nếu chúng ta muốn trả về một object với cả hai loại? Có nhiều cách để làm việc này. Có thể làm với `tuple`, như này:
 
-  ```javascript
-  function identities<T, U>(arg1: T, arg2: U): [T, U] {
-    return [arg1, arg2];
-  }
-  ```
+```javascript linenums="1"
+function identities<T, U>(arg1: T, arg2: U): [T, U] {
+  return [arg1, arg2];
+}
+```
 
 - Hàm `identities` của chúng ta giờ trả về một `tuple` bao gồm một tham số `T` và một tham số `U`. Tuy nhiên, rất có thể trong mã của bạn sẽ muốn cung cấp một `interfaces` thay thế cho `tuple` (bộ dữ liệu), để code bạn trở nên dễ đọc hơn.
 
@@ -58,29 +58,29 @@ function identity<T>(arg: T): T {
 
 - Việc này mang chúng ta tới `generic interfaces`; cùng tạo một generic `Identites` interface để sử dụng với `identities()`:
 
-  ```javascript
-  interface Identities<V, W> {
-    id1: V;
-    id2: W;
-  }
-  ```
+```javascript linenums="1"
+interface Identities<V, W> {
+  id1: V;
+  id2: W;
+}
+```
 
 - Tôi sử dụng `V` và `W` như kiểu dữ liệu của biến để demo cho bất kỳ chữ cái nào (hoặc kết hợp hợp lệ của các chữ cái), ko quan trọng bạn gọi chúng.
 
 - Chúng ta có thể áp dụng interface này như giá trị trả về cho `identities()`, sửa đổi giá trị trả về để tuân thủ. Dùng `console.log` để in ra tham số và kiểu dữ liệu của chúng để làm rõ:
 
-  ```javascript
-  function identities<T, U>(arg1: T, arg2: U): Identities<T, U> {
-    console.log(arg1 + ": ", +typeof arg1);
-    console.log(arg2 + ": ", +typeof arg2);
+```javascript linenums="1"
+function identities<T, U>(arg1: T, arg2: U): Identities<T, U> {
+  console.log(arg1 + ": ", +typeof arg1);
+  console.log(arg2 + ": ", +typeof arg2);
 
-    let identities: Identities<T, U> = {
-      id1: arg1,
-      id2: arg2,
-    };
-    return identities;
-  }
-  ```
+  let identities: Identities<T, U> = {
+    id1: arg1,
+    id2: arg2,
+  };
+  return identities;
+}
+```
 
 - Những gì chúng ta đang làm với `identities()` là truyền vào kiểu `T` và `U` và interface `Identities`, cho phép chúng ta định nghĩa kiểu trả về liên quan tới kiểu dữ liệu truyền vào.
 
@@ -90,41 +90,41 @@ function identity<T>(arg: T): T {
 
 - Chúng ta có thể tạo ra một `class` generic trong `properties` và `methods` của class. Một generic class đảm baỏ rằng các kiểu dữ liệu cụ thể được sử dụng nhất quán trong toàn bộ class. Ví dụ, bạn có thể nhận ra quy ước sau trong các dự án React Typescript:
 
-  ```javascript
-  type Pros = {
-    className?: string
-    ...
-  };
+```javascript linenums="1"
+type Pros = {
+  className?: string
+  ...
+};
 
-  type State = {
-    Submitted?: bool
-    ...
-  };
+type State = {
+  Submitted?: bool
+  ...
+};
 
-  class MyComponent extends React.Component<Props, State> {
-    ...
-  }
-  ```
+class MyComponent extends React.Component<Props, State> {
+  ...
+}
+```
 
 - Chúng ta đang sử dụng `generics` ở đây với React components để đảm bảo props và state là nhất quán.
 
 - Cú pháp generic của class tương tự như những gì chúng ta đã làm từ đầu tới giờ. Xem class dưới đây có thể quản lý nhiều kiểu của profile một lập trình viên:
 
-  ```javascript
-  class Programmer<T> {
-    private languageName: string;
-    private languageInfo: T;
+```javascript linenums="1"
+class Programmer<T> {
+  private languageName: string;
+  private languageInfo: T;
 
-    constructor(lang: string) {
-      this.languageName = lang;
-    }
-    ...
+  constructor(lang: string) {
+    this.languageName = lang;
   }
+  ...
+}
 
-  let programmer1 = new Programmer<Language.Typescript>("Typescript");
-  let programmer2 = new Programmer<Language.Rust>("Rust");
+let programmer1 = new Programmer<Language.Typescript>("Typescript");
+let programmer2 = new Programmer<Language.Rust>("Rust");
 
-  ```
+```
 
 - Với class `Programmer`, `T` là kiểu dữ liệu cho ngôn ngữ lập trình, cho phép chúng ta gán các loại ngôn ngữ khác nhau. Mỗi ngôn ngữ chắc chắn có `metadata` khác nhau, và do đó cần kiểu khác nhau.
 
@@ -132,21 +132,21 @@ function identity<T>(arg: T): T {
 
 - Trong ví dụ trên chúng ta sử dụng ngoặc nhọn với các ngôn ngữ cụ thể, khi khởi tạo một `Programmer` mới, với cú pháp như sau:
 
-  ```javascript
-  let myObj = new className() < Type > "args";
-  ```
+```javascript linenums="1"
+let myObj = new className() < Type > "args";
+```
 
 - Để khởi tạo class, trình biên dịch không thể đoán loại ngôn ngữ sẽ gán cho lập trình viên, bắt buộc cần truyền vào. Tuy nhiên, với function, trình biên dịch có thể đoán kiểu dữ liệu chúng ta muốn - đây cách các lập trình viên sử dụng.
 
 - Làm rõ điều này, cùng tham chiếu tới `identities()` một lần nữa. Gọi hàm như này sẽ gán `string` và `number` cho kiểu `T` và `U`:
 
-  ```javascript
-  let result = identities<stirng, number>("argument 1", 1000);
-  ```
+```javascript linenums="1"
+let result = identities<stirng, number>("argument 1", 1000);
+```
 
 - Tuy nhiên, kiểu hay được dùng là để trình biên dịch tự chọn kiểu, làm code bạn nhìn sạch sẽ hơn. Chúng ta có thể bỏ sót ngoặc nhọn và viết lại hàm như dưới:
 
-```javascript
+```javascript linenums="1"
 let result = identities("argument 1", 1000);
 ```
 
@@ -177,27 +177,27 @@ let result = identities("argument 1", 1000);
 
 - Ví dụ điển hình là khi là việc với string hoặc array khi thuộc tính `.length` là khả dụng. Lấy `identity()` làm ví dụ, và cố gắng in ra `length` của các tham số.
 
-  ```javascript
-  // This will cause an error
-  function identity<T>(arg: T): T {
-    console.log(arg.length);
-    return arg;
-  }
-  ```
+```javascript linenums="1"
+// This will cause an error
+function identity<T>(arg: T): T {
+  console.log(arg.length);
+  return arg;
+}
+```
 
 - Trong trường hợp này compiler sẽ không biết rằng `T` cần có thuộc tính `.length`, đặc biệt bất kỳ loại nào có thể được gán cho `T`. Cái chúng ta cần là `extend` kiểu dữ liệu biến vào một `interface`. Nhìn như này:
 
-  ```javascript
-  interface Length {
-    length: number;
-  }
+```javascript linenums="1"
+interface Length {
+  length: number;
+}
 
-  function identity<T extends Length>(arg: T): T {
-    //length property can now be called
-    console.log(arg.length);
-    return arg;
-  }
-  ```
+function identity<T extends Length>(arg: T): T {
+  //length property can now be called
+  console.log(arg.length);
+  return arg;
+}
+```
 
 - `T` bị hạn chế đang sử dụng `extends` theo sau bởi type chúng ta muốn mở rộng, bên trong ngoặc nhọn. Chúng ta đang nói với compiler răng chúng ta có thể hỗ trợ bất kỳ kiểu nào có trong `Length`.
 
@@ -209,20 +209,20 @@ let result = identities("argument 1", 1000);
 
 - Có giải pháp khác cho thuộc tính `.length` nếu chúng ta hỗ trợ kiểu mảng. Chúng ta có thể định nghĩa kiểu dữ liệu là một mảng, như dưới:
 
-  ```javascript
-  // length is now recognised by declaring T as a type of array
+```javascript linenums="1"
+// length is now recognised by declaring T as a type of array
 
-  function identity<T>(arg: T[]): T[] {
-    console.log(arg.length);
-    return arg;
-  }
+function identity<T>(arg: T[]): T[] {
+  console.log(arg.length);
+  return arg;
+}
 
-  //or
-  function identity<T>(arg: Array<T>): Array<T> {
-    console.log(arg.length);
-    return arg;
-  }
-  ```
+//or
+function identity<T>(arg: Array<T>): Array<T> {
+  console.log(arg.length);
+  return arg;
+}
+```
 
 - Cả hai cách trên đều sẽ hoạt động, theo đó chúng ta cho phép compiler biết rằng `arg` và giá trị trả về của function sẽ là kiểu array.
 
@@ -230,11 +230,11 @@ let result = identities("argument 1", 1000);
 
 - Trường hợp sử dụng tuyệt vời cho constraints là xác nhận key tồn tại trong object bằng cách sử dụng cú pháp `extends keyof`. Xem ví dụ dưới kiểm tra một key có tồn tại trong ojbect được chúng ta truyền vào hàm không ?
 
-  ```javascript
-  function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
-    return obj[key];
-  }
-  ```
+```javascript linenums="1"
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+```
 
 - Tham số thứ nhất là object chúng ta sẽ lấy giá trị từ nó, tham số thứ hai là key của object này.Giá trị trả về mô tả mối quan hệ này với `T[K]`, dù hàm này hoạt động với mà không có kiểu trả về được xác định.
 
@@ -242,27 +242,27 @@ let result = identities("argument 1", 1000);
 
 - Từ giờ `getProperty` đơn giản để dùng, như trong ví dụ dưới để lấy một thuộc tính từ một đối tượng `typescript_info`:
 
-  ```javascript
-  // the property we will get will be of type Difficulty
+```javascript linenums="1"
+// the property we will get will be of type Difficulty
 
-  enum Difficulty {
-    Easy,
-    Intermediate,
-    Hard
-  }
+enum Difficulty {
+  Easy,
+  Intermediate,
+  Hard
+}
 
-  // defining the object we will get a property from
+// defining the object we will get a property from
 
-  let typescript_info = {
-    name: "typescript",
-    supperset_of: "javascript",
-    difficulty: Difficulty.Intermediate,
-  }
+let typescript_info = {
+  name: "typescript",
+  supperset_of: "javascript",
+  difficulty: Difficulty.Intermediate,
+}
 
-  // calling getProperty to retrieve a value from typescript_info
-  let supperset_of: Difficulty =
-    getProperty(typescript_info, 'difficulty');
-  ```
+// calling getProperty to retrieve a value from typescript_info
+let supperset_of: Difficulty =
+  getProperty(typescript_info, 'difficulty');
+```
 
 - Ví dụ này cũng có thêm một `enum` để định nghĩa kiểu của thuộc tính `difficulty` mà chúng ta sẽ nhận được với `getProperty`.
 
@@ -276,12 +276,12 @@ let result = identities("argument 1", 1000);
 
 - Lấy `getRecord()` làm ví dụ - class không nhận thức kiểu của record chúng ta sẽ nhận được từ service API của chúng ta, cũng không nhận thức được kiểu dữ liệu chúng ta đang truy vấn. Khắc phục vấn đề này, chúng ta dùng generics cho `getRecord()` như phần giữ chỗ cho giá trị trả về và kiểu giữ liệu truy vấn:
 
-  ```javascript
-  class APIService extends API {
-    public getRecord <T, U> (endpoint: string, params: T[]): U {}
-    public getRecords<T, U> (endpoint: string, params: T[]): U[] {}
-  }
-  ```
+```javascript linenums="1"
+class APIService extends API {
+  public getRecord <T, U> (endpoint: string, params: T[]): U {}
+  public getRecords<T, U> (endpoint: string, params: T[]): U[] {}
+}
+```
 
 - Method generic của chúng ta giờ có thể chấp nhận bất kỳ kiểu nào của `params`, sẽ dùng để query API endpoint. `U` là giá trị trả về
 
@@ -289,46 +289,46 @@ let result = identities("argument 1", 1000);
 
 - Generics cho phép chúng ta điều khiển kiểu các array. Chúng ta có thể muốn thêm hoặc xóa item từ dữ liệu nhân viên, như ví dụ dưới đây, sử dụng một biến chung cho lớp bộ phận (`Department`) và method `add`:
 
-  ```javascript
-  class Department<T> {
-    //different types of employees
-    private employees: Array<T> = new Array<T>();
+```javascript linenums="1"
+class Department<T> {
+  //different types of employees
+  private employees: Array<T> = new Array<T>();
 
-    public add (employee: T): void {
-      this.employees.push(employee);
-    }
+  public add (employee: T): void {
+    this.employees.push(employee);
   }
-  ```
+}
+```
 
 - Class trên cho phép chúng ta quản lý các nhân viên bằng `department` - bộ phận, cho phép mỗi bộ phận và các nhân viên bên trong được định nghĩa bởi một kiểu cụ thể.
 
 - Hoặc có lẽ bạn yêu cầu một hàm tiện ích chúng hơn để chuyển đổi một mảng thành một string được phân cách bởi các dấu phẩy.
 
-  ```javascript
-  function arrayAsString<T>(names: T[]): string {
-    return names.join(", ");
-  }
-  ```
+```javascript linenums="1"
+function arrayAsString<T>(names: T[]): string {
+  return names.join(", ");
+}
+```
 
 ### Extending with classes
 
 - Chúng ta đã thấy `generic constrains` được sử dụng với React để hạn chế `props` và `state`, nhưng chúng cũng có thể được sử dụng để đảm bảo thuộc tính của class là đúng định dạng. Lấy ví dụ như dưới đây, đảm bảo first và last name của một `Programmer` là được định nghĩa khi hàm yêu cầu chúng:
 
-  ```javascript
-  class Programmer {
-    //automatic constructor parameter assignment
-    constructor (public fname: sttring, public lname: string) {
+```javascript linenums="1"
+class Programmer {
+  //automatic constructor parameter assignment
+  constructor (public fname: sttring, public lname: string) {
 
-    }
   }
+}
 
-  function logProgrammer<T extends Programmer>(prog: T): void {
-    console.log(`${prog.fname} ${prog.lname}`);
-  }
+function logProgrammer<T extends Programmer>(prog: T): void {
+  console.log(`${prog.fname} ${prog.lname}`);
+}
 
-  const programmer = new Programmer("Ross", "Bulat");
-  logProgrammer(programmer); // > Ross Bulat
-  ```
+const programmer = new Programmer("Ross", "Bulat");
+logProgrammer(programmer); // > Ross Bulat
+```
 
 **Note:** Constructor ở đây sử dụng tự động gán tham số cho constructor (`automatic constructor parameter assignment`), một tính năng của Typescript là gán trực tiếp thuộc tính của class từ đố số constructor.
 

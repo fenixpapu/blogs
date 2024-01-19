@@ -20,50 +20,50 @@
 
 - Cùng xem thử cấu hình mặc định của `/etc/nginx/nginx.conf`.
 
-  ```sh
-  # cat /etc/nginx/nginx.conf
+```sh linenums="1"
+# cat /etc/nginx/nginx.conf
 
-  user  nginx;
-  worker_processes  1;
+user  nginx;
+worker_processes  1;
 
-  error_log  /var/log/nginx/error.log warn;
-  pid        /var/run/nginx.pid;
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
 
-  events {
-  worker_connections 1024;
-  }
+events {
+worker_connections 1024;
+}
 
-  http {
-    ...
-  }
+http {
+  ...
+}
 
-  ```
+```
 
 - File bắt đầu với 4 directives(chỉ thị): `user`, `worker_processes`, `error_log`, và `pid`. Chúng đặt ngoài bất kỳ block hay context cụ thể nào, do vậy chúng được coi tồn tại trong context chính ( `main context`). `events` và `http` blocks là các chỉ thị thêm (additional directive), chúng cũng tồn tại trong `main context`.
 
 ## The http block
 
-- ```sh
-  http {
-      include       /etc/nginx/mime.types;
-      default_type  application/octet-stream;
+```sh linenums="1"
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
 
-      log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                        '$status $body_bytes_sent "$http_referer" '
-                        '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
 
-      access_log  /var/log/nginx/access.log  main;
+    access_log  /var/log/nginx/access.log  main;
 
-      sendfile        on;
-      #tcp_nopush     on;
+    sendfile        on;
+    #tcp_nopush     on;
 
-      keepalive_timeout  65;
+    keepalive_timeout  65;
 
-      #gzip  on;
+    #gzip  on;
 
-      include /etc/nginx/conf.d/*.conf;
-  }
-  ```
+    include /etc/nginx/conf.d/*.conf;
+}
+```
 
 - `http` block chứa các chỉ thị cho việc điều khiển traffic web. Những chỉ thị này thường tham chiếu như là `universal` vì chúng được truyền tới tất cả các website cấu hình NGINX phục vụ. Xem [NGINX docs](https://nginx.org/en/docs/http/ngx_http_core_module.html) để thấy list các chỉ thị có trong `http` block, bao gồm cả `server`.
 
@@ -80,17 +80,17 @@
 
 - Bất kể source cài đặt như thế nào, file cấu hình server sẽ chứa một block (hoặc các block) `server` cho một web site. Ví dụ:
 
-  ```sh
-  #/etc/nginx/conf.d/example.com.conf
-  server {
-  listen 80 default_server;
-  listen [::]:80 default_server;
-  server_name example.com www.example.com;
-  root /var/www/example.com;
-  index index.html;
-  try_files \$uri /index.html;
-  }
-  ```
+```sh linenums="1"
+#/etc/nginx/conf.d/example.com.conf
+server {
+listen 80 default_server;
+listen [::]:80 default_server;
+server_name example.com www.example.com;
+root /var/www/example.com;
+index index.html;
+try_files \$uri /index.html;
+}
+```
 
 ## Listening Ports
 
@@ -104,25 +104,25 @@
 
   1. Xử lý request cho cả `example.com` và `www.example.com`
 
-  ```sh
-    #/etc/nginx/conf.d/example.com.conf
-    server_name example.com www.example.com;
-  ```
-
-  2. Chỉ thị `server_name` có thể sử dụng wildcards `*.example.com` và `.example.com` cả hai đều chỉ server cách xử lý requests với tất cả các sub domain của `example.com`
-
-  ```sh
+```sh linenums="1"
   #/etc/nginx/conf.d/example.com.conf
-  server_name *.example.com;
-  server_name .example.com;
-  ```
+  server_name example.com www.example.com;
+```
 
-  3. Xử lý với tất của request với domain bắt đầu bằng `example.`:
+2. Chỉ thị `server_name` có thể sử dụng wildcards `*.example.com` và `.example.com` cả hai đều chỉ server cách xử lý requests với tất cả các sub domain của `example.com`
 
-  ```sh
-  # /etc/nginx/conf.d/example.com.conf
-  server_name example;
-  ```
+```sh linenums="1"
+#/etc/nginx/conf.d/example.com.conf
+server_name *.example.com;
+server_name .example.com;
+```
+
+3. Xử lý với tất của request với domain bắt đầu bằng `example.`:
+
+```sh linenums="1"
+# /etc/nginx/conf.d/example.com.conf
+server_name example;
+```
 
 - NGINX cho phép bạn chỉ rõ server name không phù hợp. NGINX sử dụng name từ http header để trả lời request, dù request đó hợp lệ hay không.
 
@@ -132,7 +132,7 @@
 
 - Thiết lập `location` cho phép bạn cấu hình cách NGINX sẽ phản hồi request với tài nguyên trong server. Giống như directive `server_name`nói cho NGINX biết cách xử lý request tới domain, directive `location` đảm bảo cho request tới các file hoặc thư mục cụ thể như `http://example.com/blog/`. Đây là một ví dụ:
 
-```sh
+```sh linenums="1"
   #/etc/nginx/sites-available/example.com
   location / {}
   location /images/ {}
@@ -153,34 +153,34 @@
 
 - **Returns**: sẽ được đáp ứng bởi chỉ thị `location /planet/blog/` vì nó có thể hơn, dù `location /planet/` cũng phù hợp với request này.
 
-  ```sh
-  #/etc/nginx/sites-available/example.com
-  location ~ IndexPage\.php$ {}
-  locaiton ~ ^/BlogPlanet(/|/index\.php)$ {}
-  ```
+```sh linenums="1"
+#/etc/nginx/sites-available/example.com
+location ~ IndexPage\.php$ {}
+locaiton ~ ^/BlogPlanet(/|/index\.php)$ {}
+```
 
 - Khi một directive `location` được theo sau bởi một dấu ngã (~), NGINX thực thi một regex (regular expression) match. Những regex này luôn luôn case-sensitive ( phân biệt hoa thường). Vì vậy, `IndexPage.php` sẽ match với ví dụ đầu tiên ở trên, nhưng `indexpage.php` sẽ không. Trong ví dụ thứ 2, regex `^/BlogPlanet(/|/index\.php)$` sẽ match với request cho `/BlogPlanet/` và `/BlogPlanet/index.php`, nhưng **KHÔNG** match `/BlogPlanet`, `blogplanet`, hoặc `/blogplanet/index.php`. NGINX sử dụng [Perl Compatible Regular Expressions - PCRE](https://perldoc.perl.org/perlre.html)
 
-  ```sh
-  #/etc/nginx/sites-available/example.com
-  location ~* \.(pl|cgi|perl|prl)$ { }
-  location ~* \.(md|mdwn|txt|mkdn)$ { }
-  ```
+```sh linenums="1"
+#/etc/nginx/sites-available/example.com
+location ~* \.(pl|cgi|perl|prl)$ { }
+location ~* \.(md|mdwn|txt|mkdn)$ { }
+```
 
 - Nếu bạn muốn match với `case-insensitive` (match KHÔNG phân biệt hoa thường), sử dụng một dấu ngã với một dấu sao (~\*). Các ví dụ trên chỉ định cách NGINX nên sử lý tất cả các request mà kết thúc trong một phần mở rộng file. Ví dụ đầu tiên, bất kỳ file nào kết thúc với: `.pl`, `.PL`, `.cgi`, `.CGI`, `.perl`, `.Perl`, `.prl`, và `.PrL` sẽ match.
 
-  ```sh
-  #/etc/nginx/sites-available/example.com
-  location ^~/images/IndexPage/ {}
-  location ^~/blog/BlogPlanet/ {}
-  ```
+```sh linenums="1"
+#/etc/nginx/sites-available/example.com
+location ^~/images/IndexPage/ {}
+location ^~/blog/BlogPlanet/ {}
+```
 
-  - Thêm một dấu mũ và dấu ngã (^~) vào directive `location` nới với NGINX, nếu nó match một string cụ thể , dừng tìm kiếm một match cụ thể hơn (match dài hơn) và sử dụng luôn các chỉ thị (directive) ở đây.
+- Thêm một dấu mũ và dấu ngã (^~) vào directive `location` nới với NGINX, nếu nó match một string cụ thể , dừng tìm kiếm một match cụ thể hơn (match dài hơn) và sử dụng luôn các chỉ thị (directive) ở đây.
 
-  ```sh
-  #/etc/nginx/sites-available/example.com
-  location = / {}
-  ```
+```sh linenums="1"
+#/etc/nginx/sites-available/example.com
+location = / {}
+```
 
 - Cuối cùng, nếu bạn thêm một dấu bằng (=) vào `location`, điều này ấp đặt một match chính xác với path request và dừng tìm kiếm cho một match cụ thể hơn. Ví dụ trên sẽ chỉ match `http://example.com/`, không match `http://example.com/index.html`. Sử dụng match chính xác có thể tăng tốc độ phản hồi request lên một chút, hữu ích khi bạn có một vài request đặc biệt phỏ biến.
 
@@ -196,10 +196,10 @@
 
 - Đảm bảo rằng mỗi file và folder dưới một domain sẽ match ít nhất một `location` directive.
 
-  ```text
-  NOTE:
-  Location lồng nhau thì không được khuyến khích hoặc supported.
-  ```
+```text linenums="1"
+NOTE:
+Location lồng nhau thì không được khuyến khích hoặc supported.
+```
 
 ## Location Root and Index
 
@@ -207,13 +207,13 @@
 
 - Một khi NGINX xác định một directive `location` phù hợp nhất với request, response cho request này được xác định bởi nội dung liên quan trong block của directive `location`. Đây là một ví dụ:
 
-  ```sh
-  #/etc/nginx/sites-available/example.com
-  location / {
-    root html;
-    index index.html index.htm;
-  }
-  ```
+```sh linenums="1"
+#/etc/nginx/sites-available/example.com
+location / {
+  root html;
+  index index.html index.htm;
+}
+```
 
 - Trong ví dụ này, tài liệu root được đặt trong thư mục `html/` Bên dưới cài đặt mặc định của NGINX, đường dẫn đầy đủ cho vị trí này là `/etc/nginx/html/`.
 
@@ -221,10 +221,10 @@
 
 - **Returns**: NGINX sẽ cố gắng phục vụ các file được đặt ở: `/etc/nginx/html/blog/includes/styles.css`
 
-  ```sh
-  NOTE:
-  Bạn có thể sử dụng đường dẫn tuyệt đối nếu muốn
-  ```
+```sh linenums="1"
+NOTE:
+Bạn có thể sử dụng đường dẫn tuyệt đối nếu muốn
+```
 
 - Biến `index` nói với NGINX file được phục vụ nếu không được chỉ định rõ ràng.
 - Ví dụ:
@@ -237,21 +237,21 @@
 
 - Đây là một ví dụ phức tạp hơn một chút, hiển thị một tập các directive `location` cho một server response với domain `example.com`:
 
-  ```sh
-  # /etc/nginx/sites-available/example.com location directive
-  location / {
-    root /srv/www/example.com/public_html;
-    index index.html index.htm;
-  }
+```sh linenums="1"
+# /etc/nginx/sites-available/example.com location directive
+location / {
+  root /srv/www/example.com/public_html;
+  index index.html index.htm;
+}
 
-  location ~ \.pl$ {
-    gzip off;
-    include /etc/nginx/fastcgi_params;
-    fastcgi_pass unix:/var/run/fcgiwrap.socket;
-    fastcgi_index index.pl;
-    fastcgi_param SCRIPT_FILENAME /srv/www/example.com/public_html$fastcgi_script_name;
-  }
-  ```
+location ~ \.pl$ {
+  gzip off;
+  include /etc/nginx/fastcgi_params;
+  fastcgi_pass unix:/var/run/fcgiwrap.socket;
+  fastcgi_index index.pl;
+  fastcgi_param SCRIPT_FILENAME /srv/www/example.com/public_html$fastcgi_script_name;
+}
+```
 
 - Trong ví dụ này, tất cả request cho resource kết thúc với đuôi `.pl` được xử lý bởi `location` block, chỉ rõ một `fastcgi` xử lý cho những request này. Nếu không, NGINX sử dụng directive location đầu tiên. Tài nguyên được đặt trong file hệ thống ở `/srv/www/example.com/public_html/`. Nếu không file name nào được chỉ định trong request, NGINX sẽ tìm kiếm và cung cấp file `index.html` hoặc `index.htm`. Nếu không `index` file nào được tìm thấy, server sẽ trả về 404.
 

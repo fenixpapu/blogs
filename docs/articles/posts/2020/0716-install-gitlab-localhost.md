@@ -27,7 +27,7 @@
 
 - Chạy lệnh `ifconfig`:
 
-```sh
+```sh linenums="1"
 $ ifconfig
 enp37s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 172.16.3.213  netmask 255.255.0.0  broadcast 172.16.255.255
@@ -47,7 +47,7 @@ enp37s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 - Có thể thay đổi `13.0.5-ce.0` bằng version mới nhất. Với private IP: `172.16.3.213` như trên, chạy lệnh dưới để cài gitlab local:
 
-```sh
+```sh linenums="1"
     sudo docker run --detach \
     --hostname 172.16.3.213 \
     --publish 80:80 \

@@ -33,14 +33,14 @@
 
 - `Bind mounts` có sẵn từ những ngày đầu của Docker. `Bind mounts` có những giới hạn so với volumes. Khi sử dụng bind mounts một file hoặc thư mục trên máy chủ sẽ được mount vào container.File hoặc thư mục được tham chiếu với đường dẫn đầy đủ trên máy chủ. File và thư mục này không cần thiết phải đã tồn tại trên máy chủ. Nó sẽ được tạo nếu nó chưa tồn tại. Bind mounts có hiệu suất rất tốt nhưng lại phụ thuộc vào cấu trúc thư mục sẵn có trên máy chủ. Nếu bạn đang phát triển một ứng dụng mới trên Docker, hãy xem xét việc sử dụng volume được đặt tên. Bạn sẽ không thể sử dụng Docker CLI để quản lý trực tiếp bind mounts.
 
-  ```text
-    BIND MOUNTS CHO PHÉP TRUY CẬP CÁC TẬP TIN NHẠY CẢM
-    - Một tác dụng phụ của bind mounts, có thể tốt hơn hoặc tồi hơn, đó là nó cho phép bạn thay đổi nội dung file hệ thống trên MÁY CHỦ (HOST chạy docker) từ tiến trình đang chạy trên CONTAINER, bao gồm tạo , thay đổi, hoặc xóa các file hoặc thư mục của hệ thống. Đây là một khả năng mạnh mẽ mang ý nghĩa về mặt bảo mật tác động lên các tiến trình KHÔNG PHẢI CỦA DOCKER trên hệ thống máy chủ(HOST).
-  ```
+```text linenums="1"
+  BIND MOUNTS CHO PHÉP TRUY CẬP CÁC TẬP TIN NHẠY CẢM
+  - Một tác dụng phụ của bind mounts, có thể tốt hơn hoặc tồi hơn, đó là nó cho phép bạn thay đổi nội dung file hệ thống trên MÁY CHỦ (HOST chạy docker) từ tiến trình đang chạy trên CONTAINER, bao gồm tạo , thay đổi, hoặc xóa các file hoặc thư mục của hệ thống. Đây là một khả năng mạnh mẽ mang ý nghĩa về mặt bảo mật tác động lên các tiến trình KHÔNG PHẢI CỦA DOCKER trên hệ thống máy chủ(HOST).
+```
 
-  - `tmpfs mount`: Một `tmpfs` mount thì không lưu dữ liệu trên ổ cứng của cả container lẫn mấy chủ. Nó có thể được sử dụng bởi một container trong suốt vòng đời của container, để lưu những dữ liệu không cần đảm bảo tính toàn vẹn hoặc thông tin nhạy cảm.
+- `tmpfs mount`: Một `tmpfs` mount thì không lưu dữ liệu trên ổ cứng của cả container lẫn mấy chủ. Nó có thể được sử dụng bởi một container trong suốt vòng đời của container, để lưu những dữ liệu không cần đảm bảo tính toàn vẹn hoặc thông tin nhạy cảm.
 
-  - `Named pipes`: Một `npipe` mount có thể sử dụng cho việc truyền thông giữa máy chủ Docker và container. Trường hợp sử dụng phổ biến là chạy một tool của bên thứ ba bên trong container và kết nối tới Docker Engine API sử dụng một named pipe.
+- `Named pipes`: Một `npipe` mount có thể sử dụng cho việc truyền thông giữa máy chủ Docker và container. Trường hợp sử dụng phổ biến là chạy một tool của bên thứ ba bên trong container và kết nối tới Docker Engine API sử dụng một named pipe.
 
 - Bind mount và volume có thể đều được mount vào container bằng cờ `-v` hoặc `--volume`, dù cú pháp có hơi khác nhau đôi chút. Với `tmpfs` bạn có thể dùng cờ `--tmpfs`. Tuy nhiên từ Docker 17.06 trở đi, khuyến khích dùng `--mount` cho cả container và service dùng với bind mount ,volume, và cả tmpfs, như một cú pháp rõ ràng hơn.
 

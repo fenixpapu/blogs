@@ -10,7 +10,7 @@
 
 - Sau đó zip files thôi:
 
-```
+```linenums="1"
 zip -r function.zip ./
 ```
 
@@ -18,7 +18,7 @@ zip -r function.zip ./
 
 - Deploy source code mới:
 
-```
+```linenums="1"
 aws lambda update-function-code \
 --function-name <lambda_function_name> \
 --zip-file fileb://./function.zip \

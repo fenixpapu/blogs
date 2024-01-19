@@ -12,92 +12,92 @@
 
   - Không sử dụng Redis:
 
-  ```javascript
-  // withoutRedisAsCache.js
+```javascript linenums="1"
+// withoutRedisAsCache.js
 
-  //Define all dependencies needed
-  const express = require("express");
-  const responseTime = require("response-time");
-  const axios = require("axios");
+//Define all dependencies needed
+const express = require("express");
+const responseTime = require("response-time");
+const axios = require("axios");
 
-  //Load Express Framework
-  var app = express();
+//Load Express Framework
+var app = express();
 
-  //Create a middleware that adds a X-Response-Time header to responses.
-  app.use(responseTime());
+//Create a middleware that adds a X-Response-Time header to responses.
+app.use(responseTime());
 
-  const getBook = (req, res) => {
-    let isbn = req.query.isbn;
-    let url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
-    axios
-      .get(url)
-      .then(response => {
-        let book = response.data.items;
-        res.send(book);
-      })
-      .catch(err => {
-        res.send("The book you are looking for is not found !!!");
-      });
-  };
-
-  app.get("/book", getBook);
-
-  app.listen(3000, function() {
-    console.log("Your node is running on port 3000 !!!");
-  });
-  ```
-
-  - Có sử dụng redis làm cache:
-
-  ```javascript
-  // withRedisAsCache.js
-
-  const express = require("express");
-  const responseTime = require("response-time");
-  const axios = require("axios");
-  const redis = require("redis");
-  const client = redis.createClient();
-
-  // Load express Framework
-  const app = express();
-
-  // Create a middleware that adds a X-Response-Time header to response.
-  app.use(responseTime());
-
-  const getBook = (req, res) => {
-    let isbn = req.query.isbn;
-    let url = `https://wwww.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
-    return axios
-      .get(url)
-      .then(response => {
-        let book = response.data.items;
-        // Set the string-key: isbn in our cache. With his contents of the cache: title
-        // Set cache expirations to 1 hour (60minutes)
-        client.setex(isbn, 3600, JSON.stringify(book));
-
-        res.send(book);
-      })
-      .catch(err => {
-        res.send("The book you are looking for is not found!!!");
-      });
-  };
-
-  const getCache = (req, res) => {
-    let isbn = req.query.isbn;
-    //Check the cache data from the server redis
-    client.get(isbn, (err, result) => {
-      if (result) {
-        res.send(result);
-      } else {
-        getBook(req, res);
-      }
+const getBook = (req, res) => {
+  let isbn = req.query.isbn;
+  let url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
+  axios
+    .get(url)
+    .then((response) => {
+      let book = response.data.items;
+      res.send(book);
+    })
+    .catch((err) => {
+      res.send("The book you are looking for is not found !!!");
     });
-  };
-  app.get("/book", getCache);
-  app.listen(3000, () => {
-    console.log(`Your node is running on port 3000!!!`);
+};
+
+app.get("/book", getBook);
+
+app.listen(3000, function () {
+  console.log("Your node is running on port 3000 !!!");
+});
+```
+
+- Có sử dụng redis làm cache:
+
+```javascript linenums="1"
+// withRedisAsCache.js
+
+const express = require("express");
+const responseTime = require("response-time");
+const axios = require("axios");
+const redis = require("redis");
+const client = redis.createClient();
+
+// Load express Framework
+const app = express();
+
+// Create a middleware that adds a X-Response-Time header to response.
+app.use(responseTime());
+
+const getBook = (req, res) => {
+  let isbn = req.query.isbn;
+  let url = `https://wwww.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
+  return axios
+    .get(url)
+    .then((response) => {
+      let book = response.data.items;
+      // Set the string-key: isbn in our cache. With his contents of the cache: title
+      // Set cache expirations to 1 hour (60minutes)
+      client.setex(isbn, 3600, JSON.stringify(book));
+
+      res.send(book);
+    })
+    .catch((err) => {
+      res.send("The book you are looking for is not found!!!");
+    });
+};
+
+const getCache = (req, res) => {
+  let isbn = req.query.isbn;
+  //Check the cache data from the server redis
+  client.get(isbn, (err, result) => {
+    if (result) {
+      res.send(result);
+    } else {
+      getBook(req, res);
+    }
   });
-  ```
+};
+app.get("/book", getCache);
+app.listen(3000, () => {
+  console.log(`Your node is running on port 3000!!!`);
+});
+```
 
 - Khi nhận được request từ client. Server với `withoutRedisAsCache.js` sẽ call api bên thứ ba (ở đây là google) và trả về cho người dùng. Server với `withRedisAsCache.js` sẽ check redis trước không có mới gọi api google ( và sẽ được cập nhật vào redis cho lần gọi sau).
 - Để chạy phía server ngoài khởi tạo 2 file như trên. Mình cài đặt 1 số thứ:
@@ -108,37 +108,37 @@
 
 - Giờ cùng xem thời gian phản hồi của mỗi api như nào. Với cùng một truy vấn tới server. Ở đây mình muốn check thời gian server phản hồi. Nếu bạn muốn xem full response thì bỏ option `--head` là được:
 
-  ```curl
-  curl --head --request GET 'http://localhost:3000/book?isbn=0747532699'
-  ```
+```curl linenums="1"
+curl --head --request GET 'http://localhost:3000/book?isbn=0747532699'
+```
 
 - Khi không có redis thời gian server xử lý **748.695ms**:
 
-  ```bash
-  curl --head --request GET 'http://localhost:3000/book?isbn=0747532699'
-  HTTP/1.1 200 OK
-  X-Powered-By: Express
-  Content-Type: application/json; charset=utf-8
-  Content-Length: 5555
-  ETag: W/"15b3-oclsTdp62saXpCDwbRd1UpovElU"
-  X-Response-Time: 748.695ms
-  Date: Tue, 04 Feb 2020 21:47:10 GMT
-  Connection: keep-alive
-  ```
+```bash linenums="1"
+curl --head --request GET 'http://localhost:3000/book?isbn=0747532699'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 5555
+ETag: W/"15b3-oclsTdp62saXpCDwbRd1UpovElU"
+X-Response-Time: 748.695ms
+Date: Tue, 04 Feb 2020 21:47:10 GMT
+Connection: keep-alive
+```
 
 - Khi có redis làm cache thời gian xử lý **151.236ms**:
 
-  ```sh
-  curl --head --request GET 'http://localhost:3000/book?isbn=0747532699'
-  HTTP/1.1 200 OK
-  X-Powered-By: Express
-  Content-Type: text/html; charset=utf-8
-  Content-Length: 44
-  ETag: W/"2c-MIHHo48jJM1V6k/iF6QDT81JmfU"
-  X-Response-Time: 151.236ms
-  Date: Tue, 04 Feb 2020 21:45:40 GMT
-  Connection: keep-alive
-  ```
+```sh linenums="1"
+curl --head --request GET 'http://localhost:3000/book?isbn=0747532699'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 44
+ETag: W/"2c-MIHHo48jJM1V6k/iF6QDT81JmfU"
+X-Response-Time: 151.236ms
+Date: Tue, 04 Feb 2020 21:45:40 GMT
+Connection: keep-alive
+```
 
 ## Redis as DB
 
@@ -146,126 +146,126 @@
 
 - Sử dụng mongodb:
 
-  ```javascript
-  // mongoDB.js
+```javascript linenums="1"
+// mongoDB.js
 
-  const mongoose = require("mongoose");
-  const express = require("express");
-  const responseTime = require("response-time");
+const mongoose = require("mongoose");
+const express = require("express");
+const responseTime = require("response-time");
 
-  const mongoDB = "mongodb://127.0.0.1/test";
-  mongoose.connect(mongoDB, { useNewUrlParser: true });
+const mongoDB = "mongodb://127.0.0.1/test";
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 
-  const app = express();
-  app.use(responseTime());
+const app = express();
+app.use(responseTime());
 
-  // create a Schema
-  const UserSchema = new mongoose.Schema({
-    name: String,
-    lastLogin: { type: String, index: true }
+// create a Schema
+const UserSchema = new mongoose.Schema({
+  name: String,
+  lastLogin: { type: String, index: true },
+});
+
+// create model from Schema
+const UserModel = mongoose.model("Users", UserSchema);
+
+// run this block only one time to create new User
+// start block create user
+const newUser = UserModel({
+  name: "Asterisk",
+  lastLogin: `${new Date().getTime()}`,
+});
+newUser.save((err) => {
+  if (err) console.error(`save to db error: `, err);
+  console.log("User created");
+});
+// end block create user
+
+app.get("/user", (req, res) => {
+  UserModel.findOne({ name: "Asterisk" }, (err, response) => {
+    res.json(response);
   });
+});
 
-  // create model from Schema
-  const UserModel = mongoose.model("Users", UserSchema);
-
-  // run this block only one time to create new User
-  // start block create user
-  const newUser = UserModel({
-    name: "Asterisk",
-    lastLogin: `${new Date().getTime()}`
-  });
-  newUser.save(err => {
-    if (err) console.error(`save to db error: `, err);
-    console.log("User created");
-  });
-  // end block create user
-
-  app.get("/user", (req, res) => {
-    UserModel.findOne({ name: "Asterisk" }, (err, response) => {
-      res.json(response);
-    });
-  });
-
-  app.listen(3000, () => {
-    console.log(`Your node runiing on port 3000!`);
-  });
-  ```
+app.listen(3000, () => {
+  console.log(`Your node runiing on port 3000!`);
+});
+```
 
 - Ở đây mình tạo 1 collection `User` với một document đơn giản {name: Asterisk, lastLogin: string} với lastLogin là time theo mili giây.
 - Cài đặt gói mongoose: `npm i mongoose`.
 - Chạy server: `node mongoDB.js`.
 - Check response từ phía server:
 
-  ```sh
-  $ curl --request GET 'http://localhost:3000/user'
-  {"_id":"5e39ef517017466d73374df9","name":"Asterisk","lastLogin":"1580855121662","__v":0}
-  ```
+```sh linenums="1"
+$ curl --request GET 'http://localhost:3000/user'
+{"_id":"5e39ef517017466d73374df9","name":"Asterisk","lastLogin":"1580855121662","__v":0}
+```
 
 - Check Header xem thời gian phản hồi:
 
-  ```sh
-  curl --head --request GET 'http://localhost:3000/user'
-  HTTP/1.1 200 OK
-  X-Powered-By: Express
-  Content-Type: application/json; charset=utf-8
-  Content-Length: 88
-  ETag: W/"58-tbwvkcJnjDHdbM+ylOQJecz0iEs"
-  X-Response-Time: 2.821ms
-  Date: Tue, 04 Feb 2020 22:35:27 GMT
-  Connection: keep-alive
-  ```
+```sh linenums="1"
+curl --head --request GET 'http://localhost:3000/user'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 88
+ETag: W/"58-tbwvkcJnjDHdbM+ylOQJecz0iEs"
+X-Response-Time: 2.821ms
+Date: Tue, 04 Feb 2020 22:35:27 GMT
+Connection: keep-alive
+```
 
 - Như vậy với một bản ghi, đã được index, thời gian cỡ khoảng **2.821ms**
 
 - Nếu cùng mục đích sử dụng lưu lastLogin nhưng lần này mình sẽ lưu trong redis thì sao:
 - Sử dụng redis:
 
-  ```javascript
-  // redisDB.js
+```javascript linenums="1"
+// redisDB.js
 
-  const express = require("express");
-  const responseTime = require("response-time");
-  const axios = require("axios");
-  const redis = require("redis");
-  const client = redis.createClient();
+const express = require("express");
+const responseTime = require("response-time");
+const axios = require("axios");
+const redis = require("redis");
+const client = redis.createClient();
 
-  const app = express();
-  app.use(responseTime());
+const app = express();
+app.use(responseTime());
 
-  // Run this line only one time to set for redis
-  client.set(`Asterisk`, `${new Date().getTime()}`);
+// Run this line only one time to set for redis
+client.set(`Asterisk`, `${new Date().getTime()}`);
 
-  app.get("/user", (req, res) => {
-    client.get(`Asterisk`, (err, result) => {
-      if (err) console.error(err);
-      res.send(result);
-    });
+app.get("/user", (req, res) => {
+  client.get(`Asterisk`, (err, result) => {
+    if (err) console.error(err);
+    res.send(result);
   });
-  app.listen(3000, () => {
-    console.log(`Your node is running on port 3000!!!`);
-  });
-  ```
+});
+app.listen(3000, () => {
+  console.log(`Your node is running on port 3000!!!`);
+});
+```
 
-  - Test thử response từ phía server:
+- Test thử response từ phía server:
 
-  ```sh
-  $ curl --request GET 'http://localhost:3000/user'
-  1580857007517
-  ```
+```sh linenums="1"
+$ curl --request GET 'http://localhost:3000/user'
+1580857007517
+```
 
-  - Check header xem thời gian phản hồi **0.384ms**:
+- Check header xem thời gian phản hồi **0.384ms**:
 
-  ```sh
-  curl --head --request GET 'http://localhost:3000/user'
-  HTTP/1.1 200 OK
-  X-Powered-By: Express
-  Content-Type: text/html; charset=utf-8
-  Content-Length: 13
-  ETag: W/"d-JS5kVrHA/I/MbbqfR1u35i9JqlI"
-  X-Response-Time: 0.384ms
-  Date: Tue, 04 Feb 2020 23:04:12 GMT
-  Connection: keep-alive
-  ```
+```sh linenums="1"
+curl --head --request GET 'http://localhost:3000/user'
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 13
+ETag: W/"d-JS5kVrHA/I/MbbqfR1u35i9JqlI"
+X-Response-Time: 0.384ms
+Date: Tue, 04 Feb 2020 23:04:12 GMT
+Connection: keep-alive
+```
 
 ## Conclusion
 

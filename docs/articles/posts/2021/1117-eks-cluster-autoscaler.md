@@ -6,7 +6,7 @@
 
 ---
 
-- K8s CA tự động thay đổi số nodes trong cluster của bạn khi các pod fail hoặc được tạo lại trên một node khác. [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) thường được cài đặt như một [Deployment](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws/examples) trong cluster của bạn. Nó sử dụng [Leader Election](https://en.wikipedia.org/wiki/Leader_election) để đảm bảo tính HA ( khả dụng cao - high availability), nhưng việc mở rộng chỉ được thực hiện bởi một bản sao tại một thời điểm. 
+- K8s CA tự động thay đổi số nodes trong cluster của bạn khi các pod fail hoặc được tạo lại trên một node khác. [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) thường được cài đặt như một [Deployment](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws/examples) trong cluster của bạn. Nó sử dụng [Leader Election](https://en.wikipedia.org/wiki/Leader_election) để đảm bảo tính HA ( khả dụng cao - high availability), nhưng việc mở rộng chỉ được thực hiện bởi một bản sao tại một thời điểm.
 - Trước khi deploy một CA, hãy chắc chắn rằng bạn quen thuộc với các khái niệm của K8s tương ứng với các tính năng của AWS. Những thuật ngữ sau được sử dụng xuyên suốt bài này:
 
   - `K8s Cluster Autoscaler`: Một thành phần chính (core component) của K8s Control Plane đưa ra quyết định lập lịch và mở rộng quy mô. Thêm thông tin về [Control Plane](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md)
@@ -21,7 +21,6 @@
 
 - Topic này mô tả làm thế nào bạn có thể deploy CA trong Amazon EKS cluster của bạn, và cấu hình CA để Amazon EC2 ASG.
 
-
 ## Prerequisites
 
 - Trước khi deploy CA, bạn phải đáp ứng được những điều kiện tiên quyết sau:
@@ -35,20 +34,20 @@
     - Nếu bạn sử dụng `eksctl` để tạo các node groups, những tags này được thêm tự động.
     - Nếu bạn không sử dụng `eksctl`, bạn phải thêm các tags này thủ công:
 
-      | Key | Value|
-      | ----| -----|
+      | Key                                      | Value   |
+      | ---------------------------------------- | ------- |
       | k8s.io/cluster-autoscaler/<cluster-name> | `owned` |
-      | k8s.io/cluster-autoscaler/enabled | TRUE |
-  
+      | k8s.io/cluster-autoscaler/enabled        | TRUE    |
+
 ## Create an IAM policy and role
 
-- Tạo một IAM cấp quyền ( permission) cho CA. Thay thế tất cả `<example-values>`  ( cả <>) với giá trị của bạn trong suốt quá trình.
+- Tạo một IAM cấp quyền ( permission) cho CA. Thay thế tất cả `<example-values>` ( cả <>) với giá trị của bạn trong suốt quá trình.
 
 ### Create an IAM policy
 
 - Lưu nội dung dưới đây vào file tên: `cluster-autoscaler-policy.json`. Nếu các node groups đang tồn tại của bạn được tạo với `eksctl` và bạn sử dụng tùy chọn: `--asg-access`, thì policy đã tồn tại và bạn có thể đi tới bước tiếp theo.
 
-```
+```linenums="1"
   {
       "Version": "2012-10-17",
       "Statement": [
@@ -68,9 +67,10 @@
       ]
   }
 ```
+
 - Tạo policy với lệnh dưới. Có thể đổi `policy-name`
 
-```
+```linenums="1"
   aws iam create-policy --policy-name AmazonEKSClusterAutoscalerPolicy --policy-document file://cluster-autoscaler-policy.json
 ```
 
@@ -82,7 +82,7 @@
 
 - Chạy lệnh dưới đây nếu bạn đã tạo EKS cluster với `eksctl`. Nếu bạn tạo node groups sử dụng tùy chọn: `--asg-access` , thay thế `<AmazonEKSClusterAutoscalerPolicy>` với tên IAM policy mà `eksctl` tạo cho bạn. Tên policy có thể theo mẫu như sau: `eksctl-<cluster-name>-nodegroup-ng-<xxxxxxxx>-PolicyAutoScaling`:
 
-```
+```linenums="1"
   eksctl create iamserviceaccount \
     --cluster=<my-cluster> \
     --namespace=kube-system \
@@ -92,19 +92,19 @@
     --approve
 ```
 
-- AWS khuyến nghị, nếu bạn tạo groups sử dụng tùy chọn: `--asg-access` bạn detach IAM policy `eskctl` đã tạo và attach vào [Amazon EKS node IAM role](https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html) mà `eksctl` đã tạo cho bạn. Bạn tách policy khỏi node IAM role để các function của CA được hoạt động bình thường. Tách các policy không đưa cho các pods khác trên các node quyền trong policy. Chi tiết xem tại: [Removing IAM identity permission](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#remove-policies-console) 
+- AWS khuyến nghị, nếu bạn tạo groups sử dụng tùy chọn: `--asg-access` bạn detach IAM policy `eskctl` đã tạo và attach vào [Amazon EKS node IAM role](https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html) mà `eksctl` đã tạo cho bạn. Bạn tách policy khỏi node IAM role để các function của CA được hoạt động bình thường. Tách các policy không đưa cho các pods khác trên các node quyền trong policy. Chi tiết xem tại: [Removing IAM identity permission](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#remove-policies-console)
 
 - Quá trình chạy thật bị lỗi: `failed to create service account kube-system/cluster-autoscaler: checking whether namespace "kube-system" exists: Unauthorized` nên đã phải làm bước này trên console.
 
 ## Deploy Cluster Autoscaler
 
-- Các bước tiếp theo sẽ deploy CA. AWS khuyên bạn nên review: [Deployment considerations](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html#ca-deployment-considerations) - hoặc scroll xuống dưới -  và tối ưu CA trước khi deploy trên production.
+- Các bước tiếp theo sẽ deploy CA. AWS khuyên bạn nên review: [Deployment considerations](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html#ca-deployment-considerations) - hoặc scroll xuống dưới - và tối ưu CA trước khi deploy trên production.
 
-- *** TO DEPLOY THE CLUSTER AUTOSCALER***
+- **_ TO DEPLOY THE CLUSTER AUTOSCALER_**
 
-1. Tải CA YAML file: 
+1. Tải CA YAML file:
 
-```
+```linenums="1"
   curl -o cluster-autoscaler-autodiscover.yaml https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
 ```
 
@@ -112,53 +112,55 @@
 
 3. Apply YAML file vào cluster của bạn:
 
-```
+```linenums="1"
   kubectl apply -f cluster-autoscaler-autodiscover.yaml
 ```
 
 4. Annotate `cluster-autoscaler` service account với ARN của IAM role bạn tạo trước đó. Thay thế `<example values>` với giá trị của bạn:
 
-```
+```linenums="1"
   kubectl annotate serviceaccount cluster-autoscaler -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::926755034425:role/AmazonEKSClusterAutoscalerRole
 ```
 
 5. Patch (vá) deployment để thêm `cluster-autoscaler.kubernetes.io/safe-to-evict` annotation và CA pods với lệnh sau:
 
-```
+```linenums="1"
   kubectl patch deployment cluster-autoscaler -n kube-system -p '{"spec":{"template":{"metadata":{"annotations":{"cluster-autoscaler.kubernetes.io/safe-to-evict": "false"}}}}}'
 ```
 
 6. Edit CA deployment với lệnh:
 
-```
+```linenums="1"
   kubectl -n kube-system edit deployment.apps/cluster-autoscaler
 ```
 
 - Edit `cluster-autoscaler` container command, thay thế `<YOUR CLUSTER NAME> (including <>)` với tên cluster của bạn và thêm các option sau:
+
   - `--balance-similar-node-groups`
   - `--skip-nodes-with-system-pods=false`
 
-  ```
-  spec:
-      containers:
-      - command:
-        - ./cluster-autoscaler
-        - --v=4
-        - --stderrthreshold=info
-        - --cloud-provider=aws
-        - --skip-nodes-with-local-storage=false
-        - --expander=least-waste
-        - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/<YOUR CLUSTER NAME>
-        - --balance-similar-node-groups
-        - --skip-nodes-with-system-pods=false
-  ```
+```linenums="1"
+spec:
+    containers:
+    - command:
+      - ./cluster-autoscaler
+      - --v=4
+      - --stderrthreshold=info
+      - --cloud-provider=aws
+      - --skip-nodes-with-local-storage=false
+      - --expander=least-waste
+      - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/<YOUR CLUSTER NAME>
+      - --balance-similar-node-groups
+      - --skip-nodes-with-system-pods=false
+```
+
 - Save và `close` file để `apply` thay đổi.
 
-7. Mở [CA releases](https://github.com/kubernetes/autoscaler/releases) để kiểm tra version của CA phù hợp với major và minor version cluster của bạn. 
+7. Mở [CA releases](https://github.com/kubernetes/autoscaler/releases) để kiểm tra version của CA phù hợp với major và minor version cluster của bạn.
 
 8. Set CA image tag với version trong bước trên theo lệnh dưới. Thay thế `1.21.n` với giá trị của bạn:
 
-```
+```linenums="1"
   kubectl set image deployment cluster-autoscaler -n kube-system cluster-autoscaler=k8s.gcr.io/autoscaling/cluster-autoscaler:v<1.21.n>
 ```
 
@@ -166,15 +168,15 @@
 
 - Sau khi bạn deploy CA, bạn có thể xem logs và xác nhận rằng nó đang monitor tải cluster của bạn.
 
-- Xem logs với lệnh như dưới: 
+- Xem logs với lệnh như dưới:
 
-```
+```linenums="1"
   kubectl -n kube-system logs -f deployment.apps/cluster-autoscaler
 ```
 
 - Output nhìn như dưới:
 
-```
+```linenums="1"
   I0926 23:15:55.165842       1 static_autoscaler.go:138] Starting main loop
   I0926 23:15:55.166279       1 utils.go:595] No pod using affinity / antiaffinity found in cluster, disabling affinity predicate for this loop
   I0926 23:15:55.166293       1 static_autoscaler.go:294] Filtering out schedulables
@@ -195,14 +197,16 @@
 
 ### Scaling consideration
 
-- CA có thể cấu hình với bất kỳ tính năng thêm nào cho node của bạn. Những tính năng này như thêm Amazon EBS volumes attach vào  nodes. EC2 instance type of node, hay GPU accelerators.
+- CA có thể cấu hình với bất kỳ tính năng thêm nào cho node của bạn. Những tính năng này như thêm Amazon EBS volumes attach vào nodes. EC2 instance type of node, hay GPU accelerators.
 
 - `Scope node groups` tới nhiều hơn một AZ:
+
   - AWS khuyến khích chúng ta cấu hình nhiều node groups, mỗi node groups trên một AZ, và enable tính năng `--balance-similar-node-groups`. Nếu bạn chỉ cấu hình một node group, cấu hình node group này có thể mở rộng trên nhiều AZ.
 
 - Tối ưu các node group của bạn: CA đưa ra giả định về cách bạn đang sử dụng các node groups. Bao gồm cả instance type mà bạn đang sử dụng group. Để phù hợp với những giả định này, cấu hình node group của bạn dựa trên những giả định và cân nhắc sau:
 
   - Mỗi node trong node group phải có các thuộc tính lập lịch giống hệt nhau. Bao gồm labels, taints, và các tài nguyên:
+
     - Với `MixedInstancePolicies`, instance type phải có thông số kỹ thuật CPU, memory, GPU tương thích.
     - Instance type đầu tiên được mô phỏng trong lập lịch ( thực sự ko hiểu câu này :)) )
     - Nếu chính sách của bạn có add thêm resource. Resource đó có thể bị lãng phí sau khi được scale out.
@@ -226,7 +230,7 @@
   - Các job training học máy phân tán ( Machine learning distributed) hưởng lợi đáng kể từ độ trễ nhỏ của các node cấu hình cùng một AZ. Những khối lượng công việc này được tải lên các pod trong cùng một khu vực. Bạn có thể làm được điều này bằng cách cấu hình `pod affinity` cho tất cả các pod có cùng lập lịch hoặc các node affinity sử dụng `topologyKey: topology.kubernetes.io/zone`. Sử dụng cấu hình này CA mở rộng theo chiều ngang trên một Zone cụ thể để đáp ứng yêu cầu. Chỉ định nhiều ASG với một AZ cụ thể, để đảm bảo chuyển đổi dự phòng `failover` cho toàn bộ khối lượng công việc được lập lịch đồng thời. Đảm bảo các điều kiện sau được đáp ứng:
 
     - Cân bằng node group được enable bởi cấu hình: `balance-similar-node-groups=true`
-    
+
     - [Node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity), [pod preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/), hoặc cả hai, được sử dụng khi cluster bao gồm Regional và Zonal node groups:
       - Sử dụng `node affinity` để áp đặt hoặc khuyến khích regional pods và tránh Zonal node groups.
       - Đừng lập lịch Zonal pod vào một Regional node group. Làm vậy có thể dẫn tới mất cân bằng sức chứa cho các Regional pods của bạn.
@@ -245,4 +249,4 @@
 
 - Scaling from Zero
 
-  - 
+  -

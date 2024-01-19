@@ -4,7 +4,6 @@
 
 - Tuy nhiên đôi khi chúng ta cần monitor những thứ không có sẵn đơn giản ví dụ chúng ta có thể monitor redis server, nhưng nếu muốn monitor giá trị của key `current_users` trong redis ( thay vì trạng thái server thì làm sao)?. Trong bài này mình sẽ note lại các bước dùng python custom metric của prometheus để monitor bất kỳ thứ gì chúng ta muốn.
 
-
 ## Python custom metric
 
 - Chi tiết python exporter có thể xem tại [đây](https://github.com/prometheus/client_python). Một số kiểu metric của prometheus:
@@ -16,9 +15,9 @@
   - enum
 - Prometheus có một thứ khá tuyệt trong metric đó là label. Ví dụ dưới đây mình sẽ tạo một metric là `currency` để monitor số tiền của mình, nhưng chúng ta sẽ có 2 label của metric này là: `VND` cho Việt Nam Đồng và là `USD` cho Đô La Mỹ.
 
-- Source code python như dưới: 
+- Source code python như dưới:
 
-```python
+```python linenums="1"
 import schedule
 import time
 from prometheus_client import start_http_server, Counter
@@ -46,13 +45,14 @@ def main():
 
 main()
 ```
+
 - Chúng ta có thể dùng `schedule` để lập lịch chạy job tính toán lại metric vào thời gian cụ thể hoặc cứ sau mỗi một khoảng thời gian. Ví dụ này chưa dùng tới nhưng trong lúc custom metric thật cho công việc có thể dùng tới nên mình note luôn lại ở đây.
 
 - Ví dụ này mình custom 1 metric tên `currency` với 2 label cho `VND` và `USD`. Với giá trị khởi điểm là 1 VND và 23 USD. Cứ 1 phút giá trị lại tăng lên 1.
 
 - Sau khi cài đặt thư viện chạy source code và truy cập `localhost:8192` để lấy metric. Như dưới mình dùng curl để lấy giá trị:
 
-```terminal
+```terminal linenums="1"
 
 $curl localhost:8192 | grep currency
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -72,12 +72,10 @@ interest_per_currency_total{Unit="USD"} 24.0
 
 - Để cho nhanh chóng thì mình sẽ setup `docker-compose.yml` cho prometheus và grafana như dưới và `docker compose up -d` cho lẹ.
 
-```yml
-
-version: '2'
+```yml linenums="1"
+version: "2"
 
 services:
-
   prometheus:
     image: prom/prometheus:v2.42.0
     container_name: prometheus_server
@@ -98,7 +96,7 @@ services:
 
 - Thiết lập cấu hình cho prometheus như dưới `prometheus.yml`:
 
-```yml
+```yml linenums="1"
 # my global config
 global:
   scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
@@ -131,9 +129,9 @@ scrape_configs:
       - targets: ["172.17.0.1:8192"]
 ```
 
-- Note chúng ta sẽ cài prometheus và grafana với version cụ thể  và setup cấu hình mặc định cho prometheus.  Phần `scrape_configs` là cấu hình cần thêm để prometheus sẽ lấy metric từ source code python lúc nãy:
+- Note chúng ta sẽ cài prometheus và grafana với version cụ thể và setup cấu hình mặc định cho prometheus. Phần `scrape_configs` là cấu hình cần thêm để prometheus sẽ lấy metric từ source code python lúc nãy:
 
-```yml
+```yml linenums="1"
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: "prometheus"
@@ -158,13 +156,10 @@ scrape_configs:
 
 - Ở đây mình tạo metric counter `interest_per_currency` nó bị thêm cái `_total` :D. Nếu metric là `Gauge` thì nó sẽ dữ nguyên tên.
 
-
-
 - Ok done như vậy là với 1 metric chúng ta có thể cùng lúc monitor được nhiều giá trị với các ý nghĩa khác nhau như `VND` và `USD` như hình dưới, prometheus thật tuyệt :D
 
 ![one metric multiple label](../../images/20230221-one-metric-multiple-label.png)
 
-- HAPPY *dev* and *devops*  :D !!!
+- HAPPY _dev_ and _devops_ :D !!!
 
 - P/S: à quên giải phóng tài nguyên. `Ctrl + C` tắt code python đang chạy. Và `docker-compose down` để giải phóng sạch sẽ các tài nguyên docker lúc nãy vừa tạo nhé.
-

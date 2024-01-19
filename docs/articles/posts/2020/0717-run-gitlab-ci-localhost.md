@@ -34,13 +34,13 @@
 - Tiếp theo cần một `dev-server` có code `nodejs`. Để phục vụ việc này mình có tạo sẵn một repo. File Dockerfile open ssh(với user/pass: root/root), install git, node.
 - Trên máy của bạn clone repo từ github về:
 
-```sh
+```sh linenums="1"
   $ git clone https://github.com/fenixpapu/demo-ci.git
 ```
 
 - Di chuyển vào bên trong thư mục `demo-ci` vừa clone về, và build image:
 
-```sh
+```sh linenums="1"
   $ cd demo-ci/
   $ git checkout dev
   $ docker build -t node-web-app .
@@ -48,13 +48,13 @@
 
 - Chạy image:
 
-```sh
+```sh linenums="1"
   $ sudo docker run -p 3000:8080 --name nodejsApp -d node-web-app
 ```
 
 - Kiểm tra lại IP của Gitlab và `dev-server` vừa chạy xong:
 
-```sh
+```sh linenums="1"
   $ docker inspect -f '{{ .NetworkSettings.IPAddress }}' gitlabCE
   172.17.0.2
   $ docker inspect -f '{{ .NetworkSettings.IPAddress }}' nodejsApp
@@ -69,7 +69,7 @@
 
 - SSH vào `dev-server` kiểm tra remote repo trong container:
 
-```sh
+```sh linenums="1"
   $ ssh root@172.17.0.4 #password: root
   $ cd /usr/src/app/
   $ git remote -v
@@ -79,7 +79,7 @@
 
 - Thay thế remote repo của github.com bằng local gitlab, và đẩy code lên gitlab:
 
-```sh
+```sh linenums="1"
   $ git remote -v
   origin	https://github.com/fenixpapu/demo-ci.git (fetch)
   origin	https://github.com/fenixpapu/demo-ci.git (push)
@@ -93,7 +93,7 @@
 
 - Tạo ra một cặp ssh-key(ssh-key này có thể tạo trên bất kỳ máy nào, key này sẽ được dùng để ssh vào `dev-server`) bằng:
 
-```sh
+```sh linenums="1"
 root@172:/# ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/root/.ssh/id_rsa):
@@ -131,7 +131,7 @@ The key's randomart image is:
 
 <!-- - Quay trở lại thư mục code trong `dev-server` create new file `.git:
 
-```sh
+```sh linenums="1"
   before_script:
   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
   - eval $(ssh-agent -s)

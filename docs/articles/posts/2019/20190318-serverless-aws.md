@@ -28,14 +28,14 @@ OK LET GO!!!
 
 - Tạo thư mục với file `package.json`.
 
-```bash
+```bash linenums="1"
 mkdir my-first-serverless && cd my-first-serverless
 npm init -f
 ```
 
 - Cài đặt các gói phụ thuộc cần thiết:
 
-```bash
+```bash linenums="1"
 npm install --save express serverless-http
 ```
 
@@ -83,7 +83,7 @@ functions:
 
 - Dùng lệnh: `serverless deploy` hoặc ngắn gọn hơn `sls deploy`. Thêm `-v`(verbose) nếu bạn muốn xem chi tiết tất cả các tiến trình.
 
-```console
+```console linenums="1"
   my-first-serverless$ sls deploy
   ...
   endpoints:
@@ -173,7 +173,7 @@ resources:
 - Để app sử dụng table đã thêm ở trên. Chúng ta sẽ thêm 2 phương thức: POST và GET cho phép người dùng tạo: user và lấy thông tin user.
 - Đầu tiên cài đặt `aws-sdk` và `body-parser`:
 
-```sh
+```sh linenums="1"
   npm install --save aws-sdk body-parser
 ```
 
@@ -251,19 +251,19 @@ module.exports.handler = serverless(app);
 
 - Deploy để cập nhật lại cấu hình và code:
 
-```sh
+```sh linenums="1"
 sls deploy
 ```
 
 - Sau khi có public link chúng ta thử tạo user:
 
-```sh
+```sh linenums="1"
   $ curl -H "Content-Type: application/json" -X POST https://8gagnsxxnl.execute-api.us-east-1.amazonaws.com/dev/users -d '{"userId": "FRAMGIA", "name": "SUN*"}'
 ```
 
 - Trước khi deploy hãy chắc chắn bạn đã save code nếu không sẽ nhận được kết quả:
 
-```sh
+```sh linenums="1"
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -278,7 +278,7 @@ sls deploy
 
 - Sau khi save code deploy chúng ta đã có thể thêm mới user:
 
-```yml
+```yml linenums="1"
   $ curl -H "Content-Type: application/json" -X POST https://8gagnsxxnl.execute-api.us-east-1.amazonaws.com/dev/users -d '{"userId": "FRAMGIA", "name": "SUN*"}'
   {"userId":"FRAMGIA","name":"SUN*"}
 ```
@@ -287,7 +287,7 @@ sls deploy
 
   May quá GET được:
 
-```sh
+```sh linenums="1"
   $curl -H "Content-Type: application/json" -X GET https://8gagnsxxnl.execute-api.us-east-1.amazonaws.com/dev/users/FRAMGIA
   {"userId":"FRAMGIA","name":"SUN*"}
 ```
@@ -331,7 +331,7 @@ functions:
 
 - Lưu ý [đoạn sau](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
 
-```
+```linenums="1"
   While in the AWS Free Tier, you can build an entire application on AWS Lambda, AWS API Gateway, and more, without getting charged for 1 year... As long as you don't exceed the resources in the free tier, of course.
 ```
 
@@ -339,7 +339,7 @@ functions:
 
 - Việc đầu tiên sau khi test thử dịch vụ đã ok mà không cần duy trì hãy `remove` ứng dụng bạn đã vừa deploy với lệnh:
 
-```console
+```console linenums="1"
   sls remove
 ```
 
