@@ -99,7 +99,7 @@ functions:
 
 - Thử truy cập chúng ta thấy server đã hoạt động:
 
-  ![Hello World](../../images/20190318_2_server_work.png)
+  ![Hello World](../../images/2019/20190318_2_server_work.png)
 
 - Dùng serverless deploy một API chỉ _đơn giản_ vậy thôi! Ngoài ra:
 

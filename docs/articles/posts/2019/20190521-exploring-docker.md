@@ -18,7 +18,7 @@ Là một người mới tìm hiểu `docker` và mới dừng ở run `containe
   - Volumes: Volumes được thiết kế để lưu dữ liệu, độc lập với vòng đời của containers - thế nghĩa là sao ? Thông thường chúng ta có thể lưu dữ liệu ngay trong containers kiểu thiết kế này làm containers bị phình to ra, và quan trọng hơn mỗi khi containers bị xóa, toàn bộ dữ liệu sẽ bị mất. Volumes sẽ giải quyết vấn đề này.
 
 - Hình bên dưới mô tả cách thức các Docker Client trên hoạt động và tương tác với nhau:
-  ![Docker-engine-diagram](../../images/20190523_docker_engine_diagram.png)
+  ![Docker-engine-diagram](../../images/2019/20190523_docker_engine_diagram.png)
   - Loằng ngoằng khó hiểu vậy? Mình sẽ nói qua một chút. Docker thực hiện chính các việc: `ship`, `build`, `run`. Trong hình trên chia ra 3 phần tương ứng cho các việc này.
   - Nhìn từ trên xuống ví dụ cho phần ship: từ `Dockerfile` chúng ta có thể build ra 1 `image` hoặc từ một `repository` chúng ta có thể `pull` về `images` hoặc ngược lại từ các `image` này chúng ta có thể `push` lên `repository` đó chính là `ship`.
   - Phần thứ 2 từ `images` chúng ta có thể `run` thành một `container` hoặc `container` chúng ta có thể `commit` để tạo ra images. Đó là phần `build`.
