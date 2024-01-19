@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-10-18
+draft: false
+---
+
 # AWS network block traffic
 
 - Bài này note lại TIL thôi. Mình có 1 yêu cầu từ dev team block traffic từ 1 service tới 1 service khác. Chính xác là block traffic từ spark job tới kafka.

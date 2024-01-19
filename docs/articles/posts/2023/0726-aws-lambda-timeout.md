@@ -1,5 +1,13 @@
-# Lambda timeout argument
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-07-26
+draft: false
+---
 
+# Lambda timeout argument
 
 - Bài này gần như là 1 TIL (today I learned) thôi.
 
@@ -9,9 +17,7 @@
 - Nhưng dùng postman call api bên kia bình thường. Đặt thêm log thì 2 dòng `console.log` liền kề nhau 1 dòng in ra được 1 dòng ko: `timeout 3s`.
 - Rồi xong đến đây nghĩ ngay đến cái `timeout` của lambda ( khoảng thời gian lambda tồn tại để chạy job) -> Chuẩn luôn timeout 3s.
 - Cay thặc chớ ^^!:
-  - Khi check bug lambda mọi người đừng quên biến này nhé :| 
+  - Khi check bug lambda mọi người đừng quên biến này nhé :|
   - Khi tạo lambda cứ set lên 15m vào. Giá của lambda tính theo cấu hình và khoảng thời gian thực thi (chạy bao nhiêu tính tiền bấy nhiêu) chứ ko liên quan đến việc khai báo timeout. Nhưng timeout thấp có thể làm lambda dừng khi chưa thực thi xong như trường hợp kể trên của mình.
-
-
 
 ### HAPPY WORKING (Devops)

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-10-13
+draft: false
+---
+
 # TIL Mesos kill driver with error cannot find driver
 
 - Note lại bài này cho kinh nghiệm về mesos và aws :D

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-06-22
+draft: true
+---
+
 # [WIP] Best practices for using Terraform
 
 - From [google](https://cloud.google.com/docs/terraform/best-practices-for-terraform)

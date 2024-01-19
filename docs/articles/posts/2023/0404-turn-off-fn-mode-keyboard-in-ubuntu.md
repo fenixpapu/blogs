@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - general
+date: 2023-04-04
+draft: false
+---
+
 # Turn off fn moe keyboard in ubuntu
 
 - Mình dùng phím cơ và nó có cái `Fn` mỗi tội default turn on, nên mỗi khi debug thay vì vì `F5` bật chế độ debug trên vscode thì nó hiển thì cái đèn bàn phím , hay F11 là giảm âm lượng. Nên bài này về việc tắt nó đi :D

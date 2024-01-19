@@ -1,3 +1,14 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+  - dev
+  - python
+date: 2023-01-05
+draft: false
+---
+
 # AWS auto start stop RDS
 
 - Bài toán: Công ty có các môi trường dev, stg, pre, prd. Trừ prd cần always up, ngoài ra các môi trường khác mình thấy ban đêm để thì phí tài nguyên, và xếp có yêu cầu giảm cost nên mình viết lambda để tự động tắt RDS trên các môi trường non-prod khi ngoài giờ hành chính.

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-10-03
+draft: false
+---
+
 # MQTT benchmark on k8s
 
 - Mình join support BID 1 dự án, và về lý thuyết MQTT support scale và loadbalancing (chi tiết xem doc EMQX: [configure load balancer](https://www.emqx.io/docs/en/v5.0/deploy/cluster/lb.html#configure-haproxy-nginx-in-emqx) ) nhưng để chắc chắn mình cần test trước để biết behavior của nó là như thế nào sau đó estimate mới chuẩn được.

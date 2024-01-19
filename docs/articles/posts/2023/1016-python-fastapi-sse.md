@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-10-16
+draft: false
+---
+
 # python fastapi sse
 
 ## Before start

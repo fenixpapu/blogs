@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-02-21
+draft: false
+---
+
 # Monitor everything with prometheus, grafana and python exporter
 
 - Prometheus và grafana thì khỏi nói rồi, monitor cơ số thứ và các node exporter có sẵn rất nhiều chỉ việc cài vào là có thể monitor.

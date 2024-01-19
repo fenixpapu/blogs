@@ -1,3 +1,14 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+  - python
+  - dev
+date: 2023-02-11
+draft: false
+---
+
 # Python take notes about list comprehension, function arbitrary kwargs and json
 
 - Năm năm trước (2017 - lúc đó network engineer) đọc python mình thấy có một số thứ vẫn còn hay bị quên. Những thứ này chỉ có ở python mà quên thì đôi khi đọc code thường hay lấn cấn. Nên giờ muốn học lại python viết luôn bài này note lại luôn cho nhớ :D

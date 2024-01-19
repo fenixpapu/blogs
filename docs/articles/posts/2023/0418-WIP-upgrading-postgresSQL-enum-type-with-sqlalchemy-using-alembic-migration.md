@@ -1,9 +1,18 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+  - python
+date: 2023-04-18
+draft: true
+---
+
 # Upgrading PostgreSQL's enum type with Sqlalchemy using Alembic migration
 
 - Bạn có thể xem bài gốc của tác giả [tại đây](https://makimo.pl/blog/upgrading-postgresqls-enum-type-with-sqlalchemy-using-alembic-migration/)
 
 - Để đọc bài này nên biết một chút về sqlalchemy , alembic và fastapi.
-
 
 ## Mở đầu
 
@@ -16,4 +25,3 @@
 - Điều kiện bạn đã biết qua cách dùng sqlalchemy và alembic ( nếu chưa thì xem qua đã nhé). Có thể mình sẽ note lại một bài về fastapi, sqlalchemy và alembic sau :D
 
 ## Basic model
-

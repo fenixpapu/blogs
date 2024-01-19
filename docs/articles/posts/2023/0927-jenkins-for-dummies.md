@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-09-27
+draft: false
+---
+
 # Jenkins for dummies
 
 - Nhân tiện có ticket liên quan jenkins nên mình lưu lại một số ghi chú trong quá trình tìm hiểu để sau cần thì lục lại cũng nhanh hơn.

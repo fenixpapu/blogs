@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-02-22
+draft: false
+---
+
 # Custom ubuntu image with service ssh ready
 
 - Bài này take note lại từ repo [này](https://github.com/fenixpapu/custom-ubuntu-image-with-ssh-ready)

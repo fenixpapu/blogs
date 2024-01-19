@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-03-10
+draft: false
+---
+
 # Today I learned: Mongodb is running but I cannot access
 
 - Bài này không đủ dài để làm một bài đăng blog. Nhưng như tiêu đề: `today I learned`, nó làm mình mất thời gian nên cần note lại để lâu lâu đọc lại nhớ lần sau ko bị :))

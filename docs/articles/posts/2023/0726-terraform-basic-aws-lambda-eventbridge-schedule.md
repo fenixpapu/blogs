@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-07-26
+draft: false
+---
+
 # Terraform basic create aws lambda trigger by eventbridge schedule
 
 - Có nhiều cách để tạo lambda thậm chí mình nghĩ nên dùng serverless của aws ngon hơn :v

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-04-18
+draft: false
+---
+
 # Vagrant custom ubuntu
 
 - Trong bài [này](../2023/0222-custom-ubuntu-image-with-ready-ssh-service.md) mình có custom một docker image để khi docker run là ta có một container sẵn sàng ssh được từ máy chủ (máy chạy docker). Tuy nhiên trong quá trình giả lập để test một số dịch vụ khi chạy ansible, có vẻ container ko đáp ứng được nên mình đã phải dùng `vagrant`.

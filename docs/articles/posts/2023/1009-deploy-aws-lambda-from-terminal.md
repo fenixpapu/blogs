@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2023-10-09
+draft: false
+---
+
 # Deploy aws lambda from terminal
 
 - Cần nói trước có nhiều cách deploy lambda function hay hơn ( bằng sls (serverless) khi bạn tạo project từ serverless) hoặc từ terraform. Tuy nhiên đôi khi lambda function đã có sẵn và được deploy từ terminal nên mình cũng deploy luôn chứ ko tạo lại từ đầu theo 2 cách trên.
