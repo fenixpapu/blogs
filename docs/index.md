@@ -1,3 +1,3 @@
-# About
+# Home
 
 - Passion without N
