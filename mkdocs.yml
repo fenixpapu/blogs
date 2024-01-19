@@ -50,5 +50,10 @@ markdown_extensions:
   - pymdownx.mark
   - attr_list
 
+plugins:
+  - blog:
+      authors: true
+      blog_dir: articles
+
 copyright: |
   &copy; 2023 <a href="https://github.com/fenixpapu"  target="_blank" rel="noopener">PaPu</a>

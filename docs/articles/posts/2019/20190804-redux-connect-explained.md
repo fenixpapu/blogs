@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2019-08-04
+draft: false
+---
+
 # React-Redux Connect Explained
 
 - About a year after Redux came out, Dan Abramov wrote a gist entitled [connect.js explained](https://gist.github.com/gaearon/1d19088790e70ac32ea636c025ba424e)

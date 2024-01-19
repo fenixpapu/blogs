@@ -1,6 +1,13 @@
-tag: [es6], [vscode][draf]
-Đây vẫn đang làm bản nháp, đừng phí thời gian của bạn cho post này.
-Bài dịch từ [medium](https://medium.com/@drcallaway/debugging-es6-in-visual-studio-code-4444db797954)
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2019-06-01
+draft: true
+---
+
+# Debugging es6 in vs code
 
 ## Step 1 Configure a New ES6 Project
 

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+date: 2019-10-20
+draft: false
+---
+
 # Webpack getting stared
 
 ## Introduction

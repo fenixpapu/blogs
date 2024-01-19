@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2019-04-19
+draft: false
+---
+
 # Dockerizing a Node.js web app
 
 ## Introdution
