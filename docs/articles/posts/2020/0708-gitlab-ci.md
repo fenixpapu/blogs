@@ -187,9 +187,9 @@ export GITLAB_HOME=/srv/gitlab
 ```
 
 - Ngay khi container up bạn cần chờ 1 lúc rồi đăng nhập lại là ok.
-  ![màn hình đăng nhập](../../images/20200708-reset-password-gitlab-screen.png)
+  ![màn hình đăng nhập](../../images/2020/20200708-reset-password-gitlab-screen.png)
 - Thế giới này giờ là của b\* mày :3
-  ![màn hình đăng nhập](../../images/20200708-welcom-to-gitlab-screen.png)
+  ![màn hình đăng nhập](../../images/2020/20200708-welcom-to-gitlab-screen.png)
 
 ## [Install gitlab runner](https://docs.gitlab.com/runner/install/docker.html)
 

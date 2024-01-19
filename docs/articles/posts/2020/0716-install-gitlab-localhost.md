@@ -62,4 +62,4 @@ enp37s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 - Nếu chưa có image thì cần chờ 1 lúc để tải image về và thêm thời gian cho container up.
 - Sau đó truy cập private IP như dưới là đã có gitlab để xài :3. Nhập mật khẩu(nhớ mật khẩu dùng sau này) cho tài khoản `root`.
 
-![reset-password-screen](../../images/20200717-gitlab-reset-password-screen.png)
+![reset-password-screen](../../images/2020/20200717-gitlab-reset-password-screen.png)

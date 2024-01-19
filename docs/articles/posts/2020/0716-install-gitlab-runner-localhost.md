@@ -33,7 +33,7 @@ gitlab/gitlab-runner:v13.1.1
 
 - Tạo một repo mới với tên `demo-ci`.
 - Trong `demo-ci` truy cập: **Settings ~> CI/CD ~> Runner** click `Expand`. Lưu ý phần `link` và `token` trong `Set up a specific Runner automatically`.
-  ![repo-without-runner](../../images/20200717-gitlab-without-runner.png)
+  ![repo-without-runner](../../images/2020/20200717-gitlab-without-runner.png)
 
 - Sau khi có gitlab-Runner và repo. Bước tiếp theo đăng ký runner cho repo cụ thể. Hướng dẫn trang chủ ở [đây](https://docs.gitlab.com/runner/register/index.html#docker):
 
@@ -93,6 +93,6 @@ docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitla
 
 - Nếu quay lại **Settings ~> CI/CD ~> Runners** Click `expand` sẽ thấy Runner được gán vào ntn:
 
-  ![runner assigned](../../images/20200717-runner-assigned.png)
+  ![runner assigned](../../images/2020/20200717-runner-assigned.png)
 
 - Click biểu tượng `edit` của Runner và tích chọn vào `Run untagged jobs` để chạy cả các jobs untagged. Click `save changes`.

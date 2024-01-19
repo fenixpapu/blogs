@@ -12,7 +12,7 @@
 
 - Trong `data bearing node` ngoài `primary` sẽ còn lại các `secondary` node, các `secondaries` này sao chép `oplog` của primary và thao tác trên bộ dữ liệu của mình, đó là cách các node lưu trữ bộ dữ liệu giống nhau.
 
-![mongo replica set: primary and secondaries](../../images/20200322-replica-set-read-write-operations-primary.bakedsvg.svg)
+![mongo replica set: primary and secondaries](../../images/2020/20200322-replica-set-read-write-operations-primary.bakedsvg.svg)
 
 - Automatic Failover: là khi `primary` node down. Các `secondaries` còn lại sẽ bình bầu để một node lên làm primary. Chúng ta sẽ không thể ghi dữ liệu cho tới khi quá trình này hoàn tất. Replica set có thể tiếp tục phục vụ đọc dữ liệu nếu được cấu hình [run on secondaries](https://docs.mongodb.com/manual/core/read-preference/#replica-set-read-preference) khi primary offline.
 

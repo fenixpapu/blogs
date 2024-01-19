@@ -16,7 +16,7 @@
 
 - Cách dễ dàng nhất để hình dung sự khác nhau giữa `volumes` , `bind mounts` và `tmpfs` là vị trí dữ liệu tồn tại trên máy chủ chạy Docker (host).
 
-- ![type of mounts](../../images/20200725-types-of-mounts.png)
+- ![type of mounts](../../images/2020/20200725-types-of-mounts.png)
 
   - `Volumes` được lưu trong một phần filesystem của host và được _quản lý bởi Docker_ (**/var/lib/docker/volumes** trên Linux). Các process không phải của Docker không nên thay đổi các filesystem này. Volume là cách tốt nhất để toàn vẹn dữ liệu (persist data) trên Docker.
   - `Bind mounts` có thể lưu bất kỳ đâu trong host. Chúng thậm chí có thể là các tập tin hệ thống (filesystem) hoặc thư mục quan trọng. Các tiến trình của Docker hoặc không phải Docker đều có thể thay đổi chúng bất kỳ khi nào.

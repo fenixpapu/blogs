@@ -24,7 +24,7 @@
 
 - Để hiểu điều này trước tiên chúng ta cần hiểu cách một người học một kỹ năng mới :
 
-  ![how people learn a new skill](../../images/20200327-how-people-learn-a-new-skill.png)
+  ![how people learn a new skill](../../images/2020/20200327-how-people-learn-a-new-skill.png)
 
 - Đây là một mô hình đơn giản của quá trình tiếp thu kỹ năng mới. Về cơ bản mô hình chỉ ra rằng để trở thành chuyên gia, chúng ta phải trải qua một chặng đường dài với các giai đoạn khác nhau. Tại mỗi giai đoạn chúng ta sẽ hoàn thiện dần những kỹ năng mình đang có, từ đó làm mọi thứ tốt hơn. Chúng ta cố gắng thực hiện điều đó bằng cách ngầm hiểu rằng có một bức tranh lớn hơn những gì mình đang biết và điều cần làm là tìm tòi, khám phá không ngừng nghỉ để nắm bắt rõ hơn từng khía cạnh của bức tranh này và dần hoàn thiện mọi thứ.
 
@@ -74,7 +74,7 @@
 
 - Học chủ động- Active learning không phải là một giai đoạn mà là một dạng **mindset**, một trạng thái của tư duy khi bất kỳ ai nhận tự nhận thức được giới hạn kiến thức của bản thân và kỳ vọng tìm hiểu nhiều hơn những gì mình đang có đều có thể trở thành một Active Learner
 
-  ![how to become a active learner](../../images/20200327-how-to-become-a-active-learner.png)
+  ![how to become a active learner](../../images/2020/20200327-how-to-become-a-active-learner.png)
 
 - Dưới đây là 4 công cụ cơ bản có thể giúp bất kỳ Active Learner nào đạt được mục tiêu của mình:
 

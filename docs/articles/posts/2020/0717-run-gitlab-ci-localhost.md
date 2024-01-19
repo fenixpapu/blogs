@@ -9,7 +9,7 @@
 - Code master không làm `dev-server` kéo code mới nhất.
 - Mô hình trông sẽ như này:
 
-- ![topology](../../images/20201707-gitlab-ci-topology.png)
+- ![topology](../../images/2020/20201707-gitlab-ci-topology.png)
 
 ### Giải pháp
 
@@ -63,7 +63,7 @@
 
 - Sau khi hoàn tất chúng ta sẽ có mô hình mạng trông như thế này( private IP có thể sẽ khác nhau khi chạy trên các máy khác nhau):
 
-![topology-with-ip](../../images/20200720-gitlab-ci-topology-with-ip.png)
+![topology-with-ip](../../images/2020/20200720-gitlab-ci-topology-with-ip.png)
 
 - Tạo một public repository `demo-ci` trên gitlab(172.17.0.2), gitlab sẽ sinh ra một URL: `http://172.16.3.213/root/demo-ci.git`
 
@@ -123,7 +123,7 @@ The key's randomart image is:
 
 - Trên Gitlab(`172.17.0.2`), trong repo `demo-ci` chọn: **Settings ~> CI/CD ~> Variables**. Click `expand`. Tạo một biến như hình dưới( **BỎ TÍCH `protect variable` NẾU KHÔNG BIẾN SẼ CHỈ SỬ DỤNG ĐƯỢC TRÊN CÁC BRANCH PROTECT**) với giá trị là `private key` trong `id_rsa.pub`:
 
-![create variable](../../images/20200720-create-ssh-private-key.png)
+![create variable](../../images/2020/20200720-create-ssh-private-key.png)
 
 - Copy public key trên server `gitlabCE` copy vào `~/.ssh/authorized_keys` trên `dev-server`.
 
