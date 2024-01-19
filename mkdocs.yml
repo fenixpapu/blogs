@@ -5,7 +5,7 @@ theme:
   features:
     - navigation.tabs
     # - navigation.sections
-    - navigation.expand
+    # - navigation.expand
     - navigation.indexes
     - navigation.top
     - toc.integrate
@@ -59,7 +59,7 @@ plugins:
       blog_dir: articles
       post_dir: articles/posts
       post_date_format: medium
-      archive: false
+      archive: true
       pagination: true
       pagination_per_page: 5
       pagination_format: "$link_first $link_previous ~2~ $link_next $link_last"
