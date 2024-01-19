@@ -15,7 +15,7 @@ draft: false
 
 ## Line by line
 
-- File gốc: [generate-index.sh](../../generate-index.sh)
+- File gốc: [generate-index.sh](generate-index.sh)
 
 ```sh linenums="1"
 #!/bin/bash
