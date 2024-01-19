@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-11-21
+draft: false
+---
+
 # Terragrunt run ec2 with nginx as proxy
 
 - À nhầm rồi :| dạo này hay viết terragrunt chứ task này mình dùng terraform @@!.

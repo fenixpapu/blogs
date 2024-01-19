@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-10-28
+draft: false
+---
+
 # Upgrade eks version
 
 - This doc is about upgrade kubernetes version on AWS (eks).

@@ -1,3 +1,13 @@
+---
+authors:
+  - PaPu
+categories:
+  - python
+  - dev
+date: 2021-05-07
+draft: false
+---
+
 # [Ý nghĩa dấu gạch dưới trong python](https://dbader.org/blog/meaning-of-underscores-in-python)
 
 - Có nhiều ý nghĩa và các quy ước về single(`_`) và double underscores (`__` - `dunder`) trong python. Cách chúng hoạt

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-11-26
+draft: false
+---
+
 # Get a Shell to a Running Container
 
 - Bài gốc ở [đây](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/)

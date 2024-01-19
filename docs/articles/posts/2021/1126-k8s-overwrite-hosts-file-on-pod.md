@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-11-26
+draft: false
+---
+
 # K8s overwrite hosts file on pod
 
 - Nay đi làm khách hàng có một bài toán: `Tao muốn có một private domain my-private-domain.com trỏ tới 127.0.0.1 sử dụng nội bộ trong pod`

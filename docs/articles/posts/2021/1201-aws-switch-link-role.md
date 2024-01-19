@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-12-01
+draft: false
+---
+
 # AWS switch link role
 
 - Bài toán:

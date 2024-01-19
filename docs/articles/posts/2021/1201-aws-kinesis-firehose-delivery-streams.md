@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-12-01
+draft: false
+---
+
 # Aws Kinesis Firehose delivery streams
 
 - Mình dùng terraform ( thực ra có dùng tý terragrunt, nhưng thôi terraform cho dễ mô tả) theo doc [ở đây](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kinesis_firehose_delivery_stream)

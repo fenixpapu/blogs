@@ -1,4 +1,15 @@
-#[How to update millions of records in MySQL](https://www.startdataengineering.com/post/update-mysql-in-batch/)
+---
+authors:
+  - PaPu
+categories:
+  - devops
+  - dev
+  - database
+date: 2021-02-16
+draft: false
+---
+
+# [How to update millions of records in MySQL](https://www.startdataengineering.com/post/update-mysql-in-batch/)
 
 ## Introduction
 

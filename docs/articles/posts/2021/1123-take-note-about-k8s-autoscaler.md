@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-11-23
+draft: false
+---
+
 # Take note about k8s autoscaler
 
 - Bài này sẽ không có ảnh do sợ lộ thông tin cấu hình của khách hàng mình đang làm :D. Hy vọng sau có điều kiện sẽ làm demo được.
@@ -12,8 +21,8 @@
 - Câu trả lời là do mình để deployment file chỉ định vào node có label cụ thể. Nhưng node được tạo mới không có label này. Nên node mới tiếp tục được tạo.
 
 - Vậy cần lưu ý những gì?
-  - Cần biết được `launch template` của `Auto Scaling Group` trên AWS đang như thế nào ? Nếu không có thể node mới tạo ra nhưng pod ko bao giờ được assign vào.
-  - Xem xét cấu hình `min` và `max` trong ASG với con số hợp lý.  Như trường hợp trên mà max lớn thì hơi toang.
 
+  - Cần biết được `launch template` của `Auto Scaling Group` trên AWS đang như thế nào ? Nếu không có thể node mới tạo ra nhưng pod ko bao giờ được assign vào.
+  - Xem xét cấu hình `min` và `max` trong ASG với con số hợp lý. Như trường hợp trên mà max lớn thì hơi toang.
 
 - Happy working :D!!

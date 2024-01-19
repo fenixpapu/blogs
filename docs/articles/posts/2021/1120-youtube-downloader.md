@@ -1,3 +1,13 @@
+---
+authors:
+  - PaPu
+categories:
+  - dev
+  - python
+date: 2021-11-20
+draft: false
+---
+
 # youtube downloader tool
 
 - Mình có tạo 1 repo [ở đây](https://github.com/y110t/ydl), script mới chỉ support download khi thêm link thủ công. Hy vọng sẽ sớm nâng cấp được tool thành bản phần mềm :muscle:

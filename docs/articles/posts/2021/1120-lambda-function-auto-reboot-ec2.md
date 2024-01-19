@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-11-20
+draft: false
+---
+
 # Lambda function reboot ec2
 
 - Mình được asgin một task dùng lambda function để reboot ec2 vào mỗi thứ 2 đầu tuần. Có chút lăn tăn khi bắt đầu task này:

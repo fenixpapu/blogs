@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-11-21
+draft: false
+---
+
 # Site-to-Site VPN Between GCP and AWS Cloud
 
 - Bài gốc trên linkin [ở đây](https://www.linkedin.com/pulse/site-to-site-vpn-between-gcp-aws-cloud-aslam-chandio/?articleId=6668922995207086080).
@@ -10,7 +19,7 @@
 
 - Tạo 1 static public IP bên GCP: `VPC network` -> `External IP address`.
 
-- Giả sử sau khi tạo xong public IP của bạn bên GCP là: `35.245.78.201` 
+- Giả sử sau khi tạo xong public IP của bạn bên GCP là: `35.245.78.201`
 
 ## Step 2 - Create a "Customer Gateway" in AWS Cloud
 
@@ -22,14 +31,13 @@
 
 - Một `virtual private gateway` là một đại diện của `VPN connector` trong AWS. Nó như là phía AWS giữa hai kết nối mạng: cổng ra của traffic AWS VPC
 
-- AWS: `Virtual private Gateways` -> `Create virtual private gateway` 
-
+- AWS: `Virtual private Gateways` -> `Create virtual private gateway`
 
 ## Step 4 - Attach virtual private gateway to the VPC
 
 - Sau khi tạo VPG chúng ta đã có một cổng bên trong AWS nhưng nó đang chẳng liên kết với đâu cả.
 
-- AWS: `VPC` -> `Virtual private gateway` -> `Select your VPC` -> `Actions` -> `Attach to VPC`. 
+- AWS: `VPC` -> `Virtual private gateway` -> `Select your VPC` -> `Actions` -> `Attach to VPC`.
 
 - Mỗi một VPC chỉ connect được tới một VPG.
 
@@ -123,11 +131,8 @@
 
 - Test lại bằng cách vào 2 VMs trên 2 cloud platform để ping sang 2 IP
 
-- AWS VPC CIDR  10.10.0.0/16: PublicSubnet-1     10.10.1.0/24
+- AWS VPC CIDR 10.10.0.0/16: PublicSubnet-1 10.10.1.0/24
 
-- GCP PublicSubnet   172.16.1.0/16
-
-
-
+- GCP PublicSubnet 172.16.1.0/16
 
 ## Happy working! :D

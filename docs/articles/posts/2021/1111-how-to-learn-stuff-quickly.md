@@ -1,11 +1,17 @@
+---
+authors:
+  - PaPu
+categories:
+  - general
+date: 2021-11-11
+draft: false
+---
+
 # How to learn stuff quickly
 
 - Bài gốc ở [đây](https://www.joshwcomeau.com/blog/how-to-learn-stuff-quickly/?fbclid=IwAR1j6P5E-6nSZRokNZYqW1eyLhVbgfcAe1vNh8GZHRrWqpUc45eJVa7_crQ#%2F%2F%2F%2F%2F%2F/)
 
 - Bài này mình chỉ dịch những chỗ mình thích. Các phần ví dụ như React các thứ sẽ lược bỏ. Nếu thích có thể check link bài gốc ở trên.
-
-
-
 
 - Người ta thường nói Internet đã dân chủ hóa nền giáo dục: Toàn bộ kiến thức loài người chỉ trong một câu lệnh google search! Chưa hết, tiếp cận thông tin chỉ là một nửa câu chuyện, bạn còn cần chuyển đổi thông tin thô thành kĩ năng hữu dụng.
 
@@ -15,10 +21,10 @@
 
 - Trong bài này, tôi sẽ chia sẻ tôi đã học được những gì về cách học, và chỉ cho bạn cách tôi học một kĩ năng mới.
 
-
 ## Kết hợp học tập có hướng dẫn và không hướng dẫn
 
 - Nói một cách rộng rãi, Có hai cách học:
+
   - `Có hướng dẫn`: Đọc tutorial, tham gia một khóa học, xem video Youtube. Bất cứ điều gì bạn đang làm theo hướng dẫn.
   - `Không có hướng dẫn`: Tạo project của bạn từ đầu, mở rộng một hướng dẫn, tìm kiếm mọi thứ trong tài liệu. Bất cứ điều gì bạn không hề theo hướng dẫn.
 
@@ -26,14 +32,13 @@
 
 - Bên cạnh đó, nếu bạn chỉ tập trung vào học tập không có hướng dẫn. Bạn sẽ học mãi mãi. Bạn cần phát minh lại mọi bánh xe, dành cả ngày thậm chí cả tuần để giải quyết vấn đề thực tế đã được giải quyết. Đó là một con đường dài và đầy khó khăn. Trong trường hợp xấu nhất bạn sẽ bỏ cuộc, bị thuyết phục ( điều này không chính xác!) rằng bạn không đủ thông minh để làm nó.
 
-- Một vài khóa học nhận thức được sự phân chia này và sẽ giành cơ hội cho việc học không có hướng dẫn. Những thứ như mục tiêu kéo dài, thử nghiệm suy nghĩ, bài tập thử thách. Giá như những tài nguyên này ngày càng phổ biến hơn. 
+- Một vài khóa học nhận thức được sự phân chia này và sẽ giành cơ hội cho việc học không có hướng dẫn. Những thứ như mục tiêu kéo dài, thử nghiệm suy nghĩ, bài tập thử thách. Giá như những tài nguyên này ngày càng phổ biến hơn.
 
 - Cùng xem một vài ý tưởng cho việc kết hợp giữa học không có hướng dẫn trong các tài liệu học có hướng dẫn.
 
-
 ## Cố tình mắc lỗi
 
-- Nếu bạn giống tôi, bạn sẽ không muốn tạo ra lỗi. Bạn muốn mọi thứ thật hoàn hảo, ngay từ lần đầu tiên. 
+- Nếu bạn giống tôi, bạn sẽ không muốn tạo ra lỗi. Bạn muốn mọi thứ thật hoàn hảo, ngay từ lần đầu tiên.
 
 - Tư duy này thường hữu dụng trong cuộc sống, và các lĩnh vực khác. Nếu bạn làm việc như một thợ cơ khí ô tô, sai lầm có thể tiêu tốn cả trăm $ của các bộ phận. Nếu bạn là một nha sĩ, một sơ xuất có thể làm hỏng nụ cười của ai đó.
 
@@ -41,7 +46,7 @@
 
 - Khi tôi làm theo hướng dẫn, tôi thích vui đùa với code. Thay vì copy / paste nguyên văn code, hãy thử nghiệm với nó: Điều gì sẽ xảy ra nếu bạn xóa bớt một vài dòng ? hoặc thay đổi một vài giá trị ?
 
-- Tôi thử  và hành động như một nhà khoa học. Nếu có giả thiết về cách thức hoạt động của code, tôi kiểm tra giả thiết đó bằng cách thay đổi code, và xem liệu chương trình có lỗi như cách tôi mong đợi không? Khi phát hiện ra giả thiết của tôi có sai sót, tôi sẽ kiểm tra lại và có thể tìm kiếm trên google. Hoặc thêm nó vào danh sách `những điều cần khám phá sau", nếu vấn đề không thể tìm ra trong khoảng thời gian ngắn.
+- Tôi thử và hành động như một nhà khoa học. Nếu có giả thiết về cách thức hoạt động của code, tôi kiểm tra giả thiết đó bằng cách thay đổi code, và xem liệu chương trình có lỗi như cách tôi mong đợi không? Khi phát hiện ra giả thiết của tôi có sai sót, tôi sẽ kiểm tra lại và có thể tìm kiếm trên google. Hoặc thêm nó vào danh sách `những điều cần khám phá sau", nếu vấn đề không thể tìm ra trong khoảng thời gian ngắn.
 
 - Quá trình này giúp chúng ta tránh được khỏi việc copy/paste code mà không hiểu code làm gì hay tại sao chúng ta lại làm vậy.
 
@@ -50,7 +55,6 @@
 ## Mở rộng hướng dẫn
 
 - Đoạn này tác giả lấy ví dụ về React game tic-tac-toe mình sẽ skip phần này.
-
 
 ## Xây dựng các dự án liên quan
 
@@ -68,7 +72,7 @@
 
 - Một vài năm trước tôi đi chơi `bowling` với một vài người bạn.
 
-- Tôi chơi ko thực sự tốt. Hâù hết các quả bóng của tôi đi xuống rãnh. Cuối buổi đi chơi tôi có số điểm kém nhất và kém xa so với phần còn lại. 
+- Tôi chơi ko thực sự tốt. Hâù hết các quả bóng của tôi đi xuống rãnh. Cuối buổi đi chơi tôi có số điểm kém nhất và kém xa so với phần còn lại.
 
 - Có hai cách để nói về việc này:
 
@@ -81,9 +85,9 @@
 
 - Mọi việc không bao giờ suôn sẻ trong phát triển phần mềm. Chúng ta sẽ cần một bản vá là điều không thể tránh khỏi khi code không hoạt động như chúng ta mong muốn.
 
-- Điều này có thể dẫn tới một vòng xoáy đi xuống -- một vòng xoáy đầy thất vọng, thiếu tự tin và hội chứng kẻ mạo danh -- hoặc nó có thể là một cơ hội học tập tuyệt vời. Không có gì giúp bạn học nhanh hơn một thông báo lỗi khó hiểu, nếu bạn có tư duy đúng đắn. 
+- Điều này có thể dẫn tới một vòng xoáy đi xuống -- một vòng xoáy đầy thất vọng, thiếu tự tin và hội chứng kẻ mạo danh -- hoặc nó có thể là một cơ hội học tập tuyệt vời. Không có gì giúp bạn học nhanh hơn một thông báo lỗi khó hiểu, nếu bạn có tư duy đúng đắn.
 
-- Thành thực thì, `chúng ta học được nhiều hơn từ đấu tranh và thất bại, hơn là thành công không nỗ lực`. Với một tư duy phát triển, cuộc đấu tranh có thể thực sự không thú vị, nhưng nó mang lại cảm giác hiệu quả, như một buổi luyện tập tốt. 
+- Thành thực thì, `chúng ta học được nhiều hơn từ đấu tranh và thất bại, hơn là thành công không nỗ lực`. Với một tư duy phát triển, cuộc đấu tranh có thể thực sự không thú vị, nhưng nó mang lại cảm giác hiệu quả, như một buổi luyện tập tốt.
 
 - Học thêm về [nuôi dưỡng một tư duy phát triển](https://www.youtube.com/watch?v=-71zdXCMU6A).
 
@@ -113,7 +117,7 @@
 
 - Điều này có một chút vấn đề, thật khó để học mọi thứ, nếu bạn không thể nhớ nó. May mắn là tôi có một hệ thống: `khoảng cách lặp lại - spaced repetition`
 
-- Đây là ý tưởng chính của khoảng cách lặp lại: Để củng cố một trí nhớ, bạn cần truy cập nó vì nó sắp biến mất. Mỗi khi bạn củng cố một trí nhớ nó chỉ kéo dài thêm một chút nữa. 
+- Đây là ý tưởng chính của khoảng cách lặp lại: Để củng cố một trí nhớ, bạn cần truy cập nó vì nó sắp biến mất. Mỗi khi bạn củng cố một trí nhớ nó chỉ kéo dài thêm một chút nữa.
 
 - Nghe có vẻ phức tạp, nhưng có công cụ giúp bạn theo dõi. Cá nhân tôi sử dụng `leiter` box, một họp vật lý chứa vài trăm thẻ chỉ mục, mỗi ngày tôi xem một vài thẻ.
 
@@ -130,7 +134,7 @@
 - Tôi có một số giả thuyết lý giải tại sao nó lại hiệu quả hơn đối với tôi:
 
   - Hằng đêm, bộ não xử lý và lưu giữ những điều bạn đã học trong ngày. Tôi muốn tận dụng điều này hàng ngày thay vì tuần một lần.
-  
+
   - Do tôi thực hành hàng ngày, nên tôi có thể bắt đầu ngay tại nơi tôi đang dừng lại. Mà không hề tốn thời gian để nhớ lại nó.
 
   - Như chúng ta đã nói, nó thật khó khăn khi những thứ mới mẻ qua đi. Nếu bạn có thể biến nó thành thói quen hàng ngày, bạn không cần phải lo lắng nhiều về động lực. Nó trở thành điều bạn chỉ cần làm, bất kể bạn cảm thấy thế nào.
@@ -144,13 +148,14 @@
 - Điều này nghe có vẻ nghịch lý: Tại sao lại dành thời gian học để viết blog? Liệu điều đó có lãng phí thời gian không ?
 
 - Có rất nhiều lợi ích khi public những gì học được, dưới đây là một trong những điều tác giả nhận ra:
+
   - Bạn đã bao giờ thử giải thích điều gì cho ai đó? Nhưng thật ra bạn không hiểu rõ nó như bạn nghĩ. Viết blog có cùng tác dụng như vậy. Đó là cách tốt nhất để phát hiện ra sai sót, lỗ hổng trong tư duy của bạn và bạn có thể fix nó.
 
   - Cảm giác tồi tệ nhất trên thế giới là khi bạn gặp bug mà bạn biết rằng bạn đã fix nó trước đó, nhưng bạn không nhớ được rằng bạn đã fix nó như thế nào. Nếu bạn viết blog về điều này. Bạn đã có thể có tài liệu về nó :D
 
   - Bằng cách chia sẻ những gì bạn học được, bạn trở thành người tích cực trong cộng đồng dev.Bạn có thể kết bạn và những kết nối. Điều này có vẻ vui vẻ và thỏa mãn ( dịch ngu quá :)) ) chưa kể lợi ích khi tìm một công việc mới hay thành lập một doanh nghiệp mới.
 
-  - Một lời cảnh báo: đừng dành hàng tuần để setup một blog hoàn hảo từ đầu. Hãy bắt đầu bằng cách public trên các nền tảng như github chẳng hạn, hay thậm chí  chỉ trên Twitter. Tác giả public hàng tá blogs trên medium trước khi tự build blog. Nếu bạn cảm thấy thích thú với việc công khai những gì học được, bạn có thể chuyển sang blog cá nhân sau.
+  - Một lời cảnh báo: đừng dành hàng tuần để setup một blog hoàn hảo từ đầu. Hãy bắt đầu bằng cách public trên các nền tảng như github chẳng hạn, hay thậm chí chỉ trên Twitter. Tác giả public hàng tá blogs trên medium trước khi tự build blog. Nếu bạn cảm thấy thích thú với việc công khai những gì học được, bạn có thể chuyển sang blog cá nhân sau.
 
 ## Mạng lưới các kĩ năng
 
@@ -163,7 +168,5 @@
 - Tuy nhiên theo cách nhìn nhận của tôi, kĩ năng giống như sự giàu có. Tôi càng học được nhiều kĩ năng, tôi tích lũy càng nhanh. Ý tưởng và kĩ thuật thu thập được trong một lĩnh vực có thể giúp ích trong lĩnh vực khác.
 
 - Tôi không có ý bạn phải trở thành nhà biết tuốt. Vẫn đáng để có kiến thức chuyên môn sâu. NHƯNG MẠNG LƯỚI KĨ NĂNG CỦA BẠN CÀNG RỘNG, LỢI THẾ CỦA BẠN CÀNG LỚN KHI BẠN HỌC HỎI ĐIỀU GÌ ĐÓ MỚI.
-
-
 
 - Nah I'm good!

@@ -1,3 +1,12 @@
+---
+authors:
+  - PaPu
+categories:
+  - devops
+date: 2021-11-17
+draft: false
+---
+
 # Cluster Autoscaler
 
 - Tài liệu chính thức của AWS ở [đây](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)
