@@ -16,6 +16,9 @@ draft: false
 ---
 
 - K8s CA tự động thay đổi số nodes trong cluster của bạn khi các pod fail hoặc được tạo lại trên một node khác. [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) thường được cài đặt như một [Deployment](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws/examples) trong cluster của bạn. Nó sử dụng [Leader Election](https://en.wikipedia.org/wiki/Leader_election) để đảm bảo tính HA ( khả dụng cao - high availability), nhưng việc mở rộng chỉ được thực hiện bởi một bản sao tại một thời điểm.
+
+<!-- more -->
+
 - Trước khi deploy một CA, hãy chắc chắn rằng bạn quen thuộc với các khái niệm của K8s tương ứng với các tính năng của AWS. Những thuật ngữ sau được sử dụng xuyên suốt bài này:
 
   - `K8s Cluster Autoscaler`: Một thành phần chính (core component) của K8s Control Plane đưa ra quyết định lập lịch và mở rộng quy mô. Thêm thông tin về [Control Plane](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md)

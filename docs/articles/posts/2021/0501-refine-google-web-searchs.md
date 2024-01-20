@@ -14,6 +14,8 @@ draft: false
   - Google Search usually ignores punctuation that isn’t part of a search operator.
   - Don’t put spaces between the symbol or word and your search term. A search for `site:nytimes.com` will work, but `site: nytimes.com` won’t.
 
+<!-- more -->
+
 ## Refine image searches
 
 ### Overall Advanced Search

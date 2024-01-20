@@ -14,6 +14,7 @@ draft: false
 - Điều kiện tiên quyết:
 
   - Tác giả coi như bạn đã tạo VPC trên GCP và AWS, đồng thời đã tạo 2 VMs trong public subnet với public IP.
+  <!-- more -->
 
 ## Step 1 - Create Static IP trong GCP
 

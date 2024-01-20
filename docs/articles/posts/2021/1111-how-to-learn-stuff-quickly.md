@@ -15,6 +15,8 @@ draft: false
 
 - Người ta thường nói Internet đã dân chủ hóa nền giáo dục: Toàn bộ kiến thức loài người chỉ trong một câu lệnh google search! Chưa hết, tiếp cận thông tin chỉ là một nửa câu chuyện, bạn còn cần chuyển đổi thông tin thô thành kĩ năng hữu dụng.
 
+<!-- more -->
+
 - Với phần lớn chúng ta, khoảng cách giữa hai điều này có thể dẫn tới những thứ như `tutorial hell` -- làm hết hướng dẫn này tới hướng dẫn khác mà không cảm thấy có tiến bộ đáng kể.
 
 - Học cách làm sao học hiệu quả là cực kỳ quan trọng, đặc biệt đối với một kĩ sư phần mềm; học những điều mới là bức tranh toàn cảnh của bạn. Nếu bạn có thể học một cách nhanh chóng tiếp thu ngôn ngữ mới, framework mới, công cụ mới, bạn sẽ có thể trở nên năng suất hơn các lập trình viên phổ thông khác. Đó là một loại siêu năng lực.

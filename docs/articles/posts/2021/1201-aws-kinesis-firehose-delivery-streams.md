@@ -12,6 +12,7 @@ draft: false
 - Mình dùng terraform ( thực ra có dùng tý terragrunt, nhưng thôi terraform cho dễ mô tả) theo doc [ở đây](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kinesis_firehose_delivery_stream)
 
 - File `main.tf` trông sẽ như thế này:
+<!-- more -->
 
 ```linenums="1"
   resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {

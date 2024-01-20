@@ -13,7 +13,7 @@ draft: false
 - Bài này cũng ko dài chỉ 1 dòng note lại công việc hôm nay.
 
 - Sau khi implement auto scale cho k8s như file `1117-eks-cluster-autoscaler.md`. Mình muốn test lại xem đã ok chưa.
-
+<!-- more -->
 - Mình có xem 1 video của bạn này khá hữu ích nó đầy đủ thông tin mình cần. Video ở [đây](https://www.youtube.com/watch?v=gwmdboC-BtE&lc=UgzBAD87uA8iSbwapSN4AaABAg.9Ur60HH5-RY9UsVtfsRPie). Đoạn cuối sau khi tạo eks cluster, implement `cluster autoscaler`. Bạn deploy thêm nginx để test autoscaler.
 
 - Mình làm tương tự và gặp chút vấn đề. Ban đầu không có pod nào , và có 2 node. Sau khi deploy với `replica: 3`. 2 pod lên running và 1 pod vẫn penđing. Theo tính toán chỉ cần 1 node tạo thêm là đáp ứng đủ cho 3 replica. ( mỗi pod được chỉ định trên một node). Nhưng không node thứ 3 rồi node thứ 4 được tạo ra và pod thứ 5 có thể được tạo tại sao?

@@ -11,6 +11,7 @@ draft: false
 
 - Bài gốc ở [đây](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/)
 - Thi thoảng phải chạy lệnh trong container trong pod trên k8s lại phải đi search google. Nay thấy docs official nên thôi dịch luôn.
+<!-- more -->
 
 ## Before you begin
 

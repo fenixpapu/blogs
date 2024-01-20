@@ -15,7 +15,7 @@ draft: false
 - Lúc đầu định dùng [pytube](https://github.com/pytube/pytube) với thời điểm `20-11-2021` có 4.9k start, 155 watch. Xong lướt lướt search thử stackoverflow wtf [youtube-dl](https://github.com/ytdl-org/youtube-dl) `20-11-2021` 106k start, 2.2k watch.
 
 - Thôi dùng thư viện youtube-dl luôn :))
-
+<!-- more -->
 - Tạo file: `requirements.txt` với thư viện duy nhất(thời điểm hiện tại chỉ support link insert thủ công):
 
 ```linenums="1"

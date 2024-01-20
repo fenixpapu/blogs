@@ -6,7 +6,7 @@ categories:
   - dev
   - database
 date: 2021-02-16
-draft: false
+draft: true
 ---
 
 # [How to update millions of records in MySQL](https://www.startdataengineering.com/post/update-mysql-in-batch/)
@@ -23,6 +23,8 @@ draft: false
 ```terminal linenums="1"
   Làm thế nào lệnh cập nhật lại khóa các bản ghi lại ?
 ```
+
+<!-- more -->
 
 - Bài viết này dành cho bạn, lưu ý rằng đây không phải là cách duy nhất. Có những cách tiếp cận khác như là `swapping tables`, chạy các cập nhật tiêu chuẩn tùy thuộc vào mức độ cô lập các `transaction` của bạn, etc.. Sử dụng cách tiếp cận nào thì tùy thuộc vào từng trường hợp cụ thể của bạn. Với case của chúng ta, giả sử rằng chúng ta update table `user`, mà nếu nó bị khóa trong khoảng thời gian lớn hơn `10s` có thể tác động đáng kể đến trải nghiệm người dùng và là không lý tưởng.
 -

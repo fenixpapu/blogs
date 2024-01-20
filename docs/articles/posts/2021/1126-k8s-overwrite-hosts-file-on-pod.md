@@ -13,6 +13,7 @@ draft: false
 - Hiện tại KHG đang dùng route53 để giải quyết và muốn hỏi mình có giải pháp nào khác không ?
 
 - Idea của mình là ghi đè vào docker `container` lúc chạy hoặc `image` lúc buid.
+<!-- more -->
 - Search thử qua thì hình như có chút vấn đề với việc ghi đè lên `image` lúc build. (nếu cần thì chắc có thể test thử lại). Thấy không ổn nên mình chuyển luôn ^^!. Solution thứ hai: ghi đè file hosts của container lúc chạy. Phía dưới file deployment cho nginx image sẽ ghi đè `/etc/hosts` khi container được chạy:
 
 ```linenums="1"

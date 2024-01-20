@@ -13,7 +13,9 @@ draft: false
   - Trước đó có dùng nodejs viết lambda function rồi nhưng đợt rồi làm python nên lần này muốn dùng python thay vì nodejs.
   - Đã dùng nodejs nhưng là để call sang api khác làm schedule job chứ reboot ec2 thì chưa biết làm ntn (cwl)
 - Éc lòng vòng 1 lúc task được asign cho cu em ( do mình phải làm task khác). Và bạn này có viết rồi nên mình học luôn.
+
 - Đoạn script như dưới:
+<!-- more -->
 
 ```python linenums="1"
 import json

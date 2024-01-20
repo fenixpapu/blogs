@@ -16,6 +16,8 @@ draft: false
   - [AWS EKS running out of IP address](https://medium.com/codex/kubernetes-cluster-running-out-of-ip-addresses-on-aws-eks-c7b8e5dd8606)
   - [Optimize EKS networking for scale](https://engineering.salesforce.com/optimizing-eks-networking-for-scale-1325706c8f6d)
 
+<!-- more -->
+
 ## Prepare
 
 - Change to right cluster, which you to upgrade version with commands:

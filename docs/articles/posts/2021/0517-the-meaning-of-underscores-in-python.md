@@ -12,10 +12,12 @@ draft: false
 
 - Có nhiều ý nghĩa và các quy ước về single(`_`) và double underscores (`__` - `dunder`) trong python. Cách chúng hoạt
   động như thế nào và cách chúng tác dộng lên `classes` trong Python như thế nào.
-- Trong Python: `_` và `__` có ý nghĩa trong tên biến và phương thức, một vài ý nghĩa đến từ quy ước và ý định
-  như gợi ý cho lập trình viên - và một số thì thực sự được thực thi bởi trình thông dịch.
+- Trong Python: `_` và `__` có ý nghĩa trong tên biến và phương thức, một vài ý nghĩa đến từ quy ước và ý định như gợi ý cho lập trình viên - và một số thì thực sự được thực thi bởi trình thông dịch.
 - Nếu bạn tự hỏi "Ý nghĩa của single và double underscores trong biến và phương thức của python"? Tôi sẽ cố
   gắng trả lời câu hỏi trong các phần dưới đây.
+
+  <!-- more -->
+
 - Trong bài này chúng ta sẽ thảo luận về 5 kiểu mẫu underscore và quy ước đặt tên và cách chúng tác
   động lên chương trình Python của bạn:
 

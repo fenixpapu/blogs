@@ -17,6 +17,8 @@ draft: false
 
 - Nếu có một quy tắc vàng, đó chính là quy tắc này, vì vậy tôi đặt nó lên đầu. Tất cả các quy tắc khác đều xoay quanh điều này.
 
+<!-- more -->
+
 ### Rule #1
 
 - Bạn biết rằng bạn sẽ không bao giờ hoàn thành việc học. Nhưng hầu hết mọi người đều học trong âm thầm và lặng lẽ. Họ sử dụng nội dung mà không hề tạo ra bất kỳ nội dung nào. Việc đó vẫn ổn thôi, nhưng chúng ta ở đây để nói về việc nằm trong nhóm hàng đầu. Những gì bạn làm ở đây là `một thói quen tạo ra sản phẩm trong việc học`:

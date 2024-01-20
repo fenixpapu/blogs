@@ -13,7 +13,7 @@ draft: false
 - Dù sao thì terragrunt cũng thực sự rất hay, mình chắc chắn sẽ cố gắng viết vài bài hoặc dịch vài bài về terragrunt. Thích nhất idea của terragrant khi bạn làm devops và phải triển khai các môi trường khác nhau (`prod`, `stage`, `qa`). Thực ra chính là trong [đoạn này](https://terragrunt.gruntwork.io/docs/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments).
 
 - Thôi quay trở lại bài chính :D
-
+<!-- more -->
 - Yêu cầu của bài toán là sử dụng `terraform` chạy một ec2 với 3 container: 2 container là [metabase](https://www.metabase.com/docs/latest/operations-guide/running-metabase-on-docker.html) một cho `prod` và một cho `staging` - hai container này sẽ ko expose port ra ngoài. Một container nginx nhận request và forward sang các container tương ứng.
 
 - Sẽ rất nhanh nếu làm trên local với 1 file `docker-compose.yml` là xong :D hoặc trên ec2 với `user-data` thì cũng nhanh thôi :D. Làm với terraform làm mình mất thời gian hơn :D
