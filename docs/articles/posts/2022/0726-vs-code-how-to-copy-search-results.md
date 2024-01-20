@@ -16,6 +16,8 @@ draft: false
 
 - Sau khi lấy regex được đoạn này để search nên mình nghĩ ra google cách để copy cái kết quả search này. Tada [stackoverflow](https://stackoverflow.com/a/47024020/1406656) mãi đỉnh :D
 
+<!-- more -->
+
 ## How to
 
 - Take note lại cho lần sau còn cần dùng:

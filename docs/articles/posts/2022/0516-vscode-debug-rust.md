@@ -18,6 +18,8 @@ draft: false
 
 - Để debug Rust chúng ta phải cài đặt một trong hai extension sau hỗ trợ cho việc debug:
 
+  <!-- more -->
+
   - [M$ C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
     - ![20220517-165800-M%24-C-Cplust-extension](../../images/2022/20220517-165800-M$-C-Cplust-extension.png)
   - [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)

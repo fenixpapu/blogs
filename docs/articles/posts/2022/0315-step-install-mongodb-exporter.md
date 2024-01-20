@@ -4,7 +4,7 @@ authors:
 categories:
   - devops
 date: 2022-03-15
-draft: false
+draft: true
 ---
 
 # Step install mongodb exporter
@@ -23,6 +23,8 @@ db.getSiblingDB("admin").createUser({
   ]
 })
 ```
+
+<!-- more -->
 
 ## Step to create mongodb docker
 

@@ -13,6 +13,8 @@ draft: false
 
 - Ok! Bài này take note cho đoạn bash script đọc từ file `.env` và in ra `stdout` để chỉ việc copy vào deployment file. - bash script và sed hay phết :3
 
+<!-- more -->
+
 - Mình có 1 file `.env` example như dưới:
 
 ```linenums="1"

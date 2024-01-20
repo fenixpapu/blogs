@@ -20,6 +20,8 @@ User: arn:aws:sts::888888888888:assumed-role/LordOfTheVolumes/i-0dc4f12f9fdb8dcd
 
 - Ông tạo ra issue đã fix được nhưng ko tạo merge commit mà kệ cho AWS sửa :v, cần thêm policy như dưới:
 
+<!-- more -->
+
 ```linenums="1"
 {
     "Effect": "Allow",

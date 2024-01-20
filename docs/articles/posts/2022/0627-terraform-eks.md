@@ -19,6 +19,8 @@ draft: false
   - VPC cho EKS ( chưa phải môi trường pro nên mình dùng luôn VPC default)
   - Kiến thức cơ bản về AWS: iam, role, policies, ec2...
 
+<!-- more -->
+
 ## main.tf
 
 - thêm `aws` provider:

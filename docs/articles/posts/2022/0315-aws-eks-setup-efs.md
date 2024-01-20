@@ -13,6 +13,8 @@ draft: false
 - Ví dụ khi 1 pod được tạo và nó phải sử dụng vol (ebs) trên `ap-southeast-1a` thì pod cũng bị giới hạn (nodeSelector) vào 1 node thuộc zone này.
 - Việc tương tự không xảy ra với EFS ( data trên EFS pod có thể thuộc bất kỳ zone nào `1a`, `1b` hay `1c` đều được)
 
+<!-- more -->
+
 - Bài này sẽ ko có nhiều hình do account của khách hàng :D
 
 ## Cài đặt AWS EFS CSI driver

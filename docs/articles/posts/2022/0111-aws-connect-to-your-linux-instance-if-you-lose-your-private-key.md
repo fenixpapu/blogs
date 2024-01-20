@@ -13,6 +13,8 @@ draft: false
 
 - Bài này dịch từ doc official của AWS, mình thấy nó có giá trị trong cả các server khác ( hiểu hệ thống và cách ổ cứng được đọc bởi hệ điều hành) nên dịch lại đây sau có thể cần dùng :D
 
+<!-- more -->
+
 - Đôi khi ec2 instance có thể còn có cách khác truy cập nhanh hơn cách này nếu nó được enable. Các đó ở đây: [Remote-into-EC2-with-ssm-session-manager](https://cevo.com.au/post/remoting-into-ec2s-with-ssm-session-manager/)
 
 ## Here we go

@@ -13,6 +13,8 @@ draft: false
 - Có ý định dùng code để generate cái mục lục tự động mà vẫn chưa code được ( nodejs, python hay rust :D)
 - Dạo này đang viết bash nhiều mà lại thấy nhanh gọn tiện nên làm luôn cái generate này :D
 
+<!-- more -->
+
 ## Line by line
 
 - File gốc: [generate-index.sh](generate-index.sh)

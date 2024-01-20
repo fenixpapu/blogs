@@ -19,6 +19,8 @@ yum install httpd24-tools
 
 - If you create an user for the **_first time_**, you have to create the password file using “-c <file>” option. Remember using “-c” option for the first time only.
 
+<!-- more -->
+
 ```linenums="1"
 htpasswd -c /etc/nginx/kibana_htpasswd suraphart.suw
 ```

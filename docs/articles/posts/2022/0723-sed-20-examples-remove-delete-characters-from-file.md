@@ -19,6 +19,8 @@ $ sed 's/find/replace/' file
 
 - Giả sử chúng ta có 1 file ntn:
 
+<!-- more -->
+
 ```linenums="1"
 $ cat file
 Linux
