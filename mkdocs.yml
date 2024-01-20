@@ -1,4 +1,4 @@
-site_name: Passio
+site_name: PaPu
 
 theme:
   name: material
@@ -16,7 +16,6 @@ theme:
     - content.code.copy
   language: en
   palette:
-    # - accent: indigo
     - scheme: slate
       toggle:
         icon: material/toggle-switch
@@ -31,6 +30,8 @@ theme:
       accent: purple
   icon:
     repo: fontawesome/brands/github
+    logo: fontawesome/solid/house-chimney
+  # favicon: assets/images/favicon.png
 
 extra:
   social:
@@ -60,8 +61,6 @@ plugins:
   - blog:
       authors: true
       blog_toc: true
-      blog_dir: articles
-      post_dir: articles/posts
       post_date_format: medium
       archive: true
       pagination: true
