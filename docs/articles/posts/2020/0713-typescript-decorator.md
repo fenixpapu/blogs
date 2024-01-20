@@ -4,13 +4,14 @@ authors:
 categories:
   - dev
 date: 2020-07-13
-draft: false
+draft: true
 ---
 
 # Typescript Decorator
 
 - [Draft] Bài này không hoàn chỉnh đừng phí thời gian của bạn.
 - Take note cho decorator trong TS.
+<!-- more -->
 
 ## Introduction
 

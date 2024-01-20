@@ -4,6 +4,7 @@ authors:
 categories:
   - devops
   - dev
+  - general
 date: 2020-04-04
 draft: false
 ---
@@ -13,7 +14,7 @@ draft: false
 - Bài gốc ở [đây](https://levelup.gitconnected.com/how-to-make-money-with-code-e6bd6c698fe4) bài này có câu mở đầu tạo động lực nên quyết định dịch luôn cả bài ^^!
 
 - Biết code là một kỹ năng thực sự có giá trị có thể giúp bạn kiếm được rất nhiều tiền. Ngoài kia có hằng hà sa số cách tạo ra tiền với code. Thứ duy nhất giới hạn cơ hội kiếm tiền với code là..óc sáng tạo của bạn (câu mở đầu nghe đã hay ^^!).
-
+<!-- more -->
 - Phần lớn các developer được khơi nguồn cảm hứng từ các công ty start up thành công chỉ với một developer và một ý tưởng. Đó cũng là những gì mà các nhà phát triển mong muốn đạt được.
 
 - Tuy nhiên cố gắng xây dựng một Facebook hay Uber thứ hai sẽ không có lợi cho bạn (ý khó thay vì thế hãy tập trung cái bé trước). Bởi vậy hãy cố gắng tập trung vào những thứ dễ dàng hơn và thực tế hơn để kiếm tiền bằng code.

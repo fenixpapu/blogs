@@ -21,6 +21,8 @@ draft: false
   sudo gpasswd -a $USER docker
 ```
 
+<!-- more -->
+
 3. Restart the docker daemon
 
 ```sh linenums="1"

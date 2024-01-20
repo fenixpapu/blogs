@@ -18,6 +18,7 @@ draft: false
   - Ghi dữ liệu vào một writable layer của container yêu cầu một [storage driver](https://docs.docker.com/storage/storagedriver/) để quản lý hệ thống file (filesystem). Storage driver cung cấp một hệ thống tập tin kết hợp, sử dụng nhân Linux. Việc trừu tượng hóa này làm giảm đáng kể hiệu năng khi so với sử dụng `data volume`, cái mà ghi trực tiếp lên filesystem của host.
 
 - Docker có hai tùy chọn: `volumes` và `bind mounts` để lưu file trên host, với các cách này dữ liệu vẫn còn tồn tại ngay khi container bị dừng lại. Nếu bạn chạy Docker trên linux bạn có thể sử dụng `tmpfs mount`. Nếu bạn đang chạy Docker trên windows bạn có thể sử dụng `pipe`.
+<!-- more -->
 
 ## Choose the right type of mount
 

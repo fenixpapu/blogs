@@ -29,6 +29,7 @@ draft: false
 - Docker version
 - Có kiến thức cơ bản về docker.
 - Port dùng cho gitlab 80 nếu có không bị chiếm bởi ứng dụng khác.
+<!-- more -->
 
 ## Install
 

@@ -12,6 +12,7 @@ draft: true
 - Dự án mình làm cần dùng gitlab-ci vào vài việc nhỏ nên cài thử gitlab vọc luôn xem sao.
 
 - Bài này là QUÁ TRÌNH cài đặt gitlab trên cloud và chạy ci.(từ một server trắng chưa cài đặt gì). Thôi CI sẽ udpate trong bài sau.
+<!-- more -->
 
 ## Prepare
 

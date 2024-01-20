@@ -19,6 +19,8 @@ x = S.casefold() # das strasse
 y = S.lower() # das straße
 ```
 
+<!-- more -->
+
 ## Python collections (Arrays)
 
 - Có 4 kiểu dữ liệu dạng collection trong ngôn ngữ Python:

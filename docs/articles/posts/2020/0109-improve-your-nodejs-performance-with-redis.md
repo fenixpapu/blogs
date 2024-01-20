@@ -15,6 +15,8 @@ draft: false
 - Bài này mình sẽ không trình bày: [Redis](https://redis.io/) là gì?. Vì sao nên dùng redis.
 - Bài viết này chỉ đưa ra kết quả so sánh khi chuyển sang dùng redis làm cache hoặc thay thế các kiểu dữ liệu truyền thống (SQL và NoSQL).
 
+<!-- more -->
+
 ## Redis as cache
 
 - Cùng xem ví dụ nodejs app trả về thông tin sách thông qua dữ liệu của google api.

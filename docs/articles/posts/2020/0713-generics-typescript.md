@@ -16,6 +16,7 @@ draft: false
 - Một phần chính của kỹ sư phần mềm là xây dựng các components không chỉ được định nghĩa rõ ràng và các APIs thích hợp mà còn tái sử dụng được. Components có khả năng làm việc với dự liệu ngày hôm nay cũng như dữ liệu tương lai sẽ đưa cho bạn khả năng linh hoạt để xây dựng hệ thống phần mềm lớn.
 
 - Với C# và Java, một trong các tools chính tạo ra các component tái sử dụng được là `generic`, thứ có khả năng tạo ra các component có thể làm việc với các kiểu dữ liệu khác nhau hơn là chỉ một loại.
+<!-- more -->
 
 ## Hello World of Generics
 

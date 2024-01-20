@@ -14,6 +14,7 @@ draft: false
 - Bài này mình sẽ viết về cách upload files lên S3 của Amazon.
 - S3 là dịch vụ lưu trữ file của AWS. Trước khi sử dụng dịch vụ ta cần tạo Bucket( nơi sẽ chứa các file chúng ta upload lên).
 - FYI: Khi tạo tài khoản AWS một số dịch vụ sẽ free trong 12 tháng: EC2, S3, RDS, CloudFront ( nhớ đọc kỹ free như thế nào ví S3 sẽ free 5GB, 20k GET request và 2k PUT request - chỉ thế thôi, hơn tính phí đấy nên cẩn thận). Tuy nhiên nhiên một số dịch vụ khác lại luôn luôn miễn phí ( kể cả sau 12 tháng - nên tha hồ nghịch): DynamoDB, Lamda..
+<!-- more -->
 
 ## Before start
 

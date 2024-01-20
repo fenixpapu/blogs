@@ -16,6 +16,7 @@ draft: false
 - Một trong các tính năng mạnh nhất của NGINX là khả năng phục vụ hiệu quả nội dung tĩnh (static content) như file HTML và media. NGINX sử dụng một cơ chế bất đồng bộ, cung cấp dự đoán hiệu năng theo tải.(đoạn này lú chưa hiểu lắm :v).
 
 - NGINX trao đổi nội dung động cho CGI, FastCGI, hoặc các web server khác như Apache. Các nội dung này sau đó được truyền ngược lại cho NGINX để chuyển tới client. Bài viết này sẽ giúp bạn làm quen với các tham số và quy ước cơ bản của NGINX
+<!-- more -->
 
 ## Directives, Blocks, and Contexts
 

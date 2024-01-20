@@ -38,6 +38,8 @@ sudo docker run -d --name gitlab-runner --restart always \
 gitlab/gitlab-runner:v13.1.1
 ```
 
+<!-- more -->
+
 ## Setup
 
 - Tạo một repo mới với tên `demo-ci`.

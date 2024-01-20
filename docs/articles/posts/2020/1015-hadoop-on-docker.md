@@ -25,6 +25,8 @@ docker run -it -d -p 9000:9000 --privileged=true --name centos8-master centos:ce
 docker exec -it centos8 /bin/bash
 ```
 
+<!-- more -->
+
 ## Install package
 
 ```sh linenums="1"

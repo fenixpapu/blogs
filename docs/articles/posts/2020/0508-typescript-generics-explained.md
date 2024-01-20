@@ -16,6 +16,7 @@ draft: false
 - Triển khai `generics` trong Typescript cho phép chúng ta khả năng truyền một loạt các kiểu vào một `component`, thêm một lớp mở rộng và tái sử dụng code. `Generics` có thể được áp dụng trong `functions`, `interfaces` và `classes` trong Typescript.
 
 - Bài này sẽ giải thích `generics` là gì và tại sao chúng có thể được sử dụng cho các mục này,
+<!-- more -->
 
 ### The Hello world of Generics
 

@@ -3,6 +3,7 @@ authors:
   - PaPu
 categories:
   - math
+  - general
 date: 2020-04-11
 draft: false
 ---
@@ -16,6 +17,8 @@ draft: false
 - Hồi còn là sinh viên. Tôi thấy danh sách các quyển toán học cần thiết trên một blog. Tôi tự hứa sẽ đọc xong những quyển này trong 10 năm ( vì ở đây có 50 quyển lận). Tôi vẫn đang cố gắng hoàn thành danh sách này. Và giờ là lúc tôi có thể chia sẻ một vài quyển trong số đó với các bạn.
 
 - Toán học thật đẹp và đáng kinh ngạc. Thật vui sướng biết bao khi hiểu được toán học, chẳng hạn như: làm sao để chứng minh định lý cuối cùng của Fermat hay những bí ẩn của số Pi, e, epsilon vân vân và vân vân.
+
+<!-- more -->
 
 - Dẫu sao thì, nếu bạn vượt qua rất nhiều ký thi toán nhưng lại không cảm thụ được vẻ đẹp của toán học trong suốt quãng thời gian đi học của mình, **những quyển sách này được viết ra dành cho bạn**.
   Ý kiến thằng dịch: toán học không nhàm chán, nếu bạn thấy chán, bạn đã học sai thầy (cwl). Thấy toán thú vị khi học môn Đại Số của một thầy hồi học đại học :D

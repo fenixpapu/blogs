@@ -2,7 +2,7 @@
 authors:
   - PaPu
 categories:
-  - dev
+  - general
 date: 2020-01-26
 draft: false
 ---
@@ -12,6 +12,7 @@ draft: false
 - Trở thành một junior, mid-level, hay senior developer không đơn thuần chỉ là làm lập trình trong nhiều năm. Một junior có thể già hơn một senior. Tất cả dựa trên kĩ năng. Việc này không có nghĩa senior phải là chuyên gia trong mọi thứ, nhưng chính xác khi nói lập trình viên senior được trang bị nhiều kĩ năng hơn nhiều so với junior và mid-level.
 
 - Khác nhau giữa senior và junior, mid-level không chỉ riêng kĩ năng code. Vậy chính xác khác nhau về những gì ?
+<!-- more -->
 
 ## Knowledge
 

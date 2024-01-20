@@ -13,6 +13,7 @@ draft: false
 - Đây là một bài dịch. Bản thân thấy có ích nên mình lượm lặt lại. Link bài gốc [tại đây](https://hackernoon.com/active-learner-how-developers-keep-learning-1309b91f1ae6)
 
 * Vài tuần trước tôi đã có buổi nói chuyện tại Hội nghị thường niên Geektime dành cho các bạn Developer chủ đề Active Learner. Sau hội nghị, tôi quyết định viết một article chi tiết về chủ đề này. Bạn có thể tìm [slide](https://speakerdeck.com/dennisnerush/active-learner-how-developers-keep-learning) và [video](https://www.youtube.com/watch?v=3GrNFnKNy-I). Năm 2018, tôi lại có cơ hội trao đổi về chủ đề này tại [Hội nghị thường niên Amsterdam Codemotion dành cho Developer](https://www.youtube.com/watch?v=tKoTO8A-vVY).
+<!-- more -->
 
 ## Expert Beginners
 

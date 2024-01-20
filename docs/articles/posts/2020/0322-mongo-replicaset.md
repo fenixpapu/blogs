@@ -14,7 +14,7 @@ draft: false
 - Một Replica Set (một bộ các bản sao) là một nhóm các thể hiện (instance) `mongod`, các thể hiện này lưu trữ bộ dữ liệu ( data set) giống nhau.
 
 - Trong môi trường product các tính dự phòng và sẵn sàng cao ( redundancy and high available) mà mongo replica set cung cấp là hết sức cần thiết. Không giống như khi chúng ta chạy thử với môi trường `dev` hoặc `test` thì có thể chỉ cần một `mongod` chạy là đủ.
-
+<!-- more -->
 - Một mongo replica set sẽ chứa các node mang dữ liệu (`data bearing node`) và có thể có một node trọng tài (`arbiter`), riêng `arbiter` không mang dữ liệu nhiệm vụ duy nhất của nó dành cho bình bầu.
 
 - Trong số các `data bearing node` có duy nhất một node `primary` có quyền ghi dữ liệu. Trong quá trình ghi dữ liệu node primary này ghi lại toàn bộ thay đổi lên dữ liệu của nó vào trong operation log hay còn gọi [oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/).

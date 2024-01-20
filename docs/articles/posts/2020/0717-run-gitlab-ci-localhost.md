@@ -36,6 +36,7 @@ draft: false
 - Kiến thức cơ bản về git.
 
 - Các bước trên thực hiện trên ubuntu 20.04 LTS( trên MACOS ko chắc chắn hoạt động).
+<!-- more -->
 
 ## Chuẩn bị môi trường
 
