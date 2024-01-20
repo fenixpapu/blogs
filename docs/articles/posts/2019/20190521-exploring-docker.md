@@ -14,6 +14,8 @@ draft: false
 Hi guys!
 Là một người mới tìm hiểu `docker` và mới dừng ở run `container` từ `image` :D. Mình có lên trang web của docker để đọc [documentation](https://docs.docker.com/get-started/). Nhưng thấy khá dối vì có quá nhiều khái niệm: docker-something( docker-compose, docker-machine, docker engine, docker swarm, docker image, docker container...). Vì vậy mình quyết định không đọc tiếp documentation nữa. Mà sẽ tìm hiểu tổng quát qua các khái niệm của docker, để có cái nhìn bao quát trước khi đi vào chi tiết từng khái niệm. Đó cũng chính là nội dung của bài viết này sẽ trình bày. Ngoài khái niệm về định nghĩa, nội dung có viêt theo ý hiểu của cá nhân :)
 
+<!-- more -->
+
 ## [Docker Engine](https://github.com/docker/engine)
 
 - Là một lightweight runtime tool sẽ build và run các docker containers. Nó hoạt động như thế nào? Docker thực chất là một ứng dụng dạng client-sever. Docker Client sẽ giao tiếp với Docker Engine qua một RESTful API, để thực hiện việc build, ship và run các containers.

@@ -19,6 +19,8 @@ draft: true
     $ code .
 ```
 
+<!-- more -->
+
 - Cài đặt các module của Babel như lệnh dưới:
 
 ```bash linenums="1"

@@ -13,7 +13,7 @@ draft: false
 ## Introduction
 
 - Hi guys! Trước khi bắt đầu với git's branch. Mình nghĩ chúng ta nên có một sự hiểu biết nhất định về [git's data model](https://hackernoon.com/https-medium-com-zspajich-understanding-git-data-model-95eb16cc99f5). (nếu bạn muốn có một bài dịch cho đường link đó vui lòng thông tin cho m :D ).
-
+<!-- more -->
 - Còn đây là nhận xét từ git scm về lợi ích việc hiểu git branch: "Understanding and mastering this feature ([git's branch](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)) gives you a powerful and unique tool and can entirely change the way that you develop."
 
 ## Git's branch

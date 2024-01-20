@@ -17,6 +17,8 @@ Bài hướng dẫn trên trang chủ của docker bằng `python` bản thân �
 
 Mời các bạn theo dõi:
 
+<!-- more -->
+
 ## Create the Node.js app
 
 - Để tạo một docker container của Nodejs việc đầu tiên chúng ta phải tạo nodejs app, bằng cách tạo file `package.json` với nội dung như dưới:

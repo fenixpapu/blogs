@@ -14,6 +14,7 @@ draft: false
 - React cung cấp các developers rất nhiều các `method` hoặc `hooks` được thực thi trong suốt `life-cycle` của một component, các phương thức này sẽ cập nhật UI cũng như state của ứng dụng. Hiểu cách các life-cycle này hoạt động sẽ giúp chúng ta làm việc với React một cách nhẹ nhàng hơn.
 
 - React liên tục cập nhật và `không dùng - deprecated` một vài life-cycle đã giới thiệu trước đó. Nhưng trong bài này vẫn liệt kê. ( có thể do code cũ của dữ án đã dùng - việc hiểu chúng cũng có lợi).
+<!-- more -->
 
 ## Life-cycle
 

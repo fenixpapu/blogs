@@ -12,6 +12,7 @@ draft: false
 ## Introduction
 
 - Hi guys! với mục đích cá nhân: tìm hiểu webpack là gì? Bước đầu cấu hình webpack như thế nào? Bài viết này sẽ trình bày các bước cơ bản để cáu hình một webpack và các khái niệm cần biết của webpack.
+<!-- more -->
 
 ## Before we start
 

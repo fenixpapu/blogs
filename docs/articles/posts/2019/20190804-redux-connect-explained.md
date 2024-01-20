@@ -12,6 +12,7 @@ draft: false
 - About a year after Redux came out, Dan Abramov wrote a gist entitled [connect.js explained](https://gist.github.com/gaearon/1d19088790e70ac32ea636c025ba424e)
 
 - Trong quá trình tìm hiểu: React, Redux, React-Redux, Redux-Saga có rất nhiều chỗ mình còn chưa hiểu tại sao. Và code dưới đây giải thích 1 trong các phần đó: `connect` trong Redux.
+<!-- more -->
 
 ```javascript linenums="1"
   // connect() là một function, `injects` những thứ Redux liên quan props vào trong component của bạn.

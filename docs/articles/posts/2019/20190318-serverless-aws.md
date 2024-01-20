@@ -20,6 +20,8 @@ draft: false
 
 OK LET GO!!!
 
+<!-- more -->
+
 ## DEPLOY REST API
 
 ### [Cài đặt serverless Framework](https://serverless.com/framework/docs/providers/aws/guide/quick-start/)
