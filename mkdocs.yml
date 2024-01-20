@@ -31,7 +31,7 @@ theme:
   icon:
     repo: fontawesome/brands/github
     logo: fontawesome/solid/house-chimney
-  # favicon: assets/images/favicon.png
+  favicon: assets/images/favicon.webp
 
 extra:
   social:

@@ -1,3 +1,3 @@
 # Home
 
-- Passion without N
+- Passio without N
