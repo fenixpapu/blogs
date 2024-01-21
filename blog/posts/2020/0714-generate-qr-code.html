@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>PaPu</title>
+  </head>
+  <body>
+    <div
+      style="
+        width: 50%;
+        margin: 0 auto;
+        justify-content: center;
+        display: flex;
+      "
+    >
+      <div>
+        <div style="display: grid !important;">
+          <input type="text" placeholder="e.g fb.com/phoenixpapu" id="input" />
+          <button id="btn" onclick="generateQRCode()">Create</button>
+        </div>
+        <img
+          src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl='fb.com/phoenixpapu'"
+          title="Created By PaPu"
+          id="qr-code"
+        />
+      </div>
+    </div>
+    <script>
+      const generateQRCode = () => {
+        const img = document.getElementById("qr-code");
+        const input = document.getElementById("input");
+        const btn = document.getElementById("btn");
+        const content = input.value;
+        console.log(content);
+        const src = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl='${content}'`;
+        console.log(`1111`, src);
+        img.src = src;
+        btn.textContent = `QR Generated`;
+        setTimeout(() => {
+          btn.textContent = `Create`;
+          input.value = "";
+        }, 2000);
+      };
+    </script>
+  </body>
+</html>
