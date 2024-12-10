@@ -1,13 +1,10 @@
 ---
-
 authors:
-
-- PaPu
-  categories:
-- python
-  date: 2024-06-18
-  draft: false
-
+  - PaPu
+categories:
+  - python
+date: 2024-06-18
+draft: false
 ---
 
 # Setup debug scrapy on visual studio code

@@ -1,13 +1,10 @@
 ---
-
 authors:
-
-- PaPu
-  categories:
-- python
-  date: 2024-12-10
-  draft: false
-
+  - PaPu
+categories:
+  - devops
+date: 2024-12-10
+draft: false
 ---
 
 # nginx 502 bad gateway and pm2 no-daemon
