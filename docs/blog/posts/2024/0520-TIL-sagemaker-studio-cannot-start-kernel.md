@@ -1,13 +1,10 @@
 ---
-
 authors:
-
-- PaPu
-  categories:
-- devops
-  date: 2024-05-20
-  draft: false
-
+  - PaPu
+categories:
+  - devops
+date: 2024-05-20
+draft: false
 ---
 
 # TIL Sagemaker Studio can not start kernel

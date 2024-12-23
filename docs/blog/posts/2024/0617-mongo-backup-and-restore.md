@@ -1,13 +1,10 @@
 ---
-
 authors:
-
-- PaPu
-  categories:
-- devops
-  date: 2024-06-17
-  draft: false
-
+  - PaPu
+categories:
+  - devops
+date: 2024-06-17
+draft: false
 ---
 
 # mongo backup and restore

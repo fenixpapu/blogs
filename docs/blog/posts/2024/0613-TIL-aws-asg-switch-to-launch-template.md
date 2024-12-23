@@ -1,13 +1,10 @@
 ---
-
 authors:
-
-- PaPu
-  categories:
-- devops
-  date: 2024-06-13
-  draft: false
-
+  - PaPu
+categories:
+  - devops
+date: 2024-06-13
+draft: false
 ---
 
 # TIL AWS ASG switch from launch configuration to launch template without downtime
