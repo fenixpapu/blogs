@@ -186,7 +186,7 @@ mapRoles: |
     ```
 
   - Create IAM Policy với permission cho Pod mà chúng ta muốn cấp quyền.
-  - Tạo IAM Role cho phép Pod trong eks được Assume Role. Phần trust policy trông sẽ như dưới:
+  - Tạo IAM Role cho phép Pod trong eks được Assume Role. Phần trust policy trông sẽ như dưới.
     ```json
     {
       "Version": "2012-10-17",
@@ -225,3 +225,4 @@ mapRoles: |
     ```
 
   - Deploy Pod với service account trên.
+  - Ngoài ra thì IAM Role cũng có thể cấu hình Pod thuộc namespace và service account [cụ thể](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-role.html).
