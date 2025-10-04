@@ -97,7 +97,7 @@ mapRoles: |
 
 - AWS EKS cung cấp 2 cách để workload trong eks truy cập tài nguyên AWS:
   - IAM roles for service accounts(`IRSA`): IAM Role cho k8s service account :D
-  - EKS pod identities.
+  - EKS Pod identities.
 - Bạn có thể xem qua so sánh giữa 2 phương thức này ở: [Comparing EKS Pod Identity and IRSA](https://docs.aws.amazon.com/eks/latest/userguide/service-accounts.html#service-accounts-iam)
 
 ### [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)
@@ -165,3 +165,63 @@ mapRoles: |
         - name: my-app
           image: public.ecr.aws/nginx/nginx:X.XX
   ```
+
+### EKS Pod Identities
+
+- Pod Identity thì đơn giản hơn IRSA: không sử dụng OIDC Identity Providers, service account cũng ko cần cấu hình phần `annotate`
+- Các bước cấu hình:
+
+  - Setup Pod Identity Agent. Có thể cài đặt add-on Pod Identity cho eks cluster theo nhiều cách:
+
+    - AWS CLI.
+    - AWS console.
+    - Hay terraform:
+
+    ```terraform
+    resource "aws_eks_addon" "pod_identity" {
+      cluster_name  = aws_eks_cluster.eks.name
+      addon_name    = "eks-pod-identity-agent"
+      addon_version = var.pod_identity_version
+    }
+    ```
+
+  - Create IAM Policy với permission cho Pod mà chúng ta muốn cấp quyền.
+  - Tạo IAM Role cho phép Pod trong eks được Assume Role. Phần trust policy trông sẽ như dưới:
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowEksAuthToAssumeRoleForPodIdentity",
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "pods.eks.amazonaws.com"
+          },
+          "Action": ["sts:AssumeRole", "sts:TagSession"]
+        }
+      ]
+    }
+    ```
+  - Attach IAM Policy ở trên với IAM Role
+  - Associate IAM Role cho k8s service account (service account này có thể tồn tại rồi hoặc chưa). Step này cũng có thể tạo bằng nhiều cách:
+
+    - AWS Console
+    - AWS CLI
+
+    ```sh
+    aws eks create-pod-identity-association --cluster-name my-cluster --role-arn arn:aws:iam::111122223333:role/my-role --namespace default --service-account my-service-account
+    ```
+
+    - Terraform: Ví dụ dưới tạo 1 association IAM Role với service_account `aws-load-balancer-controller` cho eks cluster.
+
+    ```terraform
+    resource "aws_eks_pod_identity_association" "aws_lbc" {
+      cluster_name    = aws_eks_cluster.eks.name
+      namespace       = "kube-system"
+      service_account = "aws-load-balancer-controller"
+      role_arn        = aws_iam_role.aws_lbc.arn
+      depends_on      = [aws_eks_addon.pod_identity]
+    }
+    ```
+
+  - Deploy Pod với service account trên.
