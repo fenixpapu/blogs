@@ -31,7 +31,7 @@ draft: true
 
 ### aws-auth ConfigMap
 
-- Best practice thì nên allow role thay vì user truy vào eks cluster.
+- Best practice thì nên allow role thay vì user truy cập vào eks cluster.
   - Tạo IAM role
   - Tạo IAM user với quyền assume IAM Role
   - Tạo k8s `Role` và k8s `RoleBinding` bind vào group: `eks-viewers` trong k8s
@@ -102,6 +102,7 @@ mapRoles: |
 
 ### [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)
 
+- **How it work**: Annotate k8s ServiceAccount với IAM Role. Pod với ServiceAccount assume IAM Role thông qua OIDC provider của cluster.
 - Các bước cấu hình:
 
   - Tạo IAM OIDC provider cho eks cluster:
@@ -167,7 +168,7 @@ mapRoles: |
   ```
 
 ### EKS Pod Identities
-
+- **How it work**: EKS API quản lý association giữa IAM Roles và ServiceAccounts. Pod assume IAM Role via Pod Identity Agent.
 - Pod Identity thì đơn giản hơn IRSA: không sử dụng OIDC Identity Providers, service account cũng ko cần cấu hình phần `annotate`
 - Các bước cấu hình:
 
