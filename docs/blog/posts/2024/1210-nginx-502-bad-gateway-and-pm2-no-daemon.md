@@ -23,7 +23,7 @@ draft: false
 ## Fix bug
 
 - Sau khi search thử lỗi này có 1 số trường hợp:
-  - Nginx config sai: tỷ lệ rất thấp, vì trước đó dã chạy ok giờ thêm y hệt.
+  - Nginx config sai: tỷ lệ rất thấp, vì trước đó đã chạy ok giờ thêm y hệt.
   - Backend service lỗi: lúc đầu nghĩ ok rồi do ku em backend báo test ngon.
 - Sau khi port-forward về local thử ( môi trường dev) thì thấy ko truy cập được thật, ngó lại docker build local thì ko vào được ( @#$%^&)
 

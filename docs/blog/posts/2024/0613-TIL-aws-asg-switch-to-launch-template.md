@@ -23,7 +23,7 @@ draft: false
   - [Instance refresh](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html) dùng instance refresh của ASG
   - terminate thủ công bằng tay :D
 
-- Mình dùng instance refresh của ASG và vấn đề ở chỗ option này đảm bảo số ec2 instance up ( ví dụ bạn có 4 instances up và chọn min 50% up): -> ASG chỉ đảm bảo ec2 up chứ ko phải service ready -> tắt các con cũ rất nhanh và up cơn mới nhưng service thì chưa ready -> down time :D.
-- Chỉ vậy thôi nếu muốn ko có downtime thì ko nên dùng với cách `instance refresh` này :D
+- Mình dùng instance refresh của ASG và vấn đề ở chỗ option này đảm bảo số ec2 instance up ( ví dụ bạn có 4 instances up và chọn min 50% up): -> ASG chỉ đảm bảo ec2 up chứ ko phải service ready -> tắt các con cũ rất nhanh và up con mới nhưng service thì chưa ready -> down time :D.
+- Chỉ vậy thôi nếu muốn ko có downtime thì `KHÔNG` nên dùng với cách `instance refresh` này :D
 
 - Dù sao thì: **_HAPPY WORKING_**

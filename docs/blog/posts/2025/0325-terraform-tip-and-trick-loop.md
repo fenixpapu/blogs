@@ -95,7 +95,7 @@ resource "aws_security_group" "web" {
 
 - Đừng nhét `count` vào trong block `ingress` nhé - ko support đâu :D
 - Sẽ ra sao nếu chúng ta xoá 1 phần tử trong list, ví dụ ở đây xoá subnet range thứ 2: `default     = ["10.0.0.0/19", "10.0.32.0/19", "10.0.64.0/19"]` (xoá "10.0.32.0/19") hệ quả terraform sẽ xoá phần tử này và các phần tử sau nó (rồi tạo lại các phần tử sau nó) hoặc có thể không xoá được nếu có resoruce khác đang attach vào ( ví dụ ec2 đang chạy trong subnet đó).
-- Để khăc phục điều này chúng ta có `for_each` sau đây.
+- Để khắc phục điều này chúng ta có `for_each` sau đây.
 
 ### for_each expressions (lists, sets, and maps)
 
@@ -142,7 +142,7 @@ variable "subnet_cidr_blocks" {
 }
 
 resource "aws_subnet" "example" {
-  for_each = toset(var.subnet_cidr_blocks) # foreach subport sets and maps only
+  for_each = toset(var.subnet_cidr_blocks) # foreach support sets and maps only
 
   vpc_id            = aws_vpc.main.id
   cidr_block        = each.value
