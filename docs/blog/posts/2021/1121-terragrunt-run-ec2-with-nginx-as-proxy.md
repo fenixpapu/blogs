@@ -139,7 +139,7 @@ draft: false
   variable "egress_with_cidr_blocks" {
     default = [{
       rule : "all-all"
-      cirdr_blocks : "0.0.0.0/0"
+      cidr_blocks : "0.0.0.0/0"
     }]
   }
 ```
