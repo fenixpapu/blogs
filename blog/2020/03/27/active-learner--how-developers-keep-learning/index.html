@@ -1,0 +1,1536 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../22/mongo-replica-set-on-docker/">
+      
+      
+        <link rel="next" href="../../../04/04/how-to-make-money-with-code/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.webp">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Active Learner — How developers keep learning - PaPu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#active-learner-how-developers-keep-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="PaPu" class="md-header__button md-logo" aria-label="PaPu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M234.2 8.6c12.3-11.4 31.3-11.4 43.5 0L368 92.3V80c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32v101.5l37.8 35.1c9.6 9 12.8 22.9 8 35.1S493.2 272 480 272h-16v176c0 35.3-28.7 64-64 64H112c-35.3 0-64-28.7-64-64V272H32c-13.2 0-25-8.1-29.8-20.3s-1.6-26.2 8-35.1zM240 320c-26.5 0-48 21.5-48 48v96h128v-96c0-26.5-21.5-48-48-48z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PaPu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Active Learner — How developers keep learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fenixpapu/blogs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fenixpapu/blogs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="PaPu" class="md-nav__button md-logo" aria-label="PaPu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M234.2 8.6c12.3-11.4 31.3-11.4 43.5 0L368 92.3V80c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32v101.5l37.8 35.1c9.6 9 12.8 22.9 8 35.1S493.2 272 480 272h-16v176c0 35.3-28.7 64-64 64H112c-35.3 0-64-28.7-64-64V272H32c-13.2 0-25-8.1-29.8-20.3s-1.6-26.2 8-35.1zM240 320c-26.5 0-48 21.5-48 48v96h128v-96c0-26.5-21.5-48-48-48z"/></svg>
+
+    </a>
+    PaPu
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fenixpapu/blogs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fenixpapu/blogs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    dev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    devops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    general
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/linh-tinh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    linh tinh
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/38837950?v=4" alt="PaPu">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          <a href="../../../../../github.com/fenixpapu">PaPu</a>
+                        
+                      </strong>
+                      <br>
+                      Passio without N
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2020-03-27 00:00:00+00:00" class="md-ellipsis">Mar 27, 2020</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/devops/">devops</a>, 
+                              <a href="../../../../category/dev/">dev</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              10 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#expert-beginners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expert Beginners
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tai-sao-ieu-nay-xay-ra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tại sao điều này xảy ra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lam-cach-nao-nhung-develop-re-theo-loi-nay-trong-khi-so-khac-thi-khong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Làm cách nào những develop rẽ theo lối này trong khi số khác thì không?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Làm cách nào những develop rẽ theo lối này trong khi số khác thì không?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#thay-oi-cong-nghe-lien-tuc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thay đổi công nghệ liên tục
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fullstack-expert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fullstack != Expert
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passive-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passive Learning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-can-one-become-an-active-learner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How can one become an “Active Learner”?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How can one become an “Active Learner”?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leave-your-comfort-zone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leave your comfort zone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-your-knowledge-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Share Your Knowledge — Write
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-school-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        After School Activities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one-more-thing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One more thing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#happy-active-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Happy active learning!
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+  
+  
+
+
+<h1 id="active-learner-how-developers-keep-learning">Active Learner — How developers keep learning</h1>
+<ul>
+<li>
+<p>Đây là một bài dịch. Bản thân thấy có ích nên mình lượm lặt lại. Link bài gốc <a href="https://hackernoon.com/active-learner-how-developers-keep-learning-1309b91f1ae6">tại đây</a></p>
+</li>
+<li>
+<p>Vài tuần trước tôi đã có buổi nói chuyện tại Hội nghị thường niên Geektime dành cho các bạn Developer chủ đề Active Learner. Sau hội nghị, tôi quyết định viết một article chi tiết về chủ đề này. Bạn có thể tìm <a href="https://speakerdeck.com/dennisnerush/active-learner-how-developers-keep-learning">slide</a> và <a href="https://www.youtube.com/watch?v=3GrNFnKNy-I">video</a>. Năm 2018, tôi lại có cơ hội trao đổi về chủ đề này tại <a href="https://www.youtube.com/watch?v=tKoTO8A-vVY">Hội nghị thường niên Amsterdam Codemotion dành cho Developer</a>.</p>
+</li>
+</ul>
+<!-- more -->
+
+<h2 id="expert-beginners">Expert Beginners</h2>
+<ul>
+<li>
+<p>Trở thành Developer là một hành trình dài mà bạn bắt đầu xuất phát ngay sau khi học viết code và bắt tay vào công việc đầu tiên của mình. Hành trình này được chia thành nhiều giai đoạn khác nhau và ai trong số các Developer cũng đều phải trải qua từ junior, senior và lên expert. Tuy nhiên hôm nay tôi muốn đề cập đến một giai đoạn khác – một giai đoạn khó khăn mà không phải ai cũng nhận ra.</p>
+</li>
+<li>
+<p>Bạn hẳn đã gặp ở đâu đó những Developer tràn đầy sự tự tin. Họ có thể mô tả về sản phẩm mình đang build, giải thích về architecture, những lợi thế công nghệ và vấn đề mà sản phẩm có thể giải quyết một cách trôi chảy. Những Developer này có thể nói về các tools, framework, infrastructure mà họ đang sử dụng hàng ngày. <strong>Họ tự hào về những sản phẩm của mình</strong>.</p>
+</li>
+<li>
+<p>Nhưng thật tiếc những Developer này không thực sự hiểu cách thức mọi thứ vận hành! Họ không hiểu cấu trúc bên trong và cách những tools này được xây dựng, hay cả những nhược điểm và những trường hợp không nên sử dụng những tools nhất định. Họ quả quyết rằng không có gì tốt hơn những tools mình đang biết và tools mà họ lựa chọn là phương án tối ưu cho họ và cho tất cả mọi người. Những Developer này thực chất chỉ là “Chuyên gia tập sự” <a href="https://daedtech.com/how-developers-stop-learning-rise-of-the-expert-beginner/">(Expert Beginner)</a>. Họ nghĩ bản thân mình đã trở thành chuyên gia nhưng hóa ra lại chỉ vừa mới bắt đầu.</p>
+</li>
+<li>
+<p>Bên cạnh đó, có một nhóm Developer sở hữu lối tư duy hoàn toàn khác!</p>
+</li>
+<li>
+<p>Những Developer này có thể giải quyết bất kỳ vấn đề nào, hiểu rõ cách mọi thứ vận hành, cách xây dựng và lý do lựa chọn một framework nhất định và <strong>tại sao</strong>. Họ nắm bắt các xu hướng mới trong ngành nhưng đồng thời cũng hiểu lý do những công nghệ này được đánh giá cao và tại sao có những công ty <strong>không nên</strong> áp dụng chúng.</p>
+</li>
+<li>
+<p>Đó chính xác là những Developer mà chúng tôi muốn tuyển dụng! Những Developer như vậy không thuộc tuýp Expert Beginner và họ cũng không phải một chuyên gia theo cách nào đó. Quan trọng hơn cả, họ có khả năng nhận thức được những gì mình đang biết và chưa biết. Họ đang trên con đường trở thành những chuyên gia thực thụ và để đi theo con đường này, họ không chỉ dựa vào lượng kiến thức có được từ công việc hiện tại, những sáng kiến “out of the box” nhưng thực ra vẫn quẩn quanh các vấn đề phát sinh thường nhật. Họ phải chủ động học hỏi nhiều hơn thế!</p>
+</li>
+<li>
+<p>They are <strong>“Active learners”</strong>(người tích cực học).</p>
+</li>
+</ul>
+<h2 id="tai-sao-ieu-nay-xay-ra">Tại sao điều này xảy ra</h2>
+<ul>
+<li>Để hiểu điều này trước tiên chúng ta cần hiểu cách một người học một kỹ năng mới :</li>
+</ul>
+<p><img alt="how people learn a new skill" src="../../../../images/2020/20200327-how-people-learn-a-new-skill.png" /></p>
+<ul>
+<li>
+<p>Đây là một mô hình đơn giản của quá trình tiếp thu kỹ năng mới. Về cơ bản mô hình chỉ ra rằng để trở thành chuyên gia, chúng ta phải trải qua một chặng đường dài với các giai đoạn khác nhau. Tại mỗi giai đoạn chúng ta sẽ hoàn thiện dần những kỹ năng mình đang có, từ đó làm mọi thứ tốt hơn. Chúng ta cố gắng thực hiện điều đó bằng cách ngầm hiểu rằng có một bức tranh lớn hơn những gì mình đang biết và điều cần làm là tìm tòi, khám phá không ngừng nghỉ để nắm bắt rõ hơn từng khía cạnh của bức tranh này và dần hoàn thiện mọi thứ.</p>
+</li>
+<li>
+<p>Tôi muốn tập trung vào giai đoạn Advanced Beginner bởi tại mốc này, bất kỳ ai cũng phải lựa chọn 1 trong 2 ngã rẽ: (1) chuyển sang giai đoạn “Competent”, nghĩa là tiếp tục thu nạp thêm các kỹ năng cần thiết, tìm hiểu những khía cạnh mới của một bức tranh lớn hơn và xác định vị trí của mình trong đó; (2) <strong>“tự xét tốt nghiệp”</strong>, chuyển sang giai đoạn Expert Beginner và tự mặc định mình đã được tốt nghiệp ở cấp độ Chuyên gia. Expert Beginner là một giai đoạn vô cùng nguy hiểm khi Developer lầm tưởng mình đã trở thành một chuyên gia, giảm dần các cố gắng để cải thiện bản thân hay không nhận ra rằng có một bức tranh lớn hơn những gì họ đang biết.</p>
+</li>
+</ul>
+<h2 id="lam-cach-nao-nhung-develop-re-theo-loi-nay-trong-khi-so-khac-thi-khong">Làm cách nào những develop rẽ theo lối này trong khi số khác thì không?</h2>
+<h3 id="thay-oi-cong-nghe-lien-tuc">Thay đổi công nghệ liên tục</h3>
+<ul>
+<li>
+<p>Thế giới của chúng ta liên tục dịch chuyển, các công nghệ, framework và các tools mới cũng xuất hiện hàng năm. Truy tìm các công nghệ mới nổi và ứng dụng chúng ngay lập tức được xem là một phản ứng “thời thượng” và rất “cool ngầu”</p>
+</li>
+<li>
+<p>Vậy nhưng, điều đó làm cho việc trở thành một chuyên gia đúng nghĩa trở nên khó khăn hơn cả bởi mọi thứ thay đổi liên tục. Chạy theo các công nghệ mới nổi khiến Developer phải liên tục chuyển đổi công nghệ mà chưa kịp nghiên cứu sâu và master công nghệ đó.</p>
+</li>
+</ul>
+<h3 id="fullstack-expert">Fullstack != Expert</h3>
+<ul>
+<li>
+<p>Lý do thứ hai là <strong>quan điểm sai lầm</strong> của một số Developer khi đồng nghĩa Fullstack với Expert. Tất nhiên thực tế vẫn có những Fullstack Developer thực sự là chuyên gia. Tôi sẽ không đề cập đến họ trong trường hợp này.</p>
+</li>
+<li>
+<p>Tôi muốn bàn tới những Developer hoàn thành React và Node tutorial, dựng 1 app to-do, deploy nó bằng 1 cú click chuột trên Heroku và tự xem mình là 1 <strong>Fullstack Developer</strong>. Họ nhìn thấy kết quả ngay lập tức mà không thực sự hiểu về “điều kỳ diệu” đã xảy ra, hệ thống sẽ scale thế nào? Nhược điểm của platform hiện tại? Khi nào họ nên hay không nên sử dụng platform đó?</p>
+</li>
+<li>
+<p>Thêm một lý do khác là các Developer bị mắc kẹt trong một hệ sinh thái duy nhất suốt một thời gian dài – một con đường mòn mà ở đó bạn luôn cảm thấy thoải mái khi làm việc trong một team suốt nhiều năm, phát triển các tính năng giống nhau, fix các lỗi tương tự, lặp đi lặp lại và về cơ bản không học được điều gì mới. Một dạng khác của con đường mòn này là khi bạn thay đổi nơi làm việc, chuyển sang các công ty khác nhau, nhưng thực tế vẫn ở trong cùng một hệ sinh thái, làm việc cùng một vị trí, cùng trách nhiệm và sử dụng cùng tools. Một lần nữa, bạn không học được gì mới mẻ.</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>10 năm kinh nghiệm hay 10 lần kinh nghiệm của một năm
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Có những người nhìn qua tưởng chừng có nhiều năm kinh nghiệm nhưng thực ra chỉ là lặp đi lặp lại một set kinh nghiệm cũ qua nhiều năm. Tôi đã từng đọc CV của rất nhiều Developer có 6 hay thậm chí 9 năm làm việc trong ngành, nhưng khi nói chuyện, nhưng khi nói chuyện những kinh nghiệm đó lại rất mờ nhạt giống như đang nói chuyện với một Junior Developer hơn là một Senior Developer</li>
+</ul>
+<h2 id="passive-learning">Passive Learning</h2>
+<ul>
+<li>
+<p>Điều cuối cùng là trong thực tế những Expert Beginner chỉ học những gì họ tiếp xúc hàng ngày, những công nghệ và thách thức phát sinh trực tiếp trong công việc buộc họ phải học để giải quyết. Cách học này thực sự giới hạn bởi có rất nhiều giải pháp thay thế ngoài kia mà những Expert Beginner này chưa nhận thức được.</p>
+</li>
+<li>
+<p>Khi nói chuyện với Expert Beginner, đặt cho họ những câu hỏi có chiều sâu, bạn sẽ thường nhận được những câu trả lời như:</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>&quot;This is a `black box`&quot;
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>&quot;It `magiccally` works&quot;
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>&quot;That was here `before me`&quot;
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>&quot;The `other team` is responsible for this&quot;
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>&quot;X sucks, Y is the best, `It just is`&quot;
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>
+<p>Những câu trả lời bạn nhận được không có chiều sâu được thể hiện bằng qua sự am hiểu về nguyên lý hoạt động và đáp án cho câu hỏi “Tại sao”</p>
+</li>
+<li>
+<p>Tựu chung lại sự khác biệt quan trọng nhất giữa Expert Beginner và Active Learner là Active Learner không cần biết hết tất cả mọi thứ. Họ nhận thức được sự tồn tại của một bức tranh lớn hơn tầm hiểu biết của họ, không có gì vận hành đơn thuần, không có phương án tối ưu cho mọi tình huống, mọi thứ đều có ưu và nhược điểm. Họ không vội kết luận mà muốn tìm hiểu kỹ càng và hiểu vấn đề một cách sâu sắc.</p>
+</li>
+</ul>
+<h2 id="how-can-one-become-an-active-learner">How can one become an “Active Learner”?</h2>
+<ul>
+<li>Học chủ động- Active learning không phải là một giai đoạn mà là một dạng <strong>mindset</strong>, một trạng thái của tư duy khi bất kỳ ai nhận tự nhận thức được giới hạn kiến thức của bản thân và kỳ vọng tìm hiểu nhiều hơn những gì mình đang có đều có thể trở thành một Active Learner</li>
+</ul>
+<p><img alt="how to become a active learner" src="../../../../images/2020/20200327-how-to-become-a-active-learner.png" /></p>
+<ul>
+<li>Dưới đây là 4 công cụ cơ bản có thể giúp bất kỳ Active Learner nào đạt được mục tiêu của mình:</li>
+</ul>
+<h3 id="read">Read</h3>
+<ul>
+<li>
+<p>Đọc sách là cách đầu tiên và dễ nhất bạn có thể sử dụng để học chủ động. Hàng nghìn đầu sách, blog, videos, podcasts về bất kỳ chủ đề nào đều có sẵn trên Internet. Chúng ở đó chỉ để chờ được bạn tìm kiếm.</p>
+</li>
+<li>
+<p>Hãy đọc về những gì bạn đang biết, củng cố kiến thức hiện tại, đào sâu hơn và thực sự hiểu về cách thức hoạt động của chúng. Bạn cũng cần đọc về những gì mình chưa biết, ngừng tin vào “magic” hay black box, thay vào đó hãy google để hiểu cách thức hoạt động của chúng, đừng lấy bất cứ thứ gì bạn được trao cho.</p>
+</li>
+</ul>
+<h3 id="leave-your-comfort-zone">Leave your comfort zone</h3>
+<ul>
+<li>
+<p>Để thực sự học được nhiều điều mới, chúng ta cần trải nghiệm những điều mình chưa biết và làm việc tại những nơi còn nhiều thiếu sót, chúng ta cần rời khỏi vùng an toàn hiện tại, thay đổi môi trường và đôi khi thậm chí bắt đầu lại ở một nơi hoàn toàn khác. Bởi thật quá dễ dàng nếu tiếp tục làm đi làm lại những gì chúng ta đã biết.</p>
+</li>
+<li>
+<p>Phát triển phần mềm không phải là framework hay ngôn ngữ mà bạn biết, phát triển phần mềm là các nguyên tắc, SOLID, DRY, KISS, tự động hóa… Các nguyên tắc này là đa nền tảng. Hãy thử những thứ bạn không quen thuộc, những tools và framework khác nhau. Đừng chỉ vì chúng đang <strong>hot</strong>, nhưng hiểu cách chúng giải quyết những vấn đề bạn đang phải đối mặt. Hãy bước ra khỏi nơi mà mọi thứ đã được chuẩn bị sẵn sàng và mọi thứ chỉ đơn giản là "hoạt động" ( tức bạn không hiểu nó hoạt động như thế nào ?).</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>Hãy thử tự tạo ra magic box và black box
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Bạn sẽ nhận ra rằng các ngôn ngữ, framework, tools đều có chung những principles nhất định. Tìm tòi, khám phá nhiều lần một vấn đề sẽ củng cố khả năng hiểu biết và bạn có thể ứng dụng chúng ở bất kỳ đâu.</li>
+</ul>
+<h3 id="share-your-knowledge-write">Share Your Knowledge — Write</h3>
+<ul>
+<li>Viết không phải là một điều dễ dàng. Bạn không thể chia sẻ một nửa sự thật hay trình bày một vấn đề nếu chưa hiểu rõ ràng về nó. Viết về bất kỳ chủ đề nào cũng sẽ khiến bạn hiểu sâu sắc hơn. Bạn có thể kể một câu chuyện, mở đầu một cuộc thảo luận và giải thích tại sao công nghệ đó lại tuyệt vời với mọi người. Khả năng viết lách không chỉ hữu ích khi bạn đặt bút viết mà còn tỏ ra hữu hiệu nếu bạn cần chia sẻ quan điểm của bản thân. Viết càng nhiều, khả năng viết lách của bạn càng được mài dũa. Đây là một trong những lý do khiến tôi lập blog để viết về các chủ đề khác nhau và tôi buộc tôi phải tìm hiểu cho đế khi thực sự hiểu chúng trước khi chia sẻ lại với thế giới.</li>
+</ul>
+<h3 id="after-school-activities">After School Activities</h3>
+<ul>
+<li>
+<p>Học thụ động trong công việc là một bức tường trong suốt, ít ai nhận ra. Có nhiều cách khác để nâng cao kinh nghiệm của mình. Những Active Learner sử dụng thời gian sau giờ làm việc để học những thứ mà công việc của họ không thể cung cấp. Hãy meet up, đi gặp gỡ những người sử dụng cùng loại tool hay những người đang giải quyết vấn đề tương tự như bạn để xem cách họ đang xử lý mọi thứ và học hỏi từ họ. Hãy thử đóng góp cho open source, xem qua một số dự án trên open source mà bạn yêu thích, giúp đỡ họ, giải quyết vấn đề hoặc thêm một tính năng. Đóng góp cho open source sẽ nâng các kỹ năng của bạn cao hơn bạn nghĩ.</p>
+</li>
+<li>
+<p>Và thực sự, chỉ cần mở máy tính và code, code bất cứ điều gì bạn muốn và bất cứ điều gì bạn đam mê. Mỗi khi bạn develop một thứ gì đó mà bạn đã từng xem là điều kỳ diệu hay black box, bạn đã củng cố kỹ năng và hiểu biết của mình. Đừng quên tìm hiểu khi nào nên sử dụng những tools đó, khi nào thì không nhé!</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>&quot;I hear and I forget.
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>I see and I remember.
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>I DO AND I UNDERSTAND&quot;
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>        - Nho giáo -
+</code></pre></div></td></tr></table></div>
+<h3 id="one-more-thing">One more thing</h3>
+<ul>
+<li>Hãy lặp đi lặp lại các bước trên. Nó là một chặng đường dài, nhưng nó đang giá.</li>
+</ul>
+<h3 id="happy-active-learning">Happy active learning!</h3>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 <a href="https://github.com/fenixpapu"  target="_blank" rel="noopener">PaPu</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/fenixpapu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/phoenixpapu" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/fenixpapu/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.integrate", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

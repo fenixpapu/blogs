@@ -1,0 +1,1686 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../14/learn-in-public/">
+      
+      
+        <link rel="next" href="../../20/youtube-downloader-tool/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.webp">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Cluster Autoscaler - PaPu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cluster-autoscaler" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="PaPu" class="md-header__button md-logo" aria-label="PaPu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M234.2 8.6c12.3-11.4 31.3-11.4 43.5 0L368 92.3V80c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32v101.5l37.8 35.1c9.6 9 12.8 22.9 8 35.1S493.2 272 480 272h-16v176c0 35.3-28.7 64-64 64H112c-35.3 0-64-28.7-64-64V272H32c-13.2 0-25-8.1-29.8-20.3s-1.6-26.2 8-35.1zM240 320c-26.5 0-48 21.5-48 48v96h128v-96c0-26.5-21.5-48-48-48z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PaPu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cluster Autoscaler
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fenixpapu/blogs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fenixpapu/blogs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="PaPu" class="md-nav__button md-logo" aria-label="PaPu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M234.2 8.6c12.3-11.4 31.3-11.4 43.5 0L368 92.3V80c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32v101.5l37.8 35.1c9.6 9 12.8 22.9 8 35.1S493.2 272 480 272h-16v176c0 35.3-28.7 64-64 64H112c-35.3 0-64-28.7-64-64V272H32c-13.2 0-25-8.1-29.8-20.3s-1.6-26.2 8-35.1zM240 320c-26.5 0-48 21.5-48 48v96h128v-96c0-26.5-21.5-48-48-48z"/></svg>
+
+    </a>
+    PaPu
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fenixpapu/blogs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fenixpapu/blogs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    dev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    devops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    general
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/linh-tinh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    linh tinh
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/terraform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/38837950?v=4" alt="PaPu">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          <a href="../../../../../github.com/fenixpapu">PaPu</a>
+                        
+                      </strong>
+                      <br>
+                      Passio without N
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2021-11-17 00:00:00+00:00" class="md-ellipsis">Nov 17, 2021</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/devops/">devops</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              10 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-an-iam-policy-and-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an IAM policy and role
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create an IAM policy and role">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-an-iam-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an IAM policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-iam-role-and-attach-iam-policy-to-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create IAM role and attach IAM policy to it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-cluster-autoscaler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy Cluster Autoscaler
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-your-cluster-autoscaler-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View your Cluster Autoscaler logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaling-consideration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaling consideration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+  
+  
+
+
+<h1 id="cluster-autoscaler">Cluster Autoscaler</h1>
+<ul>
+<li>
+<p>Tài liệu chính thức của AWS ở <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html">đây</a></p>
+</li>
+<li>
+<p>Mình cần implement CA cho project của dự án, nên dịch luôn bài này cho hiểu. :)</p>
+</li>
+</ul>
+<hr />
+<ul>
+<li>K8s CA tự động thay đổi số nodes trong cluster của bạn khi các pod fail hoặc được tạo lại trên một node khác. <a href="https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler">Cluster Autoscaler</a> thường được cài đặt như một <a href="https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws/examples">Deployment</a> trong cluster của bạn. Nó sử dụng <a href="https://en.wikipedia.org/wiki/Leader_election">Leader Election</a> để đảm bảo tính HA ( khả dụng cao - high availability), nhưng việc mở rộng chỉ được thực hiện bởi một bản sao tại một thời điểm.</li>
+</ul>
+<!-- more -->
+
+<ul>
+<li>
+<p>Trước khi deploy một CA, hãy chắc chắn rằng bạn quen thuộc với các khái niệm của K8s tương ứng với các tính năng của AWS. Những thuật ngữ sau được sử dụng xuyên suốt bài này:</p>
+</li>
+<li>
+<p><code>K8s Cluster Autoscaler</code>: Một thành phần chính (core component) của K8s Control Plane đưa ra quyết định lập lịch và mở rộng quy mô. Thêm thông tin về <a href="https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md">Control Plane</a></p>
+</li>
+<li>
+<p><code>AWS Cloud provider implemention</code>: Một extension của K8s CA, thực hiện các quyết định của K8s CA bằng cách giao tiếp với các sản phẩm và dịch vụ của AWS ví dụ như EC2. Chi tiết xem tại đây: <a href="https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md">CA on AWS</a></p>
+</li>
+<li>
+<p><code>Node groups</code> - Một khái niệm trong k8s cho một nhóm các nodes trong cluster. Nodes group không phải là một tài nguyên thực sự của k8s, nhưng chúng được tìm thấy dưới dạng trừu tượng trong CA, Cluster API, và các thành phần khác. Các node trong cùng một node group có thể chia sẻ một vài thuộc tính chung như <code>labels</code> và <code>taints</code>. Tuy vậy chúng vẫn có thể khác AZ hay instance type.</p>
+</li>
+<li>
+<p><code>Amazon EC2 Auto Scaling Groups</code>: Một tính năng của AWS được sử dụng bởi CA. ASG phù hợp với rất nhiều trường hợp. Amazon EC2 ASG được cấu hình để chạy instance tự động join k8s cluster. Chúng cũng được <code>labels</code> và <code>taint</code> cho các tài nguyên Node tương ứng trong k8s API.</p>
+</li>
+<li>
+<p>Tham khảo, <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html"><code>Managed node groups</code></a> được quản lý sử dụng Amazon EC2 ASG, và tương thích với CA.</p>
+</li>
+<li>
+<p>Topic này mô tả làm thế nào bạn có thể deploy CA trong Amazon EKS cluster của bạn, và cấu hình CA để Amazon EC2 ASG.</p>
+</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>
+<p>Trước khi deploy CA, bạn phải đáp ứng được những điều kiện tiên quyết sau:</p>
+</li>
+<li>
+<p>Một Amazon EKS cluster ( hẳn nhiên rồi).</p>
+</li>
+<li>
+<p>Một IAM OIDC provider cho cluster của bạn. Để xem bạn đã có hay cần tạo mới: <a href="https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html">Create an IAM OIDC provider for your cluster</a></p>
+</li>
+<li>
+<p>Node groups với ASG tags. CA yêu cầu những tags sau trên ASG để chúng được tự động tìm thấy ( auto discovered):</p>
+<ul>
+<li>Nếu bạn sử dụng <code>eksctl</code> để tạo các node groups, những tags này được thêm tự động.</li>
+<li>Nếu bạn không sử dụng <code>eksctl</code>, bạn phải thêm các tags này thủ công:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>k8s.io/cluster-autoscaler/<cluster-name></td>
+<td><code>owned</code></td>
+</tr>
+<tr>
+<td>k8s.io/cluster-autoscaler/enabled</td>
+<td>TRUE</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2 id="create-an-iam-policy-and-role">Create an IAM policy and role</h2>
+<ul>
+<li>Tạo một IAM cấp quyền ( permission) cho CA. Thay thế tất cả <code>&lt;example-values&gt;</code> ( cả &lt;&gt;) với giá trị của bạn trong suốt quá trình.</li>
+</ul>
+<h3 id="create-an-iam-policy">Create an IAM policy</h3>
+<ul>
+<li>Lưu nội dung dưới đây vào file tên: <code>cluster-autoscaler-policy.json</code>. Nếu các node groups đang tồn tại của bạn được tạo với <code>eksctl</code> và bạn sử dụng tùy chọn: <code>--asg-access</code>, thì policy đã tồn tại và bạn có thể đi tới bước tiếp theo.</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>  {
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>      &quot;Version&quot;: &quot;2012-10-17&quot;,
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>      &quot;Statement&quot;: [
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>          {
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>              &quot;Action&quot;: [
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>                  &quot;autoscaling:DescribeAutoScalingGroups&quot;,
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>                  &quot;autoscaling:DescribeAutoScalingInstances&quot;,
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>                  &quot;autoscaling:DescribeLaunchConfigurations&quot;,
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>                  &quot;autoscaling:DescribeTags&quot;,
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>                  &quot;autoscaling:SetDesiredCapacity&quot;,
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>                  &quot;autoscaling:TerminateInstanceInAutoScalingGroup&quot;,
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>                  &quot;ec2:DescribeLaunchTemplateVersions&quot;
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>              ],
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>              &quot;Resource&quot;: &quot;*&quot;,
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>              &quot;Effect&quot;: &quot;Allow&quot;
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>          }
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>      ]
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>  }
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Tạo policy với lệnh dưới. Có thể đổi <code>policy-name</code></li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>  aws iam create-policy --policy-name AmazonEKSClusterAutoscalerPolicy --policy-document file://cluster-autoscaler-policy.json
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Lưu lại ARN để dùng cho các bước sau.</li>
+</ul>
+<h3 id="create-iam-role-and-attach-iam-policy-to-it">Create IAM role and attach IAM policy to it</h3>
+<ul>
+<li>
+<p>Ở đây sử dụng <code>eksctl</code> để sử dụng <code>AWS Management console</code> check link gốc.</p>
+</li>
+<li>
+<p>Chạy lệnh dưới đây nếu bạn đã tạo EKS cluster với <code>eksctl</code>. Nếu bạn tạo node groups sử dụng tùy chọn: <code>--asg-access</code> , thay thế <code>&lt;AmazonEKSClusterAutoscalerPolicy&gt;</code> với tên IAM policy mà <code>eksctl</code> tạo cho bạn. Tên policy có thể theo mẫu như sau: <code>eksctl-&lt;cluster-name&gt;-nodegroup-ng-&lt;xxxxxxxx&gt;-PolicyAutoScaling</code>:</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span>
+<span class="normal"><a href="#__codelineno-2-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>  eksctl create iamserviceaccount \
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>    --cluster=&lt;my-cluster&gt; \
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>    --namespace=kube-system \
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>    --name=cluster-autoscaler \
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>    --attach-policy-arn=arn:aws:iam::&lt;AWS_ACCOUNT_ID&gt;:policy/&lt;AmazonEKSClusterAutoscalerPolicy&gt; \
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>    --override-existing-serviceaccounts \
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>    --approve
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>
+<p>AWS khuyến nghị, nếu bạn tạo groups sử dụng tùy chọn: <code>--asg-access</code> bạn detach IAM policy <code>eskctl</code> đã tạo và attach vào <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html">Amazon EKS node IAM role</a> mà <code>eksctl</code> đã tạo cho bạn. Bạn tách policy khỏi node IAM role để các function của CA được hoạt động bình thường. Tách các policy không đưa cho các pods khác trên các node quyền trong policy. Chi tiết xem tại: <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#remove-policies-console">Removing IAM identity permission</a></p>
+</li>
+<li>
+<p>Quá trình chạy thật bị lỗi: <code>failed to create service account kube-system/cluster-autoscaler: checking whether namespace "kube-system" exists: Unauthorized</code> nên đã phải làm bước này trên console.</p>
+</li>
+</ul>
+<h2 id="deploy-cluster-autoscaler">Deploy Cluster Autoscaler</h2>
+<ul>
+<li>
+<p>Các bước tiếp theo sẽ deploy CA. AWS khuyên bạn nên review: <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html#ca-deployment-considerations">Deployment considerations</a> - hoặc scroll xuống dưới - và tối ưu CA trước khi deploy trên production.</p>
+</li>
+<li>
+<p><strong><em> TO DEPLOY THE CLUSTER AUTOSCALER</em></strong></p>
+</li>
+<li>
+<p>Tải CA YAML file:</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>  curl -o cluster-autoscaler-autodiscover.yaml https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>
+<p>Đổi <code>&lt;YOUR CLUSTER NAME&gt;</code> trong file download về với cluster của bạn.</p>
+</li>
+<li>
+<p>Apply YAML file vào cluster của bạn:</p>
+</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>  kubectl apply -f cluster-autoscaler-autodiscover.yaml
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>Annotate <code>cluster-autoscaler</code> service account với ARN của IAM role bạn tạo trước đó. Thay thế <code>&lt;example values&gt;</code> với giá trị của bạn:</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>  kubectl annotate serviceaccount cluster-autoscaler -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::926755034425:role/AmazonEKSClusterAutoscalerRole
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>Patch (vá) deployment để thêm <code>cluster-autoscaler.kubernetes.io/safe-to-evict</code> annotation và CA pods với lệnh sau:</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>  kubectl patch deployment cluster-autoscaler -n kube-system -p &#39;{&quot;spec&quot;:{&quot;template&quot;:{&quot;metadata&quot;:{&quot;annotations&quot;:{&quot;cluster-autoscaler.kubernetes.io/safe-to-evict&quot;: &quot;false&quot;}}}}}&#39;
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>Edit CA deployment với lệnh:</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>  kubectl -n kube-system edit deployment.apps/cluster-autoscaler
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>
+<p>Edit <code>cluster-autoscaler</code> container command, thay thế <code>&lt;YOUR CLUSTER NAME&gt; (including &lt;&gt;)</code> với tên cluster của bạn và thêm các option sau:</p>
+</li>
+<li>
+<p><code>--balance-similar-node-groups</code></p>
+</li>
+<li><code>--skip-nodes-with-system-pods=false</code></li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>spec:
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>    containers:
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>    - command:
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>      - ./cluster-autoscaler
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>      - --v=4
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>      - --stderrthreshold=info
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>      - --cloud-provider=aws
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>      - --skip-nodes-with-local-storage=false
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>      - --expander=least-waste
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>      - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/&lt;YOUR CLUSTER NAME&gt;
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a>      - --balance-similar-node-groups
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>      - --skip-nodes-with-system-pods=false
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>
+<p>Save và <code>close</code> file để <code>apply</code> thay đổi.</p>
+</li>
+<li>
+<p>Mở <a href="https://github.com/kubernetes/autoscaler/releases">CA releases</a> để kiểm tra version của CA phù hợp với major và minor version cluster của bạn.</p>
+</li>
+<li>
+<p>Set CA image tag với version trong bước trên theo lệnh dưới. Thay thế <code>1.21.n</code> với giá trị của bạn:</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>  kubectl set image deployment cluster-autoscaler -n kube-system cluster-autoscaler=k8s.gcr.io/autoscaling/cluster-autoscaler:v&lt;1.21.n&gt;
+</code></pre></div></td></tr></table></div>
+<h2 id="view-your-cluster-autoscaler-logs">View your Cluster Autoscaler logs</h2>
+<ul>
+<li>
+<p>Sau khi bạn deploy CA, bạn có thể xem logs và xác nhận rằng nó đang monitor tải cluster của bạn.</p>
+</li>
+<li>
+<p>Xem logs với lệnh như dưới:</p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>  kubectl -n kube-system logs -f deployment.apps/cluster-autoscaler
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Output nhìn như dưới:</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>  I0926 23:15:55.165842       1 static_autoscaler.go:138] Starting main loop
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>  I0926 23:15:55.166279       1 utils.go:595] No pod using affinity / antiaffinity found in cluster, disabling affinity predicate for this loop
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>  I0926 23:15:55.166293       1 static_autoscaler.go:294] Filtering out schedulables
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a>  I0926 23:15:55.166330       1 static_autoscaler.go:311] No schedulable pods
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>  I0926 23:15:55.166338       1 static_autoscaler.go:319] No unschedulable pods
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a>  I0926 23:15:55.166345       1 static_autoscaler.go:366] Calculating unneeded nodes
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a>  I0926 23:15:55.166357       1 utils.go:552] Skipping ip-192-168-3-111.&lt;region-code&gt;.compute.internal - node group min size reached
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a>  I0926 23:15:55.166365       1 utils.go:552] Skipping ip-192-168-71-83.&lt;region-code&gt;.compute.internal - node group min size reached
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>  I0926 23:15:55.166373       1 utils.go:552] Skipping ip-192-168-60-191.&lt;region-code&gt;.compute.internal - node group min size reached
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a>  I0926 23:15:55.166435       1 static_autoscaler.go:393] Scale down status: unneededOnly=false lastScaleUpTime=2019-09-26 21:42:40.908059094 ...
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a>  I0926 23:15:55.166458       1 static_autoscaler.go:403] Starting scale down
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a>  I0926 23:15:55.166488       1 scale_down.go:706] No candidates for scale down
+</code></pre></div></td></tr></table></div>
+<h2 id="deployment-considerations">Deployment Considerations</h2>
+<ul>
+<li>Xem xét các cân nhắc phía dưới sau để tối ưu CA deployment của bạn.</li>
+</ul>
+<h3 id="scaling-consideration">Scaling consideration</h3>
+<ul>
+<li>
+<p>CA có thể cấu hình với bất kỳ tính năng thêm nào cho node của bạn. Những tính năng này như thêm Amazon EBS volumes attach vào nodes. EC2 instance type of node, hay GPU accelerators.</p>
+</li>
+<li>
+<p><code>Scope node groups</code> tới nhiều hơn một AZ:</p>
+</li>
+<li>
+<p>AWS khuyến khích chúng ta cấu hình nhiều node groups, mỗi node groups trên một AZ, và enable tính năng <code>--balance-similar-node-groups</code>. Nếu bạn chỉ cấu hình một node group, cấu hình node group này có thể mở rộng trên nhiều AZ.</p>
+</li>
+<li>
+<p>Tối ưu các node group của bạn: CA đưa ra giả định về cách bạn đang sử dụng các node groups. Bao gồm cả instance type mà bạn đang sử dụng group. Để phù hợp với những giả định này, cấu hình node group của bạn dựa trên những giả định và cân nhắc sau:</p>
+</li>
+<li>
+<p>Mỗi node trong node group phải có các thuộc tính lập lịch giống hệt nhau. Bao gồm labels, taints, và các tài nguyên:</p>
+<ul>
+<li>Với <code>MixedInstancePolicies</code>, instance type phải có thông số kỹ thuật CPU, memory, GPU tương thích.</li>
+<li>Instance type đầu tiên được mô phỏng trong lập lịch ( thực sự ko hiểu câu này :)) )</li>
+<li>Nếu chính sách của bạn có add thêm resource. Resource đó có thể bị lãng phí sau khi được scale out.</li>
+<li>Nếu chính sách của bạn là thêm instance type với ít tài nguyên hơn, pod có thể lỗi khi được lập lịch khi chạy trên instance này.</li>
+</ul>
+</li>
+<li>
+<p>Cấu hình số lượng node group nhỏ hơn nhu cầu node group. Vì điều ngược lại có thể ảnh hưởng tiêu cực tới khả năng mở rộng.</p>
+</li>
+<li>
+<p>Sử dụng tính năng của AWS EC2 khi cả hai nhà cung cấp (?) hỗ trợ chúng ( ví dụ: sử dụng Region, <code>MixedInstancePolicy</code>)</p>
+</li>
+<li>
+<p>Nếu có thể AWS khuyến khích người dùng xem <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html">Managed node groups</a>. Managed node group có những tính năng quản lý mạnh mẽ. Bao gồm cả các tính năng cho CA như tự động Amazon EC2 ASG( auto scaling group) discovery và graceful node termination.</p>
+</li>
+<li>
+<p>Sử dụng EBS như persistent storage:</p>
+</li>
+<li>
+<p>Lưu trữ dữ liệu là rất quan trọng với các ứng dụng stateful, ví dụ như database và cache phân tán ( distrubuted cache). Với Amazon EBS, bạn có thể xây dựng ứng dụng stateful trên k8s. Nhưng bạn bị giới hạn chỉ build chúng trong một AZ. Chi tiết có thể xem tại: <a href="https://aws.amazon.com/premiumsupport/knowledge-center/eks-persistent-storage/">How do I use persistent storage in Amazon EKS</a>. Để có giải pháp tốt hơn, xem xét xây dựng ứng dụng stateful chia nhỏ giữa các AZ bằng cách sử dụng các EBS riêng biệt cho từng AZ. Làm như vậy ứng dụng của bạn sẽ có tính sẵn sàng cao. Hơn nữa, CA có thể cân bằng mở rộng giữa các EC2 ASG. Để làm được như vậy hãy đảm bảo các điều sau được đáp ứng:</p>
+<ul>
+<li>Cân bằng giữa các node groups được enable bởi cấu hình: <code>balance-similar-node-groups=true</code>.</li>
+<li>Các node group của bạn được cấu hình giống hệt nhau. (ngoài việc phân bố giữa các AZ, và sử dụng các EBS khác nhau).</li>
+</ul>
+</li>
+<li>
+<p>Co-scheduling</p>
+</li>
+<li>
+<p>Các job training học máy phân tán ( Machine learning distributed) hưởng lợi đáng kể từ độ trễ nhỏ của các node cấu hình cùng một AZ. Những khối lượng công việc này được tải lên các pod trong cùng một khu vực. Bạn có thể làm được điều này bằng cách cấu hình <code>pod affinity</code> cho tất cả các pod có cùng lập lịch hoặc các node affinity sử dụng <code>topologyKey: topology.kubernetes.io/zone</code>. Sử dụng cấu hình này CA mở rộng theo chiều ngang trên một Zone cụ thể để đáp ứng yêu cầu. Chỉ định nhiều ASG với một AZ cụ thể, để đảm bảo chuyển đổi dự phòng <code>failover</code> cho toàn bộ khối lượng công việc được lập lịch đồng thời. Đảm bảo các điều kiện sau được đáp ứng:</p>
+<ul>
+<li>
+<p>Cân bằng node group được enable bởi cấu hình: <code>balance-similar-node-groups=true</code></p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity">Node affinity</a>, <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/">pod preemption</a>, hoặc cả hai, được sử dụng khi cluster bao gồm Regional và Zonal node groups:</p>
+</li>
+<li>Sử dụng <code>node affinity</code> để áp đặt hoặc khuyến khích regional pods và tránh Zonal node groups.</li>
+<li>Đừng lập lịch Zonal pod vào một Regional node group. Làm vậy có thể dẫn tới mất cân bằng sức chứa cho các Regional pods của bạn.</li>
+<li>Cấu hình <code>pod preemption</code> nếu zonal workloads có thể chấp nhận gián đoạn và phân bổ lại. Làm vậy thực thi quyền ưu tiên và lên lịch lại tại một khu vực ít tranh chấp hơn, cho các Regional pod của bạn.</li>
+</ul>
+</li>
+<li>
+<p>Accelerators and GPUs</p>
+</li>
+<li>
+<p>Một vài cluster có các phần cứng cụ thể ví dụ như GPU. Khi mở rộng (theo chiều ngang - scale out ( not scale up)) cần thời gian để cung cấp tài nguyên cho cluster. Trong suốt khoảng thời gian đó CA mô phỏng như node có <code>accelerator</code> - (ko biết dịch sao cho sát nghĩa :) ). Tuy nhiên, cho tới khi <code>accelerator</code> sẵn sàng và cập nhật tài nguyên sẵn có của node, thì các pods không thể được lên lịch trên node. Điều này có thể là nguyên nhân của <a href="https://github.com/kubernetes/kubernetes/issues/54959">repeated unnecessary scale out</a></p>
+</li>
+<li>
+<p>Các node với <code>accelerators</code> và mức sử dụng CPU, memory cao không được xem xét để scale down ngay cả khi <code>accelerators</code> không được sử dụng. Ngược lại điều này lại có thể là nguyên nhân của chi phí không cần thiết. Để tránh những chi phí này, CA có thể áp dụng những rule đặc biệt xem xét scale down node, nếu chúng có những <code>accelerators</code> không được sử dụng.</p>
+</li>
+<li>
+<p>Để đảm bảo những hành vi đúng trong các trường hợp này, cấu hình <code>kubelet</code> trên <code>accelerator nodes</code> của bạn gán nhãn node trước node join vào cluster. CA sử dụng nhãn lựa chọn này để tối ưu hóa <code>accelerator</code>. Đảm bảo các điều kiện sau thỏa mãn:</p>
+<ul>
+<li><code>kubelet</code> cho GPU nodes được cấu hình với <code>--node-labels k8s.amazonaws.com/accelerator=$ACCELERATOR_TYPE</code></li>
+<li>Các node với <code>accelerators</code> tuân thủ các quy tắc lập lịch thống nhất.</li>
+</ul>
+</li>
+<li>
+<p>Scaling from Zero</p>
+</li>
+</ul>
+<p>-</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 <a href="https://github.com/fenixpapu"  target="_blank" rel="noopener">PaPu</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/fenixpapu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/phoenixpapu" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/fenixpapu/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.integrate", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

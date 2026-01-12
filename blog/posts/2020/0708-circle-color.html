@@ -1,0 +1,60 @@
+<html>
+  <head> </head>
+  <body>
+    <div style="text-align: center;">
+      <h1>
+        Vòng tròn sắc màu
+      </h1>
+
+      - Tên mỹ miều vãi cả nồi :v.
+      <br />
+      - Bạn bảo làm thử cái vòng tròn auto tự thay màu.
+      <br />
+      - Ừ thì rảnh làm thử cái nghịch :D
+      <br />
+      <br />
+      <br />
+      <br />
+      <p>
+        <strong>Degree: </strong><span id="degree">45deg</span>
+        <strong>Color Stop One: </strong><span id="color-stop-1">#777777</span>
+        <strong>|| Color Stop Two: </strong
+        ><span id="color-stop-2">#FFFFFF</span>
+      </p>
+      <div
+        id="circle"
+        style="
+          background: linear-gradient(45deg, #777777, #ffffff);
+          border-radius: 50%;
+          width: 400px;
+          height: 400px;
+          margin: auto;
+        "
+      ></div>
+    </div>
+
+    <script>
+      const randomColor = () => {
+        const colorOne = Math.floor(Math.random() * 16777216);
+        const colorTwo = 16777216 - colorOne;
+        return {
+          colorOne: colorOne.toString(16),
+          colorTwo: colorTwo.toString(16),
+        };
+      };
+      const randomDeg = () => Math.floor(Math.random() * 360);
+      setInterval(() => {
+        const { colorOne, colorTwo } = randomColor();
+        const deg = randomDeg();
+        const circle = document.getElementById("circle");
+        const colorStopOne = document.getElementById("color-stop-1");
+        const colorStopTwo = document.getElementById("color-stop-2");
+        const degree = document.getElementById("degree");
+        colorStopOne.textContent = `#${colorOne}`;
+        colorStopTwo.textContent = `#${colorTwo}`;
+        degree.textContent = `${deg}deg`;
+        circle.style.background = `linear-gradient(${deg}deg, #${colorOne}, #${colorTwo}`;
+      }, 3000);
+    </script>
+  </body>
+</html>
