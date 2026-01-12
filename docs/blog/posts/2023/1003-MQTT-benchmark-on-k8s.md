@@ -9,7 +9,7 @@ draft: false
 
 # MQTT benchmark on k8s
 
-- Mình join support BID 1 dự án, và về lý thuyết MQTT support scale và loadbalancing (chi tiết xem doc EMQX: [configure load balancer](https://www.emqx.io/docs/en/v5.0/deploy/cluster/lb.html#configure-haproxy-nginx-in-emqx) ) nhưng để chắc chắn mình cần test trước để biết behavior của nó là như thế nào sau đó estimate mới chuẩn được.
+- Mình join support BID 1 dự án và về lý thuyết EMQX có hỗ trợ scale và loadbalancer (chi tiết xem doc EMQX: [configure load balancer](https://www.emqx.io/docs/en/v5.0/deploy/cluster/lb.html#configure-haproxy-nginx-in-emqx) ) nhưng để chắc chắn mình cần test trước để biết behavior của nó là như thế nào sau đó estimate mới chuẩn được.
 
 <!-- more -->
 
@@ -19,9 +19,9 @@ draft: false
 
 - Nên mình cũng test lại xem pub&sub thực tế có giống như trang của EMQX đưa ra ko( còn nhiều tham số khác ảnh hưởng đến kết quả test mà EMQX chưa đưa ra nên cần test lại ví dụ như đã off SSL chưa, size của mess là lớn hay nhỏ: các tham số này đều ảnh hưởng đến kết quả bao nhiêu pub&sub cùng lúc)
 
-- Trang chủ EMQX có sẵn [docker-compose](https://www.emqx.io/docs/en/v5.0/deploy/install-docker.html#use-docker-compose-to-build-an-emqx-cluster) cho EMQX cluster. Paste lại đây trong trường hợp link chết :D
+- Trang chủ EMQX có sẵn [docker-compose](https://www.emqx.io/docs/en/v5.0/deploy/install-docker.html#use-docker-compose-to-build-an-emqx-cluster) cho EMQX cluster. Paste lại đây trong trường hợp muốn dùng luôn
 
-```yml linenums="1" title="docker-compose.yml"
+```yaml linenums="1" title="docker-compose.yml"
 version: "3"
 
 services:
