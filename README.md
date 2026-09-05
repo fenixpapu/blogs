@@ -1,10 +1,32 @@
 # Mkdocs
 
-- Create site:
+## python setup
+
+- Install `uv` for Mac OS:
 
 ```
-mkdocs new .
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
+- Create new virtual env:
+
+```sh
+uv venv
+```
+
+- Activate environment:
+
+```sh
+source .venv/bin/activate
+```
+
+- Install package:
+
+```sh
+uv pip install -r requirements.txt
+```
+
+## Run apps
 
 - Start preview:
 

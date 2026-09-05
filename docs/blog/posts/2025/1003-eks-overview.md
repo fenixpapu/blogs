@@ -5,7 +5,7 @@ categories:
   - devops
   - terraform
 date: 2025-10-03
-draft: true
+draft: false
 ---
 
 # EKS Overview
@@ -23,7 +23,6 @@ draft: true
 ## Cấp quyền truy cập eks cluster
 
 - Có 2 phương thức để người dùng truy cập eks cluster:
-
   - AWS IAM: khi tạo mới cluster chúng ta chọn 1 trong 2 hoặc cả 2 cách dưới
     - `aws-auth ConfigMap`
     - `access entries`
@@ -74,11 +73,9 @@ mapRoles: |
 - Với `aws-auth ConfigMap` khi thêm user hoặc role mới -> cần chỉnh sửa cả aws và k8s cluster(ConfigMap `aws-auth`). Với access entry khi thêm user hoặc role việc chỉnh sửa chỉ cần ở phía aws -> tiện hơn rất nhiều, tránh sửa sai trong k8s ngoài ra việc này có thể thực hiện bằng các tool IaC: terraform
 
 - Các bước khi cấp quyền truy cập cho một IAM user qua IAM Role:
-
   - Tạo IAM Role.
   - Tạo IAM user với quyền assume IAM Role ở trên.
   - Trong tab `access entry` trong eks cluster:
-
     - Tạo một `access entry` cho IAM role.
     - Associate `acess entry` với [access policies](https://docs.aws.amazon.com/eks/latest/userguide/access-policy-permissions.html) tương ứng. Các access polices này được định nghĩa sẵn các quyền trong k8s và được quản lý bởi AWS, người dùng ko thể thay đổi.
 
@@ -87,7 +84,6 @@ mapRoles: |
       - Sau đó chỉ định group này cho `access entry`.
 
 - Nhận xét:
-
   - Nếu dùng access policies -> việc cấp quyền chỉ liên quan phía aws chúng ta ko cần thay đổi gì trong k8s.
   - Nếu dùng `Role` và `RoleBinding` thì việc cấu hình sai cũng ko ảnh hưởng gì đến user cũ truy cập vào eks cluster (so với nếu chúng ta sửa apply nhầm `aws-auth` ConfigMap).
 
@@ -104,7 +100,6 @@ mapRoles: |
 
 - **How it work**: Annotate k8s ServiceAccount với IAM Role. Pod với ServiceAccount assume IAM Role thông qua OIDC provider của cluster.
 - Các bước cấu hình:
-
   - Tạo IAM OIDC provider cho eks cluster:
     - Trong AWS eks cluster tab `Overview` lưu lại: `OpenID Connect provider URL`.
     - Trong AWS IAM chọn `Identity Provider`. Tạo mới 1 provider với:
@@ -112,7 +107,6 @@ mapRoles: |
       - `URL` là URL của eks cluster bên trên.
       - `Audience` là `sts.amazonaws.com`.
   - Gán IAM Roles vào k8s service account:
-
     - Tạo IAM Role với `assume-role-policy` là OIDC provider URL của eks cluster. Example dưới cấu hình cả namespace và service account:
 
       ```json
@@ -168,12 +162,11 @@ mapRoles: |
   ```
 
 ### EKS Pod Identities
+
 - **How it work**: EKS API quản lý association giữa IAM Roles và ServiceAccounts. Pod assume IAM Role via Pod Identity Agent.
 - Pod Identity thì đơn giản hơn IRSA: không sử dụng OIDC Identity Providers, service account cũng ko cần cấu hình phần `annotate`
 - Các bước cấu hình:
-
   - Setup Pod Identity Agent. Có thể cài đặt add-on Pod Identity cho eks cluster theo nhiều cách:
-
     - AWS CLI.
     - AWS console.
     - Hay terraform:
@@ -205,7 +198,6 @@ mapRoles: |
     ```
   - Attach IAM Policy ở trên với IAM Role
   - Associate IAM Role cho k8s service account (service account này có thể tồn tại rồi hoặc chưa). Step này cũng có thể tạo bằng nhiều cách:
-
     - AWS Console
     - AWS CLI
 
